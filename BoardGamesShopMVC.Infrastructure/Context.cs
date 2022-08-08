@@ -31,6 +31,8 @@ namespace BoardGamesShopMVC.Infrastructure
         {
             builder.Entity<BoardGame>().HasOne(b => b.Stock)
                 .WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
+
+
             base.OnModelCreating(builder);
         }
     }
