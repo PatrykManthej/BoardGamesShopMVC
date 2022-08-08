@@ -1,6 +1,6 @@
-﻿namespace BoardGamesShopMVC.Web.Models
+﻿namespace BoardGamesShopMVC.Domain.Models
 {
-    public class Language
+    public class Publisher
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace BoardGamesShopMVC.Web.Models
+﻿namespace BoardGamesShopMVC.Domain.Models
 {
-    public class Category
+    public class Language
     {
         public int Id { get; set; }
         public string Name { get; set; }

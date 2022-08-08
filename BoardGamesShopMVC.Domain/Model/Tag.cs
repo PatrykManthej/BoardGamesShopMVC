@@ -1,10 +1,9 @@
-﻿namespace BoardGamesShopMVC.Web.Models
+﻿namespace BoardGamesShopMVC.Domain.Models
 {
-    public class Publisher
+    public class Tag
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public ICollection<BoardGame> BoardGames { get; set; }
     }
 }

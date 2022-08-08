@@ -1,4 +1,4 @@
-﻿namespace BoardGamesShopMVC.Web.Models
+﻿namespace BoardGamesShopMVC.Domain.Models
 {
     public class BoardGame
     {

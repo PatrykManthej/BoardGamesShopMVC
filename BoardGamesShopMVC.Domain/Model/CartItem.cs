@@ -1,13 +1,13 @@
-﻿namespace BoardGamesShopMVC.Web.Models
+﻿namespace BoardGamesShopMVC.Domain.Models
 {
-    public class OrderItem
+    public class CartItem
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
 
         public BoardGame BoardGame { get; set; }
         public int BoardGameId { get; set; }
-        public Order Order { get; set; }
-        public int OrderId { get; set; }
+        public Cart Cart { get; set; }
+        public int CartId { get; set; }
     }
 }
