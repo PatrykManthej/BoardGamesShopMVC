@@ -17,7 +17,8 @@
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
         public Stock Stock { get; set; }
-        public int StockId { get; set; }
+        public CartItem CartItem { get; set; }
+        public OrderItem OrderItem { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Tag> Tags { get; set; }
     }

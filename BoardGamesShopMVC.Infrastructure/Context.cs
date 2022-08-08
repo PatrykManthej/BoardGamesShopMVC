@@ -29,8 +29,9 @@ namespace BoardGamesShopMVC.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<BoardGame>().HasOne(b => b.Stock)
+                .WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
             base.OnModelCreating(builder);
-            builder.Entity<BoardGame>
         }
     }
 }
