@@ -1,9 +1,4 @@
 ﻿using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
@@ -14,12 +9,14 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddBoardGame(BoardGame boardGame)
         {
             _context.BoardGames.Add(boardGame);
             _context.SaveChanges();
             return boardGame.Id;
         }
+
         public void DeleteBoardGame(int boardGameId)
         {
             var boardGame = _context.BoardGames.Find(boardGameId);
@@ -29,16 +26,44 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
-        public IQueryable<BoardGame> GetBoardGamesByPublisherId(int publisherId)
-        {
-            var boardGames = _context.BoardGames.Where(b => b.PublisherId == publisherId);
-            return boardGames;
-        }
+
         public BoardGame GetBoardGameById(int boardGameId)
         {
             var boardGame = _context.BoardGames.FirstOrDefault(b => b.Id == boardGameId);
             return boardGame;
         }
+
+        public IQueryable<BoardGame> GetAllBoardGames()
+        {
+            var boardGames = _context.BoardGames;
+            return boardGames;
+        }
+
+        public IQueryable<BoardGame> GetBoardGamesByLanguageId(int languageId)
+        {
+            var boardGames = _context.BoardGames.Where(b => b.LanguageId == languageId);
+            return boardGames;
+        }
+
+        public IQueryable<BoardGame> GetBoardGamesByPublisherId(int publisherId)
+        {
+            var boardGames = _context.BoardGames.Where(b => b.PublisherId == publisherId);
+            return boardGames;
+        }
+
+        public IQueryable<BoardGame> GetBoardGamesByCategoryId(int categoryId)
+        {
+            var boardGames = _context.BoardGames.Where(b => b.Categories.Any(c => c.Id == categoryId));
+            return boardGames;
+        }
+
+        public IQueryable<BoardGame> GetBoardGamesByTagId(int tagId)
+        {
+            var boardGames = _context.BoardGames.Where(b => b.Tags.Any(t => t.Id == tagId));
+            return boardGames;
+        }
+
+        
 
     }
 }

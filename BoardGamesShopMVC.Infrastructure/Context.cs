@@ -1,4 +1,5 @@
-﻿using BoardGamesShopMVC.Domain.Models;
+﻿using BoardGamesShopMVC.Domain.Model.Customer;
+using BoardGamesShopMVC.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,6 +17,10 @@ namespace BoardGamesShopMVC.Infrastructure
 
         }
 
+        public DbSet<Address> Addresses  { get; set; }
+        public DbSet<ContactDetail> ContactDetails  { get; set; }
+        public DbSet<ContactDetailType> ContactDetailTypes  { get; set; }
+        public DbSet<Customer> Customers  { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Cart> Carts{ get; set; }
         public DbSet<CartItem> CartItems{ get; set; }
