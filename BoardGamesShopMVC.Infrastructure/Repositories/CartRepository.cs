@@ -42,14 +42,45 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var carts = _context.Carts;
             return carts;
         }
-        public void AddCartItemToCart(int cartId, CartItem cartItem)
+        public void AddItemToCart(int cartId, CartItem cartItem)
         {
             var cart = _context.Carts.Find(cartId);
             if(cart != null)
             {
                 cart.CartItems.Add(cartItem);
+                cart.TotalAmount += cartItem.TotalPrice;
                 _context.SaveChanges();
             }
+        }
+        public void DeleteItemFromCart(int cartId, int cartItemId)
+        {
+            var cart = _context.Carts.Find(cartId);
+            if (cart != null)
+            {
+                var cartItem = cart.CartItems.FirstOrDefault(i => i.Id == cartItemId);
+                if (cartItem != null)
+                {
+                    cart.TotalAmount -= cartItem.TotalPrice;
+                    _context.CartItems.Remove(cartItem);
+                    _context.SaveChanges();
+                }
+            }
+        }
+        public void ChangeCartItemQuantity(int cartId, int cartItemId, int quantity)
+        {
+            var cart = _context.Carts.Find(cartId);
+            if (cart != null)
+            {
+                var cartItem = cart.CartItems.FirstOrDefault(i => i.Id == cartItemId);
+                if (cartItem != null)
+                {
+                    cart.TotalAmount -= cartItem.TotalPrice;
+                    cartItem.Quantity = quantity;
+                    cart.TotalAmount += cartItem.TotalPrice;
+                    _context.SaveChanges();
+                }
+            }
+            
         }
     }
 }

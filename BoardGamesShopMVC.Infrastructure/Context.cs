@@ -34,8 +34,21 @@ namespace BoardGamesShopMVC.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<BoardGame>().HasOne(b => b.Stock)
-                .WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
+            builder.Entity<BoardGame>().HasOne(b => b.LanguageVersion).WithMany(l => l.BoardGames).HasForeignKey(b => b.LanguageId);
+            builder.Entity<BoardGame>().HasOne(b => b.Publisher).WithMany(p => p.BoardGames).HasForeignKey(b => b.PublisherId);
+            builder.Entity<BoardGame>().HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
+            builder.Entity<BoardGame>().HasOne(b => b.CartItem).WithOne(c => c.BoardGame).HasForeignKey<CartItem>(c => c.BoardGameId);
+            builder.Entity<BoardGame>().HasOne(b => b.OrderItem).WithOne(o => o.BoardGame).HasForeignKey<OrderItem>(o => o.BoardGameId);
+            builder.Entity<BoardGame>().HasMany(b => b.Categories).WithMany(c => c.BoardGames);
+            builder.Entity<BoardGame>().HasMany(b => b.Tags).WithMany(t => t.BoardGames);
+
+            builder.Entity<Cart>().HasOne(ca => ca.Customer).WithOne(cu => cu.Cart).HasForeignKey<Cart>(ca => ca.CustomerId);
+            builder.Entity<Cart>().HasMany(ca => ca.CartItems).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
+
+            builder.Entity<Order>().HasOne(o => o.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.CustomerId);
+            builder.Entity<Order>().HasMany(o => o.Items).WithOne(i => i.Order).HasForeignKey(i => i.OrderId);
+
+            builder.Entity<CartItem>().Property(p => p.TotalPrice).HasComputedColumnSql("[Quantity]*[UnitPrice]");
 
 
             base.OnModelCreating(builder);

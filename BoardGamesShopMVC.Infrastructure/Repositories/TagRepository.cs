@@ -16,6 +16,11 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         }
         public int AddTag(Tag tag)
         {
+            var existingTag = _context.Tags.FirstOrDefault(t => t.Name == tag.Name);
+            if(existingTag != null)
+            {
+                return existingTag.Id;
+            }
             _context.Tags.Add(tag);
             _context.SaveChanges();
             return tag.Id;
