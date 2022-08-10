@@ -1,13 +1,9 @@
-﻿using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class CartRepository
+    public class CartRepository : ICartRepository
     {
         private readonly Context _context;
         public CartRepository(Context context)
@@ -45,7 +41,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         public void AddItemToCart(int cartId, CartItem cartItem)
         {
             var cart = _context.Carts.Find(cartId);
-            if(cart != null)
+            if (cart != null)
             {
                 cart.CartItems.Add(cartItem);
                 cart.TotalAmount += cartItem.TotalPrice;
@@ -80,7 +76,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                     _context.SaveChanges();
                 }
             }
-            
+
         }
     }
 }

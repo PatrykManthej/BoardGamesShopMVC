@@ -1,13 +1,9 @@
-﻿using BoardGamesShopMVC.Domain.Model.Customer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Model.Customer;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly Context _context;
         public CustomerRepository(Context context)

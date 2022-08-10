@@ -1,13 +1,9 @@
-﻿using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class PublisherRepository
+    public class PublisherRepository : IPublisherRepository
     {
         private readonly Context _context;
         public PublisherRepository(Context context)

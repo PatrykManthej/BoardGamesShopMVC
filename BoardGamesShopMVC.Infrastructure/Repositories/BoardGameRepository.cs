@@ -1,8 +1,9 @@
-﻿using BoardGamesShopMVC.Domain.Models;
+﻿using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class BoardGameRepository
+    public class BoardGameRepository : IBoardGameRepository
     {
         private readonly Context _context;
         public BoardGameRepository(Context context)
@@ -63,7 +64,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             return boardGames;
         }
 
-        
+
 
     }
 }

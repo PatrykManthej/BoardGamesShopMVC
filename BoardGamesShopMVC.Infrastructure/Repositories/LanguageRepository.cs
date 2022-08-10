@@ -1,8 +1,9 @@
 ﻿using BoardGamesShopMVC.Domain.Models;
+using BoardGamesShopMVC.Domain.Interfaces;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class LanguageRepository
+    public class LanguageRepository : ILanguageRepository
     {
         private readonly Context _context;
         public LanguageRepository(Context context)

@@ -1,13 +1,9 @@
-﻿using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
-    public class TagRepository
+    public class TagRepository : ITagRepository
     {
         private readonly Context _context;
         public TagRepository(Context context)
@@ -17,7 +13,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         public int AddTag(Tag tag)
         {
             var existingTag = _context.Tags.FirstOrDefault(t => t.Name == tag.Name);
-            if(existingTag != null)
+            if (existingTag != null)
             {
                 return existingTag.Id;
             }
