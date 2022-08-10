@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoardGamesShopMVC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace BoardGamesShopMVC.Domain.Model.Customer
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public Cart Cart { get; set; }
+        public ICollection<Order> Orders { get; set; }
         public ICollection<Address> Addresses { get; set; }
         public ICollection<ContactDetail> ContactDetails { get; set; }
     }

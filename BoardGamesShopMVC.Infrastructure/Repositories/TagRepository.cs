@@ -37,7 +37,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             return tag;
         }
 
-        public IQueryable<Tag> GetAlltags()
+        public IQueryable<Tag> GetAllTags()
         {
             var tags = _context.Tags;
             return tags;
