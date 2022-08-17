@@ -48,5 +48,11 @@ namespace BoardGamesShopMVC.Web.Controllers
             _boardGameService.DeleteBoardGame(id);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditBoardGame(int id)
+        {
+            var boardGame = _boardGameService.GetBoardGameForEdit(id);
+            return View(boardGame);
+        }
     }
 }

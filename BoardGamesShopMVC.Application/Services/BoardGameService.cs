@@ -51,5 +51,12 @@ namespace BoardGamesShopMVC.Application.Services
         {
             _boardGameRepository.DeleteBoardGame(id);
         }
+
+        public NewBoardGameVm GetBoardGameForEdit(int id)
+        {
+            var boardGame = _boardGameRepository.GetBoardGameById(id);
+            var boardGameVm = _mapper.Map<NewBoardGameVm>(boardGame);
+            return boardGameVm;
+        }
     }
 }
