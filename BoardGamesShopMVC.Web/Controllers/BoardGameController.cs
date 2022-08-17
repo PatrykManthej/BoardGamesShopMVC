@@ -12,10 +12,12 @@ namespace BoardGamesShopMVC.Web.Controllers
     {
         private readonly IBoardGameService _boardGameService;
         private readonly IValidator<NewBoardGameVm> _validator;
-        public BoardGameController(IBoardGameService boardGameService, IValidator<NewBoardGameVm> validator)
+        private readonly ILogger<HomeController> _logger;
+        public BoardGameController(IBoardGameService boardGameService, IValidator<NewBoardGameVm> validator, ILogger<HomeController> logger)
         {
             _boardGameService = boardGameService;
             _validator = validator;
+            _logger = logger;
         }
         //Dodanie widoku dodawania gry planszowej do sklepu i obsługa
         //Dodanie widoku listy wszystkich gier i obsługa
@@ -24,12 +26,14 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            _logger.LogInformation("Jestem w BoardGame/Index");
             var model = _boardGameService.GetAllGamesForList(5,1,"");
             return View(model);
         }
         [HttpPost]
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
         {
+            _logger.LogInformation("Jestem w BoardGame/Index ale post");
             if (!pageNo.HasValue)
             {
                 pageNo = 1;

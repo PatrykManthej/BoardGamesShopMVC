@@ -19,9 +19,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
+builder.Logging.AddFile("Logs/myLog-{Date}.txt");
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
