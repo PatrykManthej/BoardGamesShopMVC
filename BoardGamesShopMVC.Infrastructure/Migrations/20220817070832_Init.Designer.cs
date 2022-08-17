@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGamesShopMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220810111013_Init")]
+    [Migration("20220817070832_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,10 +164,10 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Property<int>("LanguageId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaxNumeberOfPlayers")
+                    b.Property<int>("MaxNumberOfPlayers")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinNumeberOfPlayers")
+                    b.Property<int>("MinNumberOfPlayers")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")

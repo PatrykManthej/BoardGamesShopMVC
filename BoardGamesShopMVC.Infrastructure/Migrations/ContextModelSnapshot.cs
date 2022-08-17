@@ -162,10 +162,10 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Property<int>("LanguageId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaxNumeberOfPlayers")
+                    b.Property<int>("MaxNumberOfPlayers")
                         .HasColumnType("int");
 
-                    b.Property<int>("MinNumeberOfPlayers")
+                    b.Property<int>("MinNumberOfPlayers")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
