@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
+using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,21 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             var model = _boardGameService.GetBoardGameDetails(boardGameId);
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult AddBoardGame()
+        {
+            return View(new NewBoardGameVm());
+        }
+        [HttpPost]
+        public IActionResult AddBoardGame(NewBoardGameVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                var id = _boardGameService.AddBoardGame(model);
+                return RedirectToAction("Index");
+            }
+            return View(new NewBoardGameVm());
         }
     }
 }

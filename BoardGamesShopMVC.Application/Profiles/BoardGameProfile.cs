@@ -23,6 +23,7 @@ namespace BoardGamesShopMVC.Application.Profiles
                 dst => dst.Publisher,
                 opt => opt.MapFrom(src => src.Publisher.Name)
                 );
+            CreateMap<NewBoardGameVm, BoardGame>();
         }
     }
 }

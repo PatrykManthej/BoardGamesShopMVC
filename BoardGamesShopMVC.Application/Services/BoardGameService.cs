@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace BoardGamesShopMVC.Application.Services
             _boardGameRepository = boardGameRepository;
             _mapper = mapper;
         }
+
         public ListBoardGameForListVm GetAllGamesForList()
         {
             var boardGames = _boardGameRepository.GetAllBoardGames().ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
@@ -36,6 +38,13 @@ namespace BoardGamesShopMVC.Application.Services
             var boardGameVm = _mapper.Map<BoardGameDetailsVm>(boardGame);
 
             return boardGameVm;
+        }
+
+        public int AddBoardGame(NewBoardGameVm newBoardGame)
+        {
+            var boardGame = _mapper.Map<BoardGame>(newBoardGame);
+            var id = _boardGameRepository.AddBoardGame(boardGame);
+            return id;
         }
     }
 }
