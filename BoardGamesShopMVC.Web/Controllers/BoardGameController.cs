@@ -19,15 +19,31 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _boardGameService.GetAllGamesForList();
+            var model = _boardGameService.GetAllGamesForList(5,1,"");
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNo, string searchString)
+        {
+            if (!pageNo.HasValue)
+            {
+                pageNo = 1;
+            }
+            if(searchString is null)
+            {
+                searchString = string.Empty;
+            }
+            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString);
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult ViewBoardGame(int boardGameId)
         {
             var model = _boardGameService.GetBoardGameDetails(boardGameId);
             return View(model);
         }
+
         [HttpGet]
         public IActionResult AddBoardGame()
         {
@@ -43,11 +59,13 @@ namespace BoardGamesShopMVC.Web.Controllers
             }
             return View(new NewBoardGameVm());
         }
+
         public IActionResult Delete(int id)
         {
             _boardGameService.DeleteBoardGame(id);
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult EditBoardGame(int id)
         {

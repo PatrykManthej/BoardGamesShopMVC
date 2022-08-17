@@ -22,11 +22,20 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public ListBoardGameForListVm GetAllGamesForList()
+        public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString)
         {
-            var boardGames = _boardGameRepository.GetAllBoardGames().ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+            var boardGames = _boardGameRepository.GetAllBoardGames()
+                .Where(b=>b.Name.StartsWith(searchString))
+                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var boardGamesToShow = boardGames.Skip(pageSize * (pageNo - 1))
+                .Take(pageSize).ToList();
+
             var boardGamesList = new ListBoardGameForListVm()
             {
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
                 BoardGames = boardGames,
                 Count = boardGames.Count
             };

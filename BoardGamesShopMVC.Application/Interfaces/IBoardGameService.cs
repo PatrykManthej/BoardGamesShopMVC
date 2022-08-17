@@ -9,7 +9,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
 {
     public interface IBoardGameService
     {
-        ListBoardGameForListVm GetAllGamesForList();
+        ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString);
         BoardGameDetailsVm GetBoardGameDetails(int id);
         int AddBoardGame(NewBoardGameVm newBoardGame);
         void DeleteBoardGame(int id);
