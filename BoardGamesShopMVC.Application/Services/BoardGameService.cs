@@ -58,5 +58,11 @@ namespace BoardGamesShopMVC.Application.Services
             var boardGameVm = _mapper.Map<NewBoardGameVm>(boardGame);
             return boardGameVm;
         }
+
+        public void UpdateBoardGame(NewBoardGameVm model)
+        {
+            var boardGame = _mapper.Map<BoardGame>(model);
+            _boardGameRepository.UpdateBoardGame(boardGame);
+        }
     }
 }

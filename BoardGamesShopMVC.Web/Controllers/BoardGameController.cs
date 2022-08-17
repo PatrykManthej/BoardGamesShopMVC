@@ -54,5 +54,15 @@ namespace BoardGamesShopMVC.Web.Controllers
             var boardGame = _boardGameService.GetBoardGameForEdit(id);
             return View(boardGame);
         }
+        [HttpPost]
+        public IActionResult EditBoardGame(NewBoardGameVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                _boardGameService.UpdateBoardGame(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }

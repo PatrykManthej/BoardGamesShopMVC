@@ -28,6 +28,20 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
+        public void UpdateBoardGame(BoardGame boardGame)
+        {
+            _context.Attach(boardGame);
+            _context.Entry(boardGame).Property("Name").IsModified = true;
+            _context.Entry(boardGame).Property("Description").IsModified = true;
+            _context.Entry(boardGame).Property("AverageTimeOfPlay").IsModified = true;
+            _context.Entry(boardGame).Property("RecommendedMinimumAge").IsModified = true;
+            _context.Entry(boardGame).Property("MinNumberOfPlayers").IsModified = true;
+            _context.Entry(boardGame).Property("MaxNumberOfPlayers").IsModified = true;
+            _context.Entry(boardGame).Property("PublishedYear").IsModified = true;
+            _context.Entry(boardGame).Property("Price").IsModified = true;
+            _context.Entry(boardGame).Property("PublisherId").IsModified = true;
+            _context.SaveChanges();
+        }
 
         public BoardGame GetBoardGameById(int boardGameId)
         {

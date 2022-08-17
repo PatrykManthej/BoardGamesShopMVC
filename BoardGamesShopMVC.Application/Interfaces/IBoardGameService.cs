@@ -14,5 +14,6 @@ namespace BoardGamesShopMVC.Application.Interfaces
         int AddBoardGame(NewBoardGameVm newBoardGame);
         void DeleteBoardGame(int id);
         NewBoardGameVm GetBoardGameForEdit(int id);
+        void UpdateBoardGame(NewBoardGameVm model);
     }
 }
