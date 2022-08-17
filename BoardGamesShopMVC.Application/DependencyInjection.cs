@@ -15,6 +15,7 @@ namespace BoardGamesShopMVC.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IBoardGameService, BoardGameService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

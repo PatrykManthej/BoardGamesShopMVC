@@ -19,6 +19,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
+
 builder.Logging.AddFile("Logs/myLog-{Date}.txt");
 
 var app = builder.Build();
