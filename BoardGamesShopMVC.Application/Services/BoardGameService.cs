@@ -46,5 +46,10 @@ namespace BoardGamesShopMVC.Application.Services
             var id = _boardGameRepository.AddBoardGame(boardGame);
             return id;
         }
+
+        public void DeleteBoardGame(int id)
+        {
+            _boardGameRepository.DeleteBoardGame(id);
+        }
     }
 }

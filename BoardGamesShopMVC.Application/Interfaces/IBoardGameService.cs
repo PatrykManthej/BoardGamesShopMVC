@@ -12,5 +12,6 @@ namespace BoardGamesShopMVC.Application.Interfaces
         ListBoardGameForListVm GetAllGamesForList();
         BoardGameDetailsVm GetBoardGameDetails(int id);
         int AddBoardGame(NewBoardGameVm newBoardGame);
+        void DeleteBoardGame(int id);
     }
 }
