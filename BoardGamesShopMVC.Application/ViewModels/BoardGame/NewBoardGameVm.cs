@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+
 
 namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
 {
@@ -19,5 +16,20 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public decimal Price { get; set; }
         public int LanguageId { get; set; }
         public int PublisherId { get; set; }
+    }
+    public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
+    {
+        public NewBoardGameValidation()
+        {
+            RuleFor(b => b.Id).NotNull();
+            RuleFor(b => b.Name).MinimumLength(1).MaximumLength(100);
+            RuleFor(b => b.Description).MaximumLength(5000);
+            RuleFor(b => b.AverageTimeOfPlay).MaximumLength(10);
+            RuleFor(b => b.RecommendedMinimumAge).InclusiveBetween(0, 125);
+            RuleFor(b => b.MinNumberOfPlayers).InclusiveBetween(1, 100);
+            RuleFor(b => b.MaxNumberOfPlayers).GreaterThanOrEqualTo(1);
+            RuleFor(b => b.PublishedYear).GreaterThanOrEqualTo(0);
+            RuleFor(b => b.Price).InclusiveBetween(0, 100000000);
+        }
     }
 }

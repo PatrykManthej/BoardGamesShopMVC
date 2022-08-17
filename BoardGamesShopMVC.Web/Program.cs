@@ -1,5 +1,7 @@
 using BoardGamesShopMVC.Application;
+using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Infrastructure;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
 
 var app = builder.Build();
 

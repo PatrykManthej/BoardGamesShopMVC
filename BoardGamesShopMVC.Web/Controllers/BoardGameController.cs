@@ -1,6 +1,9 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Web.Models;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
@@ -8,9 +11,11 @@ namespace BoardGamesShopMVC.Web.Controllers
     public class BoardGameController : Controller
     {
         private readonly IBoardGameService _boardGameService;
-        public BoardGameController(IBoardGameService boardGameService)
+        private readonly IValidator<NewBoardGameVm> _validator;
+        public BoardGameController(IBoardGameService boardGameService, IValidator<NewBoardGameVm> validator)
         {
             _boardGameService = boardGameService;
+            _validator = validator;
         }
         //Dodanie widoku dodawania gry planszowej do sklepu i obsługa
         //Dodanie widoku listy wszystkich gier i obsługa
@@ -52,12 +57,16 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpPost]
         public IActionResult AddBoardGame(NewBoardGameVm model)
         {
-            if (ModelState.IsValid)
+            ValidationResult result = _validator.Validate(model);
+            if (!result.IsValid)
             {
-                var id = _boardGameService.AddBoardGame(model);
-                return RedirectToAction("Index");
+                result.AddToModelState(this.ModelState);
+                return View(new NewBoardGameVm());
             }
-            return View(new NewBoardGameVm());
+
+            var id = _boardGameService.AddBoardGame(model);
+            return RedirectToAction("Index");
+
         }
 
         public IActionResult Delete(int id)
