@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Domain.Interfaces;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Application.Services
 {
-    public class BoardGameService
+    public class BoardGameService : IBoardGameService
     {
         private readonly IBoardGameRepository _boardGameRepository;
         private readonly IMapper _mapper;
@@ -28,6 +29,13 @@ namespace BoardGamesShopMVC.Application.Services
                 Count = boardGames.Count
             };
             return boardGamesList;
+        }
+        public BoardGameDetailsVm GetBoardGameDetails(int id)
+        {
+            var boardGame = _boardGameRepository.GetBoardGameById(id);
+            var boardGameVm = _mapper.Map<BoardGameDetailsVm>(boardGame);
+
+            return boardGameVm;
         }
     }
 }

@@ -14,6 +14,15 @@ namespace BoardGamesShopMVC.Application.Profiles
         public BoardGameProfile()
         {
             CreateMap<BoardGame, BoardGameForListVm>();
+            CreateMap<BoardGame, BoardGameDetailsVm>()
+                .ForMember(
+                dst => dst.LanguageVersion,
+                opt => opt.MapFrom(src => src.LanguageVersion.Name)
+                )
+                .ForMember(
+                dst => dst.Publisher,
+                opt => opt.MapFrom(src => src.Publisher.Name)
+                );
         }
     }
 }

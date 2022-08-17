@@ -1,3 +1,4 @@
+using BoardGamesShopMVC.Application;
 using BoardGamesShopMVC.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<Context>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -38,7 +41,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=BoardGame}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

@@ -1,5 +1,6 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
@@ -30,7 +31,10 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public BoardGame GetBoardGameById(int boardGameId)
         {
-            var boardGame = _context.BoardGames.FirstOrDefault(b => b.Id == boardGameId);
+            var boardGame = _context.BoardGames
+                .Include(b=>b.LanguageVersion)
+                .Include(b=>b.Publisher)
+                .FirstOrDefault(b => b.Id == boardGameId);
             return boardGame;
         }
 
