@@ -38,5 +38,12 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var publishers = _context.Publishers;
             return publishers;
         }
+
+        public IQueryable<BoardGame> GetAllBoardGamesByPublisherId(int id)
+        {
+            var boardGames = _context.BoardGames
+                .Where(b => b.PublisherId == id);
+            return boardGames;
+        }
     }
 }

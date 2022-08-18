@@ -1,0 +1,19 @@
+﻿using AutoMapper;
+using BoardGamesShopMVC.Application.ViewModels.Publisher;
+using BoardGamesShopMVC.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BoardGamesShopMVC.Application.Profiles
+{
+    public class PublisherProfile : Profile
+    {
+        public PublisherProfile()
+        {
+            CreateMap<Publisher, PublisherForListVm>();
+        }
+    }
+}

@@ -16,6 +16,7 @@ namespace BoardGamesShopMVC.Application
         {
             services.AddTransient<IBoardGameService, BoardGameService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPublisherService, PublisherService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

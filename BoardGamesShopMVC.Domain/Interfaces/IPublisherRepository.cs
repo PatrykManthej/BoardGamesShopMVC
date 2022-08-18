@@ -8,5 +8,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void DeletePublisher(int publisherId);
         IQueryable<Publisher> GetAllPublishers();
         Publisher GetPublisherById(int publisherId);
+        IQueryable<BoardGame> GetAllBoardGamesByPublisherId(int id);
     }
 }
