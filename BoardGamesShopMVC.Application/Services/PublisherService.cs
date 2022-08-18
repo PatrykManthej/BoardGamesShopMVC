@@ -54,7 +54,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void DeletePublisher(int id)
         {
-            throw new NotImplementedException();
+            _publisherRepository.DeletePublisher(id);
         }
 
         public void UpdatePublisher(NewPublisherVm model)

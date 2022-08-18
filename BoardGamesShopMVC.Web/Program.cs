@@ -1,5 +1,6 @@
 using BoardGamesShopMVC.Application;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Infrastructure;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
+builder.Services.AddTransient<IValidator<NewPublisherVm>, NewPublisherValidation>();
 
 builder.Logging.AddFile("Logs/myLog-{Date}.txt");
 
