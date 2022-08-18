@@ -46,7 +46,13 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .Include(b => b.Categories)
                 .Where(b => b.Categories.Any(c => c.Id == id));
             return boardGames;
-                
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            _context.Attach(category);
+            _context.Entry(category).Property("Name").IsModified = true;
+            _context.SaveChanges();
         }
     }
 }

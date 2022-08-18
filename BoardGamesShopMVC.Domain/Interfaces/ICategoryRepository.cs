@@ -10,5 +10,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         IQueryable<Category> GetAllCategories();
         Category GetCategoryById(int categoryId);
         IQueryable<BoardGame> GetAllBoardGamesByCategoryId(int id);
+        void UpdateCategory(Category category);
     }
 }

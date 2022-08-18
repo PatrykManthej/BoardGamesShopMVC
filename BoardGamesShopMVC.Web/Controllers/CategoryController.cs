@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
+using BoardGamesShopMVC.Application.ViewModels.Category;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
@@ -21,6 +22,34 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             var model = _categoryService.GetBoardGamesByCategoryId(id);
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            return View(new NewCategoryVm());
+        }
+        [HttpPost]
+        public IActionResult AddCategory(NewCategoryVm model)
+        {
+            var id = _categoryService.AddCategory(model);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete(int id)
+        {
+            _categoryService.DeleteCategory(id);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var category = _categoryService.GetCategoryForEdit(id);
+            return View(category);
+        }
+        [HttpPost]
+        public IActionResult EditCategory(NewCategoryVm model)
+        {
+            _categoryService.UpdateCategory(model);
+            return RedirectToAction("Index");
         }
     }
 }

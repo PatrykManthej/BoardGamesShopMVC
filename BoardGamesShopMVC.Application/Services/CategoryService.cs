@@ -4,6 +4,7 @@ using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Domain.Interfaces;
+using BoardGamesShopMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,32 @@ namespace BoardGamesShopMVC.Application.Services
                 Count = boardGames.Count
             };
             return boardGamesList;
+        }
+
+        public int AddCategory(NewCategoryVm newCategory)
+        {
+            var category = _mapper.Map<Category>(newCategory);
+            var id = _categoryRepository.AddCategory(category);
+            return id;
+        }
+
+        public void DeleteCategory(int id)
+        {
+            _categoryRepository.DeleteCategory(id);
+        }
+
+
+        public NewCategoryVm GetCategoryForEdit(int id)
+        {
+            var category = _categoryRepository.GetCategoryById(id);
+            var categoryVm = _mapper.Map<NewCategoryVm>(category);
+            return categoryVm;
+        }
+
+        public void UpdateCategory(NewCategoryVm model)
+        {
+            var category = _mapper.Map<Category>(model);
+            _categoryRepository.UpdateCategory(category);
         }
     }
 }

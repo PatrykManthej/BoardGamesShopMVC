@@ -12,5 +12,9 @@ namespace BoardGamesShopMVC.Application.Interfaces
     {
         ListCategoryForListVm GetAllCategories();
         ListBoardGameForListVm GetBoardGamesByCategoryId(int id);
+        int AddCategory(NewCategoryVm newCategory);
+        void DeleteCategory(int id);
+        NewCategoryVm GetCategoryForEdit(int id);
+        void UpdateCategory(NewCategoryVm model);
     }
 }
