@@ -49,5 +49,23 @@ namespace BoardGamesShopMVC.Web.Controllers
             _publisherService.DeletePublisher(id);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditPublisher(int id)
+        {
+            var publisher = _publisherService.GetPublisherForEdit(id);
+            return View(publisher);
+        }
+        [HttpPost]
+        public IActionResult EditPublisher(NewPublisherVm model)
+        {
+            ValidationResult result = _validator.Validate(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View(model);
+            }
+            _publisherService.UpdatePublisher(model);
+            return RedirectToAction("Index");
+        }
     }
 }

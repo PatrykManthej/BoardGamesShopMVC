@@ -24,6 +24,12 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 return publisher.Id;
             }
         }
+        public void UpdatePublisher(Publisher publisher)
+        {
+            _context.Attach(publisher);
+            _context.Entry(publisher).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
 
         public void DeletePublisher(int publisherId)
         {
@@ -53,5 +59,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .Where(b => b.PublisherId == id);
             return boardGames;
         }
+
     }
 }

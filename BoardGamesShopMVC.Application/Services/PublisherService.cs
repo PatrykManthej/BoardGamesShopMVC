@@ -57,9 +57,17 @@ namespace BoardGamesShopMVC.Application.Services
             _publisherRepository.DeletePublisher(id);
         }
 
+        public NewPublisherVm GetPublisherForEdit(int id)
+        {
+            var publisher = _publisherRepository.GetPublisherById(id);
+            var publisherVm = _mapper.Map<NewPublisherVm>(publisher);
+            return publisherVm;
+        }
+
         public void UpdatePublisher(NewPublisherVm model)
         {
-            throw new NotImplementedException();
+            var publisher = _mapper.Map<Publisher>(model);
+            _publisherRepository.UpdatePublisher(publisher);
         }
     }
 }
