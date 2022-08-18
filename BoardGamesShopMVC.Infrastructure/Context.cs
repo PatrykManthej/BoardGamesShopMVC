@@ -45,6 +45,8 @@ namespace BoardGamesShopMVC.Infrastructure
 
             builder.Entity<CartItem>().Property(p => p.TotalPrice).HasComputedColumnSql("[Quantity]*[UnitPrice]");
 
+            builder.Entity<Publisher>().Property(p=>p.Name).HasMaxLength(50).IsRequired();
+
 
             base.OnModelCreating(builder);
         }

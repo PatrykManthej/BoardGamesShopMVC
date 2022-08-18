@@ -12,5 +12,8 @@ namespace BoardGamesShopMVC.Application.Interfaces
     {
         ListPublisherForListVm GetAllPublishers();
         ListBoardGameForListVm GetBoardGamesByPublisherId(int id);
+        int AddPublisher(NewPublisherVm newPublisher);
+        void DeletePublisher(int id);
+        void UpdatePublisher(NewPublisherVm model);
     }
 }

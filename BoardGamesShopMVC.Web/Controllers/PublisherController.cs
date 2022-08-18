@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
+using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
@@ -21,6 +22,17 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             var model = _publisherService.GetBoardGamesByPublisherId(id);
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult AddPublisher()
+        {
+            return View(new NewPublisherVm());
+        }
+        [HttpPost]
+        public IActionResult AddPublisher(NewPublisherVm model)
+        {
+            var id = _publisherService.AddPublisher(model);
+            return RedirectToAction("Index");
         }
     }
 }

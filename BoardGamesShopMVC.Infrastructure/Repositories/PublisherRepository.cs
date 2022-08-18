@@ -12,9 +12,17 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         }
         public int AddPublisher(Publisher publisher)
         {
-            _context.Publishers.Add(publisher);
-            _context.SaveChanges();
-            return publisher.Id;
+            var existingPublisher = _context.Publishers.FirstOrDefault(p => p.Name.ToLower() == publisher.Name.ToLower());
+            if(existingPublisher != null)
+            {
+                return existingPublisher.Id;
+            }
+            else
+            {
+                _context.Publishers.Add(publisher);
+                _context.SaveChanges();
+                return publisher.Id;
+            }
         }
 
         public void DeletePublisher(int publisherId)

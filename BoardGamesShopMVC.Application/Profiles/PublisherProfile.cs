@@ -14,6 +14,7 @@ namespace BoardGamesShopMVC.Application.Profiles
         public PublisherProfile()
         {
             CreateMap<Publisher, PublisherForListVm>();
+            CreateMap<NewPublisherVm, Publisher>().ReverseMap();
         }
     }
 }
