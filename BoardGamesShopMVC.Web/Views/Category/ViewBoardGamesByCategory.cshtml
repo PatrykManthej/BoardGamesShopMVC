@@ -1,10 +1,10 @@
-﻿@model BoardGamesShopMVC.Application.ViewModels.Category.ListCategoryForListVm
+﻿@model BoardGamesShopMVC.Application.ViewModels.BoardGame.ListBoardGameForListVm
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ViewBoardGamesByCategory";
 }
 
-<h1>Index</h1>
+<h1>ViewBoardGamesByCategory</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,19 +15,24 @@
             <th>
                 Name
             </th>
+            <th>
+                Price
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Categories) {
+@foreach (var item in Model.BoardGames) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("BoardGames", "ViewBoardGamesByCategory", new { id=item.Id}) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>

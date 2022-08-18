@@ -1,5 +1,6 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
@@ -37,6 +38,15 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             var categories = _context.Categories;
             return categories;
+        }
+
+        public IQueryable<BoardGame> GetAllBoardGamesByCategoryId(int id)
+        {
+            var boardGames = _context.BoardGames
+                .Include(b => b.Categories)
+                .Where(b => b.Categories.Any(c => c.Id == id));
+            return boardGames;
+                
         }
     }
 }

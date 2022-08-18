@@ -16,5 +16,11 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _categoryService.GetAllCategories();
             return View(model);
         }
+        [HttpGet]
+        public IActionResult ViewBoardGamesByCategory(int id)
+        {
+            var model = _categoryService.GetBoardGamesByCategoryId(id);
+            return View(model);
+        }
     }
 }

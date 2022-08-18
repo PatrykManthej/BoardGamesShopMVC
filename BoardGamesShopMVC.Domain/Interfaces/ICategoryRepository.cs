@@ -9,5 +9,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void DeleteCategory(int categoryId);
         IQueryable<Category> GetAllCategories();
         Category GetCategoryById(int categoryId);
+        IQueryable<BoardGame> GetAllBoardGamesByCategoryId(int id);
     }
 }

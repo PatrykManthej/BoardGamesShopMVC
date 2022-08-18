@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
+using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Domain.Interfaces;
 using System;
@@ -29,6 +30,17 @@ namespace BoardGamesShopMVC.Application.Services
                 Count = categories.Count
             };
             return listCategories;
+        }
+        public ListBoardGameForListVm GetBoardGamesByCategoryId(int id)
+        {
+            var boardGames = _categoryRepository.GetAllBoardGamesByCategoryId(id)
+                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+            var boardGamesList = new ListBoardGameForListVm()
+            {
+                BoardGames = boardGames,
+                Count = boardGames.Count
+            };
+            return boardGamesList;
         }
     }
 }
