@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BoardGamesShopMVC.Application.ViewModels.Publisher;
+using FluentValidation;
 
 
 namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
@@ -16,6 +17,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public decimal Price { get; set; }
         public int LanguageId { get; set; }
         public int PublisherId { get; set; }
+        public List<PublisherForListVm> Publishers { get; set; }
     }
     public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
     {

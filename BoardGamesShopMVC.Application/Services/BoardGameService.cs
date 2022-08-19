@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
 using System;
@@ -15,10 +16,12 @@ namespace BoardGamesShopMVC.Application.Services
     public class BoardGameService : IBoardGameService
     {
         private readonly IBoardGameRepository _boardGameRepository;
+        private readonly IPublisherRepository _publisherRepository;
         private readonly IMapper _mapper;
-        public BoardGameService(IBoardGameRepository boardGameRepository, IMapper mapper)
+        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, IMapper mapper)
         {
             _boardGameRepository = boardGameRepository;
+            _publisherRepository = publisherRepository;
             _mapper = mapper;
         }
 
@@ -72,6 +75,17 @@ namespace BoardGamesShopMVC.Application.Services
         {
             var boardGame = _mapper.Map<BoardGame>(model);
             _boardGameRepository.UpdateBoardGame(boardGame);
+        }
+        public IQueryable<PublisherForListVm> GetPublishersToSelect()
+        {
+            var publishersToSelect = _publisherRepository.GetAllPublishers()
+                .ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider);
+            return publishersToSelect;
+        }
+        public NewBoardGameVm SetParametersToVm(NewBoardGameVm model)
+        {
+            model.Publishers = GetPublishersToSelect().ToList();
+            return model;
         }
     }
 }

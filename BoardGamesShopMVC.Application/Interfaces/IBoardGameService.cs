@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace BoardGamesShopMVC.Application.Interfaces
         void DeleteBoardGame(int id);
         NewBoardGameVm GetBoardGameForEdit(int id);
         void UpdateBoardGame(NewBoardGameVm model);
+        public IQueryable<PublisherForListVm> GetPublishersToSelect();
+        public NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
 
     }
 }

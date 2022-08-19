@@ -62,7 +62,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PublisherId" class="control-label"></label>
-                <input asp-for="PublisherId" class="form-control" />
+                <select asp-for="PublisherId" class="form-control" asp-items="@(new SelectList(Model.Publishers,"Id","Name"))"></select>
                 <span asp-validation-for="PublisherId" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -56,7 +56,8 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpGet]
         public IActionResult AddBoardGame()
         {
-            return View(new NewBoardGameVm());
+            var model = _boardGameService.SetParametersToVm(new NewBoardGameVm());
+            return View(model);
         }
         [HttpPost]
         public IActionResult AddBoardGame(NewBoardGameVm model)
