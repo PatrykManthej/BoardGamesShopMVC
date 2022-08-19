@@ -14,6 +14,10 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public int AddBoardGame(BoardGame boardGame)
         {
+            foreach (var category in boardGame.Categories)
+            {
+                _context.Attach(category);
+            }
             _context.BoardGames.Add(boardGame);
             _context.SaveChanges();
             return boardGame.Id;

@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
@@ -17,11 +18,13 @@ namespace BoardGamesShopMVC.Application.Services
     {
         private readonly IBoardGameRepository _boardGameRepository;
         private readonly IPublisherRepository _publisherRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, IMapper mapper)
+        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository, IMapper mapper)
         {
             _boardGameRepository = boardGameRepository;
             _publisherRepository = publisherRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
 
@@ -54,6 +57,16 @@ namespace BoardGamesShopMVC.Application.Services
 
         public int AddBoardGame(NewBoardGameVm newBoardGame)
         {
+            var allCategories = GetCategoriesToSelect().ToList();
+            var categoriesForBoardGame = new List<CategoryForListVm>();
+
+            foreach (var categoryId in newBoardGame.CategoriesId)
+            {
+                var category = allCategories.FirstOrDefault(c => c.Id == categoryId);
+                categoriesForBoardGame.Add(category);
+            }
+
+            newBoardGame.Categories = categoriesForBoardGame;
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
             var id = _boardGameRepository.AddBoardGame(boardGame);
             return id;
@@ -82,9 +95,16 @@ namespace BoardGamesShopMVC.Application.Services
                 .ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider);
             return publishersToSelect;
         }
+        public IQueryable<CategoryForListVm> GetCategoriesToSelect()
+        {
+            var categoriesToSelect = _categoryRepository.GetAllCategories()
+                .ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider);
+            return categoriesToSelect;
+        }
         public NewBoardGameVm SetParametersToVm(NewBoardGameVm model)
         {
             model.Publishers = GetPublishersToSelect().ToList();
+            model.Categories = GetCategoriesToSelect().ToList();
             return model;
         }
     }

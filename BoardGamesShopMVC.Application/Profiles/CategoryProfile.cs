@@ -13,7 +13,7 @@ namespace BoardGamesShopMVC.Application.Profiles
     {
         public CategoryProfile()
         {
-            CreateMap<Category, CategoryForListVm>();
+            CreateMap<Category, CategoryForListVm>().ReverseMap();
             CreateMap<NewCategoryVm, Category>().ReverseMap();
         }
     }
