@@ -21,5 +21,17 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _cartService.ViewCart();
             return View(model);
         }
+     
+        public IActionResult AddToCart(int id)
+        {
+            _cartService.AddItemToCart(id, 3);
+            return RedirectToAction("Index", "BoardGame");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _cartService.DeleteCartItemFromCart(id);
+            return RedirectToAction("ViewCart");
+        }
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Application.ViewModels.Cart
 {
-    public class CartDetailsVm
+    public class CartItemVm
     {
         public int Id { get; set; }
-        public decimal TotalAmount { get; set; }
-
-        public List<CartItemVm> CartItems { get; set; }
+        public int Quantity { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public decimal Total { get; set; }
     }
 }

@@ -76,3 +76,6 @@
     @Html.ActionLink("Edit", "EditBoardGame", new { id = Model.Id}) |
     <a asp-action="Index">Back to List</a>
 </div>
+<div>
+    @Html.ActionLink("AddToCart", "AddToCart","Cart", new { id = Model.Id}) |
+</div>

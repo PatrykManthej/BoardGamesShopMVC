@@ -10,5 +10,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
     public interface ICartService
     {
         CartDetailsVm ViewCart();
+        void AddItemToCart(int boardGameId, int cartId);
+        void DeleteCartItemFromCart(int cartItemId);
     }
 }

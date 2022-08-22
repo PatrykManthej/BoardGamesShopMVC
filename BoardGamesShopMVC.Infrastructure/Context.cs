@@ -43,8 +43,6 @@ namespace BoardGamesShopMVC.Infrastructure
             builder.Entity<Order>().HasOne(o => o.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.CustomerId);
             builder.Entity<Order>().HasMany(o => o.Items).WithOne(i => i.Order).HasForeignKey(i => i.OrderId);
 
-            builder.Entity<CartItem>().Property(p => p.TotalPrice).HasComputedColumnSql("[Quantity]*[UnitPrice]");
-
             builder.Entity<Publisher>().Property(p=>p.Name).HasMaxLength(50).IsRequired();
 
 

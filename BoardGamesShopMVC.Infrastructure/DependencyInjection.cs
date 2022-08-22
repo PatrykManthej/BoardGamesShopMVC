@@ -17,6 +17,7 @@ namespace BoardGamesShopMVC.Infrastructure
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<ICartItemRepository, CartItemRepository>();
             return services;
         }
     }
