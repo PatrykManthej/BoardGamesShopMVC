@@ -17,9 +17,9 @@ namespace BoardGamesShopMVC.Application.Interfaces
         void DeleteBoardGame(int id);
         NewBoardGameVm GetBoardGameForEdit(int id);
         void UpdateBoardGame(NewBoardGameVm model);
-        public IQueryable<PublisherForListVm> GetPublishersToSelect();
-        public IQueryable<CategoryForListVm> GetCategoriesToSelect();
-        public NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
+        IQueryable<PublisherForListVm> GetPublishersToSelect();
+        IQueryable<CategoryForListVm> GetCategoriesToSelect();
+        NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
 
     }
 }
