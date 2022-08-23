@@ -88,21 +88,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 }
             }
         }
-        public void ChangeCartItemQuantity(int cartId, int cartItemId, int quantity)
-        {
-            var cart = _context.Carts.Find(cartId);
-            if (cart != null)
-            {
-                var cartItem = cart.CartItems.FirstOrDefault(i => i.Id == cartItemId);
-                if (cartItem != null)
-                {
-                    //cart.TotalAmount -= cartItem.TotalPrice;
-                    cartItem.Quantity = quantity;
-                    //cart.TotalAmount += cartItem.TotalPrice;
-                    _context.SaveChanges();
-                }
-            }
-        }
+
         public void CalculateTotalAmount(int cartId)
         {
             var cart = _context.Carts
@@ -115,8 +101,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 total += item.BoardGame.Price * item.Quantity;
             }
             cart.TotalAmount = total;
-           // _context.Attach(cart);
-            //_context.Entry(cart).Property("TotalAmount").IsModified = true;
             _context.SaveChanges();
         }
         public void IncrementCartItemQuantity(int cartId, int cartItemId)

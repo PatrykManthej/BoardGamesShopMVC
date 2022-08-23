@@ -6,7 +6,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
     {
         int AddCart(Cart cart);
         void AddItemToCart(int cartId, int boardGameId);
-        void ChangeCartItemQuantity(int cartId, int cartItemId, int quantity);
         void DeleteCart(int cartId);
         void DeleteItemFromCart(int cartId, int cartItemId);
         IQueryable<Cart> GetAllCarts();
