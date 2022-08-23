@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
+using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
@@ -19,12 +20,14 @@ namespace BoardGamesShopMVC.Application.Services
         private readonly IBoardGameRepository _boardGameRepository;
         private readonly IPublisherRepository _publisherRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ILanguageRepository _languageRepository;
         private readonly IMapper _mapper;
-        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository, IMapper mapper)
+        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository,ILanguageRepository languageRepository, IMapper mapper)
         {
             _boardGameRepository = boardGameRepository;
             _publisherRepository = publisherRepository;
             _categoryRepository = categoryRepository;
+            _languageRepository = languageRepository;
             _mapper = mapper;
         }
 
@@ -101,10 +104,17 @@ namespace BoardGamesShopMVC.Application.Services
                 .ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider);
             return categoriesToSelect;
         }
+        public IQueryable<LanguageForListVm> GetLanguagesToSelect()
+        {
+            var languagesToSelect = _languageRepository.GetAllLanguages()
+                .ProjectTo<LanguageForListVm>(_mapper.ConfigurationProvider);
+            return languagesToSelect;
+        }
         public NewBoardGameVm SetParametersToVm(NewBoardGameVm model)
         {
             model.Publishers = GetPublishersToSelect().ToList();
             model.Categories = GetCategoriesToSelect().ToList();
+            model.Languages = GetLanguagesToSelect().ToList();
             return model;
         }
     }

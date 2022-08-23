@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.ViewModels.Category;
+using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using FluentValidation;
 
@@ -21,6 +22,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public List<PublisherForListVm> Publishers { get; set; }
         public List<CategoryForListVm> Categories { get; set; }
         public List<int> CategoriesId { get; set; }
+        public List<LanguageForListVm> Languages { get; set; }
     }
     public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
     {

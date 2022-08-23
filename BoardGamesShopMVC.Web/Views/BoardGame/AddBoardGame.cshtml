@@ -57,7 +57,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="LanguageId" class="control-label"></label>
-                <input asp-for="LanguageId" class="form-control" />
+                <select asp-for="LanguageId" class="form-control" asp-items="@(new SelectList(Model.Languages,"Id","Name"))">
+                    <option selected disabled>Select language</option>
+                </select>
                 <span asp-validation-for="LanguageId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -67,7 +69,7 @@
                 </select>
                 <span asp-validation-for="PublisherId" class="text-danger"></span>
             </div>
-              <div class="form-group">
+            <div class="form-group">
                 <label asp-for="CategoriesId" class="control-label"></label>
                 <select multiple asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
                 <span asp-validation-for="CategoriesId" class="text-danger"></span>
@@ -84,5 +86,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

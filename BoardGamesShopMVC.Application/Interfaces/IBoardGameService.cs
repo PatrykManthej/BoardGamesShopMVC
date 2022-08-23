@@ -1,5 +1,6 @@
 ﻿using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
+using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
         void UpdateBoardGame(NewBoardGameVm model);
         IQueryable<PublisherForListVm> GetPublishersToSelect();
         IQueryable<CategoryForListVm> GetCategoriesToSelect();
+        IQueryable<LanguageForListVm> GetLanguagesToSelect();
         NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
 
     }
