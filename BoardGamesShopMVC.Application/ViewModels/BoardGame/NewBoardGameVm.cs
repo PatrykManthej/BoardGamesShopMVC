@@ -23,6 +23,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public List<CategoryForListVm> Categories { get; set; }
         public List<int> CategoriesId { get; set; }
         public List<LanguageForListVm> Languages { get; set; }
+        public int StockQuantity { get; set; }
     }
     public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
     {

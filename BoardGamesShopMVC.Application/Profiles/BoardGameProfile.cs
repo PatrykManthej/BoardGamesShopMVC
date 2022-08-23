@@ -23,7 +23,17 @@ namespace BoardGamesShopMVC.Application.Profiles
                 dst => dst.Publisher,
                 opt => opt.MapFrom(src => src.Publisher.Name)
                 );
-            CreateMap<NewBoardGameVm, BoardGame>().ReverseMap();
+
+            //CreateMap<NewBoardGameVm, BoardGame>()
+            //    .ForMember(dst => dst.Stock.Quantity,
+            //    opt =>opt.MapFrom(src => src.StockQuantity))
+            //    .ReverseMap();
+
+            CreateMap<BoardGame, NewBoardGameVm>()
+                .ForMember(
+                dst => dst.StockQuantity,
+                opt => opt.MapFrom(src => src.Stock.Quantity)
+                ).ReverseMap();
         }
     }
 }
