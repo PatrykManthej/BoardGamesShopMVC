@@ -24,6 +24,7 @@ namespace BoardGamesShopMVC.Application.Services
         public CartDetailsVm ViewCart() 
         {
             var cart = _cartRepository.GetCartById(3);
+            _cartRepository.CalculateTotalAmount(cart.Id);
             var cartVm = _mapper.Map<CartDetailsVm>(cart);
             foreach (var item in cartVm.CartItems)
             {
@@ -41,6 +42,14 @@ namespace BoardGamesShopMVC.Application.Services
         public void DeleteCartItemFromCart(int cartItemId)
         {
             _cartRepository.DeleteItemFromCart(3,cartItemId);
+        }
+        public void IncrementCartItemQuantity(int cartId, int cartItemId)
+        {
+            _cartRepository.IncrementCartItemQuantity(cartId, cartItemId);
+        }
+        public void DecrementCartItemQuantity(int cartId, int cartItemId)
+        {
+            _cartRepository.DecrementCartItemQuantity(cartId, cartItemId);
         }
     }
 }

@@ -8,7 +8,6 @@
 
 <div>
     <h4>CartDetailsVm</h4>
-    <a asp-area="" asp-controller="Cart" asp-action="ViewCart">Calculate</a>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -26,6 +25,7 @@
     </dl>
 </div>
 <div class="row">
+
     <table class="table">
         <thead>
             <tr>
@@ -35,19 +35,15 @@
                 <th>
                     Quantity
                 </th>
-                 <th>
-                    Quantity2
-                </th>
                 <th>
                     Name
                 </th>
                 <th>
                     Price
                 </th>
-                 <th>
+                <th>
                     Total
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -61,16 +57,17 @@
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                     <td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                     <td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.ActionLink("+", "Plus", "Cart", new {  cartId = @Model.Id, cartItemId = item.Id} ,new { @class = "btn btn-primary" })
+                        @Html.ActionLink("-", "Minus", "Cart", new {  cartId = @Model.Id, cartItemId = item.Id} ,new { @class = "btn btn-warning" })
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "EditBoardGame", new { id=item.Id }) |
@@ -81,7 +78,9 @@
             }
         </tbody>
     </table>
-    <div>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        <a asp-action="Index">Back to List</a>
-    </div>
+
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

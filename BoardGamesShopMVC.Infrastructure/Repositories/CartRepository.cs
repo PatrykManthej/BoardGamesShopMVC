@@ -44,39 +44,45 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         }
         public void AddItemToCart(int cartId, int boardGameId)
         {
-            var cart = _context.Carts.Find(cartId);
+            var cart = _context.Carts
+                .Include(c=>c.CartItems)
+                .FirstOrDefault(c=>c.Id == cartId);
             if (cart != null)
             {
-                var cartItem = _context.CartItems.FirstOrDefault(c=>c.BoardGameId == boardGameId);
+                if(cart.CartItems == null)
+                {
+                    cart.CartItems = new List<CartItem>();
+                }
+                var cartItem = cart.CartItems.FirstOrDefault(c=>c.BoardGameId == boardGameId);
                 if(cartItem == null)
                 {
-
                     var newCartItem = new CartItem()
                     {
                         Quantity = 1,
                         BoardGameId = boardGameId,
                         CartId = cartId
                     };
-
-                    var boardGame = _context.BoardGames.Find(boardGameId);
                     _context.CartItems.Add(newCartItem);
-                    cart.TotalAmount += newCartItem.Quantity * boardGame.Price;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    cartItem.Quantity++;
                     _context.SaveChanges();
                 }
             }
         }
+
         public void DeleteItemFromCart(int cartId, int cartItemId)
         {
             var cart = _context.Carts.Find(cartId);
             if (cart != null)
             {
                 var cartItem = _context.CartItems
-                    .Include(c=>c.BoardGame)
                     .FirstOrDefault(i => i.Id == cartItemId);
 
                 if (cartItem != null)
                 {
-                    cart.TotalAmount -= cartItem.Quantity * cartItem.BoardGame.Price;
                     _context.CartItems.Remove(cartItem);
                     _context.SaveChanges();
                 }
@@ -96,7 +102,56 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                     _context.SaveChanges();
                 }
             }
+        }
+        public void CalculateTotalAmount(int cartId)
+        {
+            var cart = _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.BoardGame)
+                .FirstOrDefault(b => b.Id == cartId);
+            decimal total = 0;
+            foreach (var item in cart.CartItems)
+            {
+                total += item.BoardGame.Price * item.Quantity;
+            }
+            cart.TotalAmount = total;
+           // _context.Attach(cart);
+            //_context.Entry(cart).Property("TotalAmount").IsModified = true;
+            _context.SaveChanges();
+        }
+        public void IncrementCartItemQuantity(int cartId, int cartItemId)
+        {
+            var cart = _context.Carts.Find(cartId);
+            if (cart != null)
+            {
+                var cartItem = _context.CartItems
+                  .FirstOrDefault(i => i.Id == cartItemId);
 
+                if (cartItem != null)
+                {
+                    cartItem.Quantity++;
+                    _context.SaveChanges();
+                }
+            }
+        }
+        public void DecrementCartItemQuantity(int cartId, int cartItemId)
+        {
+            var cart = _context.Carts.Find(cartId);
+            if (cart != null)
+            {
+                var cartItem = _context.CartItems
+                  .FirstOrDefault(i => i.Id == cartItemId);
+
+                if (cartItem != null)
+                {
+                    cartItem.Quantity--;
+                    if(cartItem.Quantity == 0)
+                    {
+                        _context.Remove(cartItem);
+                    }
+                    _context.SaveChanges();
+                }
+            }
         }
     }
 }

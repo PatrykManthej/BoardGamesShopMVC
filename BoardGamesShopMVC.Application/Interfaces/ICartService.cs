@@ -12,5 +12,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
         CartDetailsVm ViewCart();
         void AddItemToCart(int boardGameId, int cartId);
         void DeleteCartItemFromCart(int cartItemId);
+        void IncrementCartItemQuantity(int cartId, int cartItemId);
+        void DecrementCartItemQuantity(int cartId, int cartItemId);
     }
 }

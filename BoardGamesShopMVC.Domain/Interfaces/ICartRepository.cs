@@ -11,5 +11,8 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void DeleteItemFromCart(int cartId, int cartItemId);
         IQueryable<Cart> GetAllCarts();
         Cart GetCartById(int cartId);
+        void CalculateTotalAmount(int cartId);
+        void IncrementCartItemQuantity(int cartId, int cartItemId);
+        void DecrementCartItemQuantity(int cartId, int cartItemId);
     }
 }
