@@ -42,12 +42,12 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "BoardGames",
-                columns: new[] { "Id", "AverageTimeOfPlay", "Description", "LanguageId", "MaxNumberOfPlayers", "MinNumberOfPlayers", "Name", "Price", "PublishedYear", "PublisherId", "RecommendedMinimumAge" },
+                columns: new[] { "Id", "AverageTimeOfPlay", "Description", "ImageBytes", "LanguageId", "MaxNumberOfPlayers", "MinNumberOfPlayers", "Name", "Price", "PublishedYear", "PublisherId", "RecommendedMinimumAge" },
                 values: new object[,]
                 {
-                    { 1, "30 - 45 min", "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", 1, 5, 2, "Carcassonne", 120m, 2000, 1, 7 },
-                    { 2, "30 min", "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", 1, 4, 2, "Splendor", 130m, 2014, 2, 10 },
-                    { 3, "90 - 180 min", "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", 1, 5, 1, "Nemesis", 500m, 2018, 2, 12 }
+                    { 1, "30 - 45 min", "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", null, 1, 5, 2, "Carcassonne", 120m, 2000, 1, 7 },
+                    { 2, "30 min", "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", null, 1, 4, 2, "Splendor", 130m, 2014, 2, 10 },
+                    { 3, "90 - 180 min", "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", null, 1, 5, 1, "Nemesis", 500m, 2018, 2, 12 }
                 });
 
             migrationBuilder.InsertData(

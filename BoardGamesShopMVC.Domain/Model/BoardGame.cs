@@ -11,12 +11,13 @@
         public int MaxNumberOfPlayers { get; set; }
         public int PublishedYear { get; set; }
         public decimal Price { get; set; }
+        public byte[]? ImageBytes { get; set; }
 
         public Language LanguageVersion { get; set; }
         public int LanguageId { get; set; }
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
-        public Stock Stock { get; set; }
+        //public Stock Stock { get; set; }
         public CartItem CartItem { get; set; }
         public OrderItem OrderItem { get; set; }
         public ICollection<Category> Categories { get; set; }

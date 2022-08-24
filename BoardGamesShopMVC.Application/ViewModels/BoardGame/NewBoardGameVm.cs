@@ -2,7 +2,7 @@
 using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using FluentValidation;
-
+using Microsoft.AspNetCore.Http;
 
 namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
 {
@@ -24,6 +24,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public List<int> CategoriesId { get; set; }
         public List<LanguageForListVm> Languages { get; set; }
         public int StockQuantity { get; set; }
+        public IFormFile? ImageFile{ get; set; }
     }
     public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
     {

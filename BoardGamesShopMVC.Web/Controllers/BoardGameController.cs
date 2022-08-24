@@ -27,7 +27,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         public IActionResult Index()
         {
             _logger.LogInformation("Jestem w BoardGame/Index");
-            var model = _boardGameService.GetAllGamesForList(5,1,"");
+            var model = _boardGameService.GetAllGamesForList(5, 1, "");
             return View(model);
         }
         [HttpPost]
@@ -38,7 +38,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 pageNo = 1;
             }
-            if(searchString is null)
+            if (searchString is null)
             {
                 searchString = string.Empty;
             }
@@ -89,11 +89,11 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpPost]
         public IActionResult EditBoardGame(NewBoardGameVm model)
         {
-            if (ModelState.IsValid)
-            {
-                _boardGameService.UpdateBoardGame(model);
-                return RedirectToAction("Index");
-            }
+
+
+            _boardGameService.UpdateBoardGame(model);
+            return RedirectToAction("Index");
+
             return View(model);
         }
     }

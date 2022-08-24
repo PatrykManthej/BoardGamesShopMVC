@@ -32,7 +32,7 @@ namespace BoardGamesShopMVC.Infrastructure
         {
             builder.Entity<BoardGame>().HasOne(b => b.LanguageVersion).WithMany(l => l.BoardGames).HasForeignKey(b => b.LanguageId);
             builder.Entity<BoardGame>().HasOne(b => b.Publisher).WithMany(p => p.BoardGames).HasForeignKey(b => b.PublisherId);
-            builder.Entity<BoardGame>().HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
+            //builder.Entity<BoardGame>().HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
             builder.Entity<BoardGame>().HasOne(b => b.CartItem).WithOne(c => c.BoardGame).HasForeignKey<CartItem>(c => c.BoardGameId);
             builder.Entity<BoardGame>().HasOne(b => b.OrderItem).WithOne(o => o.BoardGame).HasForeignKey<OrderItem>(o => o.BoardGameId);
             builder.Entity<BoardGame>().HasMany(b => b.Categories)
@@ -62,14 +62,14 @@ namespace BoardGamesShopMVC.Infrastructure
             builder.Entity<Publisher>().Property(p => p.Name).HasMaxLength(50).IsRequired();
 
             builder.Entity<Publisher>().HasData
-    (
-    new Publisher() { Id = 1, Name = "Bard" },
-    new Publisher() { Id = 2, Name = "Rebel" }
-    );
+                (
+                    new Publisher() { Id = 1, Name = "Bard" },
+                    new Publisher() { Id = 2, Name = "Rebel" }
+                );
             builder.Entity<Language>().HasData
                 (
-                new Language() { Id = 1, Name = "Polski" },
-                new Language() { Id = 2, Name = "Angielski" }
+                    new Language() { Id = 1, Name = "Polski" },
+                    new Language() { Id = 2, Name = "Angielski" }
                 );
             builder.Entity<BoardGame>().HasData
                 (
@@ -82,14 +82,14 @@ namespace BoardGamesShopMVC.Infrastructure
 
             builder.Entity<Category>().HasData
                 (
-                new Category() { Id = 1, Name = "Strategiczne" },
-                new Category() { Id = 2, Name = "Przygodowe" }
+                    new Category() { Id = 1, Name = "Strategiczne" },
+                    new Category() { Id = 2, Name = "Przygodowe" }
                 );
             builder.Entity<BoardGameCategory>().HasData
                 (
-                new BoardGameCategory() { BoardGamesId = 1, CategoriesId = 1 },
-                new BoardGameCategory() { BoardGamesId = 2, CategoriesId = 1 },
-                new BoardGameCategory() { BoardGamesId = 3, CategoriesId = 2 }
+                    new BoardGameCategory() { BoardGamesId = 1, CategoriesId = 1 },
+                    new BoardGameCategory() { BoardGamesId = 2, CategoriesId = 1 },
+                    new BoardGameCategory() { BoardGamesId = 3, CategoriesId = 2 }
                 );
             builder.Entity<Cart>().HasData
                 (
@@ -99,6 +99,7 @@ namespace BoardGamesShopMVC.Infrastructure
                (
                    new Customer() { Id = 1, FirstName = "Test", LastName = "Test" }
                );
+
             base.OnModelCreating(builder);
         }
     }

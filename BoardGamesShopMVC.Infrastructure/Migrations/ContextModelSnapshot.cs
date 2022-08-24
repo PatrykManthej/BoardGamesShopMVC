@@ -184,6 +184,9 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("ImageBytes")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<int>("LanguageId")
                         .HasColumnType("int");
 

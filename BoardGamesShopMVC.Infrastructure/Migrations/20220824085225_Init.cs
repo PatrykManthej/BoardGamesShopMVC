@@ -340,6 +340,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     MaxNumberOfPlayers = table.Column<int>(type: "int", nullable: false),
                     PublishedYear = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     LanguageId = table.Column<int>(type: "int", nullable: false),
                     PublisherId = table.Column<int>(type: "int", nullable: false)
                 },
