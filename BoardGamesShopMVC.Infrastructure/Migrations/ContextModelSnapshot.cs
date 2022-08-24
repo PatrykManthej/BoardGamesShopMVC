@@ -22,7 +22,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BoardGameCategory", b =>
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGameCategory", b =>
                 {
                     b.Property<int>("BoardGamesId")
                         .HasColumnType("int");
@@ -35,6 +35,23 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("BoardGameCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            BoardGamesId = 1,
+                            CategoriesId = 1
+                        },
+                        new
+                        {
+                            BoardGamesId = 2,
+                            CategoriesId = 1
+                        },
+                        new
+                        {
+                            BoardGamesId = 3,
+                            CategoriesId = 2
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Customer.Address", b =>
@@ -141,6 +158,14 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Test",
+                            LastName = "Test"
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.BoardGame", b =>
@@ -191,6 +216,50 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasIndex("PublisherId");
 
                     b.ToTable("BoardGames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AverageTimeOfPlay = "30 - 45 min",
+                            Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 5,
+                            MinNumberOfPlayers = 2,
+                            Name = "Carcassonne",
+                            Price = 120m,
+                            PublishedYear = 2000,
+                            PublisherId = 1,
+                            RecommendedMinimumAge = 7
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AverageTimeOfPlay = "30 min",
+                            Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 4,
+                            MinNumberOfPlayers = 2,
+                            Name = "Splendor",
+                            Price = 130m,
+                            PublishedYear = 2014,
+                            PublisherId = 2,
+                            RecommendedMinimumAge = 10
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AverageTimeOfPlay = "90 - 180 min",
+                            Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 5,
+                            MinNumberOfPlayers = 1,
+                            Name = "Nemesis",
+                            Price = 500m,
+                            PublishedYear = 2018,
+                            PublisherId = 2,
+                            RecommendedMinimumAge = 12
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.Cart", b =>
@@ -213,6 +282,14 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            TotalAmount = 0m
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.CartItem", b =>
@@ -257,6 +334,18 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Strategiczne"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Przygodowe"
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.Language", b =>
@@ -274,6 +363,18 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Polski"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Angielski"
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.Order", b =>
@@ -349,6 +450,18 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Publishers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bard"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Rebel"
+                        });
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Models.Stock", b =>
@@ -607,19 +720,23 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BoardGameCategory", b =>
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGameCategory", b =>
                 {
-                    b.HasOne("BoardGamesShopMVC.Domain.Models.BoardGame", null)
+                    b.HasOne("BoardGamesShopMVC.Domain.Models.BoardGame", "BoardGame")
                         .WithMany()
                         .HasForeignKey("BoardGamesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BoardGamesShopMVC.Domain.Models.Category", null)
+                    b.HasOne("BoardGamesShopMVC.Domain.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BoardGame");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Customer.Address", b =>

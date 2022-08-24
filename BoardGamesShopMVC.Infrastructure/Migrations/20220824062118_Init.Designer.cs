@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGamesShopMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220822102628_CartItemModelModified")]
-    partial class CartItemModelModified
+    [Migration("20220824062118_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BoardGameCategory", b =>
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGameCategory", b =>
                 {
                     b.Property<int>("BoardGamesId")
                         .HasColumnType("int");
@@ -609,19 +609,23 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BoardGameCategory", b =>
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGameCategory", b =>
                 {
-                    b.HasOne("BoardGamesShopMVC.Domain.Models.BoardGame", null)
+                    b.HasOne("BoardGamesShopMVC.Domain.Models.BoardGame", "BoardGame")
                         .WithMany()
                         .HasForeignKey("BoardGamesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BoardGamesShopMVC.Domain.Models.Category", null)
+                    b.HasOne("BoardGamesShopMVC.Domain.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BoardGame");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Customer.Address", b =>

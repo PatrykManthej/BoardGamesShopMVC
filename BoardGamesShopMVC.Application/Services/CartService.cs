@@ -23,7 +23,7 @@ namespace BoardGamesShopMVC.Application.Services
         }
         public CartDetailsVm ViewCart() 
         {
-            var cart = _cartRepository.GetCartById(3);
+            var cart = _cartRepository.GetCartById(1);
             _cartRepository.CalculateTotalAmount(cart.Id);
             var cartVm = _mapper.Map<CartDetailsVm>(cart);
             foreach (var item in cartVm.CartItems)

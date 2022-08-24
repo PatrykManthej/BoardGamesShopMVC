@@ -29,7 +29,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         }
         public IActionResult AddToCart(int id)
         {
-            _cartService.AddItemToCart(id, 3);
+            _cartService.AddItemToCart(id, 1);
             return RedirectToAction("Index", "BoardGame");
         }
 

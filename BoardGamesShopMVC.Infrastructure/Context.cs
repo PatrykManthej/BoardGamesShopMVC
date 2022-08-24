@@ -13,13 +13,13 @@ namespace BoardGamesShopMVC.Infrastructure
 
         }
 
-        public DbSet<Address> Addresses  { get; set; }
-        public DbSet<ContactDetail> ContactDetails  { get; set; }
-        public DbSet<ContactDetailType> ContactDetailTypes  { get; set; }
-        public DbSet<Customer> Customers  { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
+        public DbSet<ContactDetailType> ContactDetailTypes { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
-        public DbSet<Cart> Carts{ get; set; }
-        public DbSet<CartItem> CartItems{ get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -41,12 +41,15 @@ namespace BoardGamesShopMVC.Infrastructure
                 {
                     bgcBuilder.HasOne(bgc => bgc.BoardGame)
                     .WithMany()
-                    .HasForeignKey(bgc => bgc.BoardGameId);
+                    .HasForeignKey(bgc => bgc.BoardGamesId);
 
                     bgcBuilder.HasOne(bgc => bgc.Category)
                     .WithMany()
-                    .HasForeignKey(bgc => bgc.CategoryId);
+                    .HasForeignKey(bgc => bgc.CategoriesId);
+
+                    bgcBuilder.HasKey(bgc => new { bgc.BoardGamesId, bgc.CategoriesId });
                 });
+
 
             builder.Entity<BoardGame>().HasMany(b => b.Tags).WithMany(t => t.BoardGames);
 
@@ -56,40 +59,46 @@ namespace BoardGamesShopMVC.Infrastructure
             builder.Entity<Order>().HasOne(o => o.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.CustomerId);
             builder.Entity<Order>().HasMany(o => o.Items).WithOne(i => i.Order).HasForeignKey(i => i.OrderId);
 
-            builder.Entity<Publisher>().Property(p=>p.Name).HasMaxLength(50).IsRequired();
-
+            builder.Entity<Publisher>().Property(p => p.Name).HasMaxLength(50).IsRequired();
 
             builder.Entity<Publisher>().HasData
-                (
-                new Publisher() {Id=1, Name = "Bard" },
-                new Publisher() { Id = 2, Name = "Rebel" }
-                );
+    (
+    new Publisher() { Id = 1, Name = "Bard" },
+    new Publisher() { Id = 2, Name = "Rebel" }
+    );
             builder.Entity<Language>().HasData
                 (
-                new Language() { Id = 1, Name = "Polski"},
-                new Language() { Id = 2, Name = "Angielski"}
+                new Language() { Id = 1, Name = "Polski" },
+                new Language() { Id = 2, Name = "Angielski" }
                 );
             builder.Entity<BoardGame>().HasData
                 (
-                    new BoardGame() { Id = 1, Name = "Carcassonne", Description= "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1 },
+                    new BoardGame() { Id = 1, Name = "Carcassonne", Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1 },
 
-                    new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2},
+                    new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2 },
 
-                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2}
+                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2 }
                 );
 
             builder.Entity<Category>().HasData
                 (
                 new Category() { Id = 1, Name = "Strategiczne" },
-                new Category() { Id = 2, Name = "Przygodowe"}
+                new Category() { Id = 2, Name = "Przygodowe" }
                 );
             builder.Entity<BoardGameCategory>().HasData
                 (
-                new BoardGameCategory() { BoardGameId = 1, CategoryId = 1 },
-                new BoardGameCategory() { BoardGameId = 2, CategoryId = 1 },
-                new BoardGameCategory() { BoardGameId = 3, CategoryId = 2 }
+                new BoardGameCategory() { BoardGamesId = 1, CategoriesId = 1 },
+                new BoardGameCategory() { BoardGamesId = 2, CategoriesId = 1 },
+                new BoardGameCategory() { BoardGamesId = 3, CategoriesId = 2 }
                 );
-
+            builder.Entity<Cart>().HasData
+                (
+                    new Cart() { Id = 1, CustomerId = 1 }
+                );
+            builder.Entity<Customer>().HasData
+               (
+                   new Customer() { Id = 1, FirstName = "Test", LastName = "Test" }
+               );
             base.OnModelCreating(builder);
         }
     }
