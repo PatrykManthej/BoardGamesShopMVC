@@ -32,8 +32,8 @@
     <tbody>
 @foreach (var item in Model.BoardGames) {
         <tr>
-             <td scope="col">
-                <img width="100%" src="@item.ImageUrl" />
+             <td class="text-center" scope="col">
+                <img height="120" src="@item.ImageUrl" />
             </td>
             <td scope="col">
                 @Html.DisplayFor(modelItem => item.Name)

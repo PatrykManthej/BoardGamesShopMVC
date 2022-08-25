@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BoardGamesShopMVC.Application.Profiles.Resolvers;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Domain.Models;
 using System;
@@ -24,6 +25,7 @@ namespace BoardGamesShopMVC.Application.Profiles
                 dst => dst.Publisher,
                 opt => opt.MapFrom(src => src.Publisher.Name)
                 );
+                
 
             //CreateMap<NewBoardGameVm, BoardGame>()
             //    .ForMember(dst => dst.Stock.Quantity,

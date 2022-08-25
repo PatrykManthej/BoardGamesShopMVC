@@ -23,6 +23,10 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(
                 dst => dst.Price,
                 opt => opt.MapFrom(src => src.BoardGame.Price)
+                )
+                .ForMember(
+                dst => dst.ImageUrl,
+                opt => opt.MapFrom(src => src.BoardGame.ImageUrl)
                 );
         }
     }
