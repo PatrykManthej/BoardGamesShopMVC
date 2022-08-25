@@ -26,4 +26,8 @@
     <ProjectReference Include="..\BoardGamesShopMVC.Infrastructure\BoardGamesShopMVC.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\boardgames\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace BoardGamesShopMVC.Domain.Models
+﻿using BoardGamesShopMVC.Domain.Model;
+
+namespace BoardGamesShopMVC.Domain.Models
 {
     public class BoardGame
     {
@@ -11,7 +13,7 @@
         public int MaxNumberOfPlayers { get; set; }
         public int PublishedYear { get; set; }
         public decimal Price { get; set; }
-        public byte[]? ImageBytes { get; set; }
+        public string ImageUrl { get; set; }
 
         public Language LanguageVersion { get; set; }
         public int LanguageId { get; set; }

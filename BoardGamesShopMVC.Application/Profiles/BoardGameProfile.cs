@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BoardGamesShopMVC.Application.Profiles.Resolvers;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Domain.Models;
 using System;
@@ -14,11 +13,7 @@ namespace BoardGamesShopMVC.Application.Profiles
     {
         public BoardGameProfile()
         {
-            CreateMap<BoardGame, BoardGameForListVm>()
-                .ForMember(
-                dst => dst.ImageSrc,
-                opt => opt.MapFrom<BoardGameForListImageResolver>()
-                );
+            CreateMap<BoardGame, BoardGameForListVm>();
 
             CreateMap<BoardGame, BoardGameDetailsVm>()
                 .ForMember(
@@ -28,10 +23,6 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(
                 dst => dst.Publisher,
                 opt => opt.MapFrom(src => src.Publisher.Name)
-                )
-                .ForMember(
-                dst=>dst.ImageSrc,
-                opt => opt.MapFrom<BoardGameDetailsImageResolver>()
                 );
 
             //CreateMap<NewBoardGameVm, BoardGame>()
@@ -40,16 +31,13 @@ namespace BoardGamesShopMVC.Application.Profiles
             //    .ReverseMap();
 
             CreateMap<BoardGame, NewBoardGameVm>()
-                //.ForMember(
-                //dst => dst.StockQuantity,
-                //opt => opt
-                //    .MapFrom(src => src.Stock.Quantity)
-                //)
-            .ReverseMap()
-                    .ForMember(
-                    dst=>dst.ImageBytes,
-                    opt=>opt.MapFrom<AddBoardGameImageResolver>()
-                    );
+            //.ForMember(
+            //dst => dst.StockQuantity,
+            //opt => opt
+            //    .MapFrom(src => src.Stock.Quantity)
+            //)
+            .ReverseMap();
+                    
 
         }
     }

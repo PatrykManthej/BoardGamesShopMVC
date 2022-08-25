@@ -17,7 +17,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public int MaxNumberOfPlayers { get; set; }
         public int PublishedYear { get; set; }
         public decimal Price { get; set; }
-        public string? ImageSrc { get; set; }
+        public string? ImageUrl { get; set; }
 
         public string LanguageVersion { get; set; }
         public string Publisher { get; set; }

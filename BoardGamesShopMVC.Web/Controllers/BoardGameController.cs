@@ -19,9 +19,6 @@ namespace BoardGamesShopMVC.Web.Controllers
             _validator = validator;
             _logger = logger;
         }
-        //Dodanie widoku dodawania gry planszowej do sklepu i obsługa
-        //Dodanie widoku listy wszystkich gier i obsługa
-        //Dodanie widoku detali gry i obsługa
 
         [HttpGet]
         public IActionResult Index()
@@ -68,6 +65,8 @@ namespace BoardGamesShopMVC.Web.Controllers
                 result.AddToModelState(this.ModelState);
                 return View(new NewBoardGameVm());
             }
+
+           
 
             var id = _boardGameService.AddBoardGame(model);
             return RedirectToAction("Index");

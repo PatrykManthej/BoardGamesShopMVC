@@ -41,7 +41,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.Entry(boardGame).Property("PublishedYear").IsModified = true;
             _context.Entry(boardGame).Property("Price").IsModified = true;
             _context.Entry(boardGame).Property("PublisherId").IsModified = true;
-            _context.Entry(boardGame).Property("ImageBytes").IsModified = true;
             _context.SaveChanges();
         }
 

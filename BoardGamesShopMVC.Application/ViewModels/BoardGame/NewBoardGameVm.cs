@@ -17,6 +17,8 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public int MaxNumberOfPlayers { get; set; }
         public int PublishedYear { get; set; }
         public decimal Price { get; set; }
+        public IFormFile? ImageFile{ get; set; }
+        public string ImageUrl { get; set; }
         public int LanguageId { get; set; }
         public int PublisherId { get; set; }
         public List<PublisherForListVm> Publishers { get; set; }
@@ -24,7 +26,6 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public List<int> CategoriesId { get; set; }
         public List<LanguageForListVm> Languages { get; set; }
         public int StockQuantity { get; set; }
-        public IFormFile? ImageFile{ get; set; }
     }
     public class NewBoardGameValidation : AbstractValidator<NewBoardGameVm>
     {

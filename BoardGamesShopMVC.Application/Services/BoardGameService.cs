@@ -7,6 +7,7 @@ using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Models;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,29 +23,23 @@ namespace BoardGamesShopMVC.Application.Services
         private readonly ICategoryRepository _categoryRepository;
         private readonly ILanguageRepository _languageRepository;
         private readonly IMapper _mapper;
-        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository,ILanguageRepository languageRepository, IMapper mapper)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository,ILanguageRepository languageRepository, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _boardGameRepository = boardGameRepository;
             _publisherRepository = publisherRepository;
             _categoryRepository = categoryRepository;
             _languageRepository = languageRepository;
             _mapper = mapper;
+            _hostEnvironment = hostEnvironment;
         }
 
         public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString)
         {
             var boardGames = _boardGameRepository.GetAllBoardGames()
-                .Where(b => b.Name.StartsWith(searchString)).ToList();
+                .Where(b => b.Name.StartsWith(searchString)).ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            var boardGamesDto = new List<BoardGameForListVm>();
-            foreach (var item in boardGames)
-            {
-                var itemDto = _mapper.Map<BoardGameForListVm>(item);
-                boardGamesDto.Add(itemDto);
-            }
-                
-
-            var boardGamesToShow = boardGamesDto.Skip(pageSize * (pageNo - 1))
+            var boardGamesToShow = boardGames.Skip(pageSize * (pageNo - 1))
                 .Take(pageSize).ToList();
 
             var boardGamesList = new ListBoardGameForListVm()
@@ -52,7 +47,7 @@ namespace BoardGamesShopMVC.Application.Services
                 PageSize = pageSize,
                 CurrentPage = pageNo,
                 SearchString = searchString,
-                BoardGames = boardGamesDto,
+                BoardGames = boardGames,
                 Count = boardGames.Count
             };
             return boardGamesList;
@@ -67,6 +62,18 @@ namespace BoardGamesShopMVC.Application.Services
 
         public int AddBoardGame(NewBoardGameVm newBoardGame)
         {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            if (newBoardGame.ImageFile != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + "_" + newBoardGame.ImageFile.FileName;
+                var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
+                using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileName), FileMode.Create))
+                {
+                    newBoardGame.ImageFile.CopyTo(fileStream);
+                }
+                newBoardGame.ImageUrl = @"\images\boardgames\" + fileName;
+            }
+
             var allCategories = GetCategoriesToSelect().ToList();
             var categoriesForBoardGame = new List<CategoryForListVm>();
 
@@ -77,6 +84,7 @@ namespace BoardGamesShopMVC.Application.Services
             }
 
             newBoardGame.Categories = categoriesForBoardGame;
+
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
             var id = _boardGameRepository.AddBoardGame(boardGame);
             return id;
