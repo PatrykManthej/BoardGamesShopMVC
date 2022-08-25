@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Application.Profiles.Resolvers
 {
-    public class BoardGameForListImageResolver : IValueResolver<BoardGame, BoardGameForListVm, string?>
+    public class BoardGameDetailsImageResolver : IValueResolver<BoardGame, BoardGameDetailsVm, string?>
     {
-        public string? Resolve(BoardGame source, BoardGameForListVm destination, string? destMember, ResolutionContext context)
+        public string? Resolve(BoardGame source, BoardGameDetailsVm destination, string? destMember, ResolutionContext context)
         {
             var imgSrc = "";
             if (source.ImageBytes != null)

@@ -31,7 +31,7 @@
 @foreach (var item in Model.BoardGames) {
         <tr>
              <td>
-                @Html.DisplayFor(modelItem => item.ImageSrc)
+                <img src="@item.ImageSrc" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

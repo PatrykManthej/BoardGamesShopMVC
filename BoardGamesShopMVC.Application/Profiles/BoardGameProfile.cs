@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BoardGamesShopMVC.Application.Profiles.Converters;
 using BoardGamesShopMVC.Application.Profiles.Resolvers;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Domain.Models;
@@ -15,13 +14,11 @@ namespace BoardGamesShopMVC.Application.Profiles
     {
         public BoardGameProfile()
         {
-            CreateMap<byte[], string>().ConvertUsing<BytesToBase64Converter>();
-
-            //CreateMap<BoardGame, BoardGameForListVm>();
-                //.ForMember(
-                //dst => dst.ImageSrc,
-                //opt => opt.MapFrom(src => src.ImageBytes)
-                //);
+            CreateMap<BoardGame, BoardGameForListVm>()
+                .ForMember(
+                dst => dst.ImageSrc,
+                opt => opt.MapFrom<BoardGameForListImageResolver>()
+                );
 
             CreateMap<BoardGame, BoardGameDetailsVm>()
                 .ForMember(
@@ -34,7 +31,7 @@ namespace BoardGamesShopMVC.Application.Profiles
                 )
                 .ForMember(
                 dst=>dst.ImageSrc,
-                opt => opt.MapFrom(src=>src.ImageBytes)
+                opt => opt.MapFrom<BoardGameDetailsImageResolver>()
                 );
 
             //CreateMap<NewBoardGameVm, BoardGame>()
@@ -54,10 +51,6 @@ namespace BoardGamesShopMVC.Application.Profiles
                     opt=>opt.MapFrom<AddBoardGameImageResolver>()
                     );
 
-            CreateProjection<BoardGame, BoardGameForListVm>().ForMember(
-                dst => dst.ImageSrc,
-                opt => opt.MapFrom(src => src.ImageBytes)
-                );
         }
     }
 }

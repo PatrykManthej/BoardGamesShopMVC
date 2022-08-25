@@ -34,10 +34,17 @@ namespace BoardGamesShopMVC.Application.Services
         public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString)
         {
             var boardGames = _boardGameRepository.GetAllBoardGames()
-                .Where(b=>b.Name.StartsWith(searchString))
-                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+                .Where(b => b.Name.StartsWith(searchString)).ToList();
 
-            var boardGamesToShow = boardGames.Skip(pageSize * (pageNo - 1))
+            var boardGamesDto = new List<BoardGameForListVm>();
+            foreach (var item in boardGames)
+            {
+                var itemDto = _mapper.Map<BoardGameForListVm>(item);
+                boardGamesDto.Add(itemDto);
+            }
+                
+
+            var boardGamesToShow = boardGamesDto.Skip(pageSize * (pageNo - 1))
                 .Take(pageSize).ToList();
 
             var boardGamesList = new ListBoardGameForListVm()
@@ -45,7 +52,7 @@ namespace BoardGamesShopMVC.Application.Services
                 PageSize = pageSize,
                 CurrentPage = pageNo,
                 SearchString = searchString,
-                BoardGames = boardGames,
+                BoardGames = boardGamesDto,
                 Count = boardGames.Count
             };
             return boardGamesList;
