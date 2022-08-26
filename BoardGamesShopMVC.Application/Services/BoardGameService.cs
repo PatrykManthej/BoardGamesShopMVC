@@ -6,13 +6,8 @@ using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Interfaces;
-using BoardGamesShopMVC.Domain.Models;
+using BoardGamesShopMVC.Domain.Model;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Application.Services
 {

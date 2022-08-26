@@ -1,4 +1,4 @@
-﻿namespace BoardGamesShopMVC.Domain.Models
+﻿namespace BoardGamesShopMVC.Domain.Model
 {
     public class Stock
     {

@@ -1,4 +1,4 @@
-﻿using BoardGamesShopMVC.Domain.Model.Customer;
+﻿using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Domain.Interfaces
 {

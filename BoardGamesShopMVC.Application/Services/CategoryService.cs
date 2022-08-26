@@ -4,12 +4,7 @@ using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Domain.Interfaces;
-using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Application.Services
 {

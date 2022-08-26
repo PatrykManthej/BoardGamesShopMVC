@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using BoardGamesShopMVC.Application.Profiles.Resolvers;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
-using BoardGamesShopMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Application.Profiles
 {

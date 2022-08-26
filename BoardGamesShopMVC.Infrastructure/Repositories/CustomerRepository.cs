@@ -1,5 +1,5 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
-using BoardGamesShopMVC.Domain.Model.Customer;
+using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {

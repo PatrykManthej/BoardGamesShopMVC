@@ -1,4 +1,4 @@
-﻿using BoardGamesShopMVC.Domain.Models;
+﻿using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Domain.Interfaces
 {
@@ -12,6 +12,5 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         IQueryable<BoardGame> GetBoardGamesByCategoryId(int categoryId);
         IQueryable<BoardGame> GetBoardGamesByLanguageId(int languageId);
         IQueryable<BoardGame> GetBoardGamesByPublisherId(int publisherId);
-        IQueryable<BoardGame> GetBoardGamesByTagId(int tagId);
     }
 }

@@ -1,6 +1,4 @@
-﻿using BoardGamesShopMVC.Domain.Model.Customer;
-
-namespace BoardGamesShopMVC.Domain.Models
+﻿namespace BoardGamesShopMVC.Domain.Model
 {
     public class Order
     {

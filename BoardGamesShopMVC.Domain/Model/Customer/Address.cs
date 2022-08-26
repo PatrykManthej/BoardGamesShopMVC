@@ -1,4 +1,4 @@
-﻿namespace BoardGamesShopMVC.Domain.Model.Customer
+﻿namespace BoardGamesShopMVC.Domain.Model
 {
     public class Address
     {
