@@ -13,12 +13,10 @@ namespace BoardGamesShopMVC.Application.Services
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
-        private readonly ICartItemRepository _cartItemRepository;
         private readonly IMapper _mapper;
-        public CartService(ICartRepository cartRepository,ICartItemRepository cartItemRepository, IMapper mapper)
+        public CartService(ICartRepository cartRepository, IMapper mapper)
         {
             _cartRepository = cartRepository;
-            _cartItemRepository = cartItemRepository;
             _mapper = mapper;
         }
         public CartDetailsVm ViewCart() 
