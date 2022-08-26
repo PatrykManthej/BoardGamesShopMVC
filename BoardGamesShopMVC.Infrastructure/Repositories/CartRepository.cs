@@ -31,8 +31,8 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         public Cart GetCartById(int cartId)
         {
             var cart = _context.Carts
-                .Include(c=>c.CartItems)
-                .ThenInclude(ci=>ci.BoardGame)
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.BoardGame)
                 .FirstOrDefault(b => b.Id == cartId);
             return cart;
         }
@@ -45,16 +45,18 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         public void AddItemToCart(int cartId, int boardGameId)
         {
             var cart = _context.Carts
-                .Include(c=>c.CartItems)
-                .FirstOrDefault(c=>c.Id == cartId);
+                .Include(c => c.CartItems)
+                .FirstOrDefault(c => c.Id == cartId);
+
             if (cart != null)
             {
-                if(cart.CartItems == null)
+                if (cart.CartItems == null)
                 {
                     cart.CartItems = new List<CartItem>();
                 }
-                var cartItem = cart.CartItems.FirstOrDefault(c=>c.BoardGameId == boardGameId);
-                if(cartItem == null)
+                var cartItem = cart.CartItems.FirstOrDefault(c => c.BoardGameId == boardGameId);
+
+                if (cartItem == null)
                 {
                     var newCartItem = new CartItem()
                     {
@@ -67,8 +69,18 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 }
                 else
                 {
-                    cartItem.Quantity++;
-                    _context.SaveChanges();
+                    var boardGame = _context.BoardGames
+                        .Include(b => b.Stock)
+                        .FirstOrDefault(b => b.Id == boardGameId);
+
+                    var boardGameStock = boardGame.Stock.Quantity;
+                    var cartitemQuantity = cartItem.Quantity;
+
+                    if (++cartitemQuantity <= boardGameStock)
+                    {
+                        cartItem.Quantity++;
+                        _context.SaveChanges();
+                    }
                 }
             }
         }
@@ -129,7 +141,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 if (cartItem != null)
                 {
                     cartItem.Quantity--;
-                    if(cartItem.Quantity == 0)
+                    if (cartItem.Quantity == 0)
                     {
                         _context.Remove(cartItem);
                     }

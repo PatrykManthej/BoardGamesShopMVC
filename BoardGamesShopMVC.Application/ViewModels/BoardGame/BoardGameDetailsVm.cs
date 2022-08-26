@@ -18,6 +18,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public int PublishedYear { get; set; }
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
+        public int StockId { get; set; }
 
         public string LanguageVersion { get; set; }
         public string Publisher { get; set; }

@@ -32,7 +32,7 @@ namespace BoardGamesShopMVC.Infrastructure
         {
             builder.Entity<BoardGame>().HasOne(b => b.LanguageVersion).WithMany(l => l.BoardGames).HasForeignKey(b => b.LanguageId);
             builder.Entity<BoardGame>().HasOne(b => b.Publisher).WithMany(p => p.BoardGames).HasForeignKey(b => b.PublisherId);
-            //builder.Entity<BoardGame>().HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<Stock>(s => s.BoardGameId);
+            builder.Entity<BoardGame>().HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<BoardGame>(s => s.StockId);
             builder.Entity<BoardGame>().HasOne(b => b.CartItem).WithOne(c => c.BoardGame).HasForeignKey<CartItem>(c => c.BoardGameId);
             builder.Entity<BoardGame>().HasOne(b => b.OrderItem).WithOne(o => o.BoardGame).HasForeignKey<OrderItem>(o => o.BoardGameId);
             builder.Entity<BoardGame>().HasMany(b => b.Categories)
@@ -73,11 +73,11 @@ namespace BoardGamesShopMVC.Infrastructure
                 );
             builder.Entity<BoardGame>().HasData
                 (
-                    new BoardGame() { Id = 1, Name = "Carcassonne", Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1, ImageUrl= @"\images\boardgames\24cf50d0-b7ed-44f5-8269-20889c9ca1ba_Carcassonne.png" },
+                    new BoardGame() { Id = 1, Name = "Carcassonne", Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1, ImageUrl= @"\images\boardgames\24cf50d0-b7ed-44f5-8269-20889c9ca1ba_Carcassonne.png", StockId = 1 },
 
-                    new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2, @ImageUrl = @"\images\boardgames\73c2c91e-e0ba-4405-98f2-4dc99f90229b_Splendor.jpg" },
+                    new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2, @ImageUrl = @"\images\boardgames\73c2c91e-e0ba-4405-98f2-4dc99f90229b_Splendor.jpg", StockId = 2 },
 
-                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\06718f78-7290-48fe-b889-34f48cd3cdfc_Nemesis.png" }
+                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\06718f78-7290-48fe-b889-34f48cd3cdfc_Nemesis.png", StockId = 3 }
                 );
 
             builder.Entity<Category>().HasData
@@ -99,6 +99,12 @@ namespace BoardGamesShopMVC.Infrastructure
                (
                    new Customer() { Id = 1, FirstName = "Test", LastName = "Test" }
                );
+            builder.Entity<Stock>().HasData
+                (
+                   new Stock() { Id = 1, Quantity = 5},
+                   new Stock() { Id = 2, Quantity = 7},
+                   new Stock() { Id = 3, Quantity = 2}
+                );
 
             base.OnModelCreating(builder);
         }
