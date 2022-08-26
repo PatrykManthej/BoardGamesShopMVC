@@ -1,5 +1,5 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
-using BoardGamesShopMVC.Domain.Models;
+using BoardGamesShopMVC.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories

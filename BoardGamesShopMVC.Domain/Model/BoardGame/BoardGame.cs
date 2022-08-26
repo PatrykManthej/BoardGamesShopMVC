@@ -1,6 +1,4 @@
-﻿using BoardGamesShopMVC.Domain.Model;
-
-namespace BoardGamesShopMVC.Domain.Models
+﻿namespace BoardGamesShopMVC.Domain.Model
 {
     public class BoardGame
     {
@@ -24,6 +22,5 @@ namespace BoardGamesShopMVC.Domain.Models
         public CartItem CartItem { get; set; }
         public OrderItem OrderItem { get; set; }
         public ICollection<Category> Categories { get; set; }
-        public ICollection<Tag> Tags { get; set; }
     }
 }

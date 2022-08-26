@@ -1,4 +1,4 @@
-﻿using BoardGamesShopMVC.Domain.Models;
+﻿using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Domain.Interfaces
 

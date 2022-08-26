@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BoardGamesShopMVC.Application.ViewModels.Category;
-using BoardGamesShopMVC.Domain.Models;
+using BoardGamesShopMVC.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,5 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
-using BoardGamesShopMVC.Domain.Models;
+using BoardGamesShopMVC.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
@@ -76,14 +76,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var boardGames = _context.BoardGames.Where(b => b.Categories.Any(c => c.Id == categoryId));
             return boardGames;
         }
-
-        public IQueryable<BoardGame> GetBoardGamesByTagId(int tagId)
-        {
-            var boardGames = _context.BoardGames.Where(b => b.Tags.Any(t => t.Id == tagId));
-            return boardGames;
-        }
-
-
 
     }
 }

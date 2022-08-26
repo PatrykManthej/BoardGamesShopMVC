@@ -1,6 +1,4 @@
 ﻿using BoardGamesShopMVC.Domain.Model;
-using BoardGamesShopMVC.Domain.Model.Customer;
-using BoardGamesShopMVC.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +24,6 @@ namespace BoardGamesShopMVC.Infrastructure
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
-        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -49,9 +46,6 @@ namespace BoardGamesShopMVC.Infrastructure
 
                     bgcBuilder.HasKey(bgc => new { bgc.BoardGamesId, bgc.CategoriesId });
                 });
-
-
-            builder.Entity<BoardGame>().HasMany(b => b.Tags).WithMany(t => t.BoardGames);
 
             builder.Entity<Cart>().HasOne(ca => ca.Customer).WithOne(cu => cu.Cart).HasForeignKey<Cart>(ca => ca.CustomerId);
             builder.Entity<Cart>().HasMany(ca => ca.CartItems).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
