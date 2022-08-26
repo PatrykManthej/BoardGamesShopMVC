@@ -49,7 +49,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var boardGame = _context.BoardGames
                 .Include(b=>b.LanguageVersion)
                 .Include(b=>b.Publisher)
-                //.Include(b=>b.Stock)
                 .FirstOrDefault(b => b.Id == boardGameId);
             return boardGame;
         }

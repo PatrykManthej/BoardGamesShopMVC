@@ -8,5 +8,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void DeleteStock(int stockId);
         IQueryable<Stock> GetAllStocks();
         Stock GetStockById(int stockId);
+        Stock GetStockByBoardGameId(int boardGameId);
     }
 }
