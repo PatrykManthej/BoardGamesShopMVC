@@ -17,6 +17,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
         IQueryable<CategoryForListVm> GetCategoriesToSelect();
         IQueryable<LanguageForListVm> GetLanguagesToSelect();
         NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
+        NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model);
 
     }
 }

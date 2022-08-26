@@ -17,14 +17,16 @@ namespace BoardGamesShopMVC.Application.Services
         private readonly IPublisherRepository _publisherRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly ILanguageRepository _languageRepository;
+        private readonly IStockRepository _stockRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _hostEnvironment;
-        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository,ILanguageRepository languageRepository, IMapper mapper, IWebHostEnvironment hostEnvironment)
+        public BoardGameService(IBoardGameRepository boardGameRepository, IPublisherRepository publisherRepository, ICategoryRepository categoryRepository, ILanguageRepository languageRepository, IStockRepository stockRepository, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _boardGameRepository = boardGameRepository;
             _publisherRepository = publisherRepository;
             _categoryRepository = categoryRepository;
             _languageRepository = languageRepository;
+            _stockRepository = stockRepository;
             _mapper = mapper;
             _hostEnvironment = hostEnvironment;
         }
@@ -57,18 +59,6 @@ namespace BoardGamesShopMVC.Application.Services
 
         public int AddBoardGame(NewBoardGameVm newBoardGame)
         {
-            string wwwRootPath = _hostEnvironment.WebRootPath;
-            if (newBoardGame.ImageFile != null)
-            {
-                string fileName = Guid.NewGuid().ToString() + "_" + newBoardGame.ImageFile.FileName;
-                var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
-                using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileName), FileMode.Create))
-                {
-                    newBoardGame.ImageFile.CopyTo(fileStream);
-                }
-                newBoardGame.ImageUrl = @"\images\boardgames\" + fileName;
-            }
-
             var allCategories = GetCategoriesToSelect().ToList();
             var categoriesForBoardGame = new List<CategoryForListVm>();
 
@@ -77,10 +67,13 @@ namespace BoardGamesShopMVC.Application.Services
                 var category = allCategories.FirstOrDefault(c => c.Id == categoryId);
                 categoriesForBoardGame.Add(category);
             }
-
             newBoardGame.Categories = categoriesForBoardGame;
 
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
+
+            var stockId = _stockRepository.AddStock(new Stock() { Quantity = newBoardGame.StockQuantity });
+            boardGame.StockId = stockId;
+
             var id = _boardGameRepository.AddBoardGame(boardGame);
             return id;
         }
@@ -125,6 +118,21 @@ namespace BoardGamesShopMVC.Application.Services
             model.Publishers = GetPublishersToSelect().ToList();
             model.Categories = GetCategoriesToSelect().ToList();
             model.Languages = GetLanguagesToSelect().ToList();
+            return model;
+        }
+        public NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model)
+        {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            if (model.ImageFile != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
+                using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileName), FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(fileStream);
+                }
+                model.ImageUrl = @"\images\boardgames\" + fileName;
+            }
             return model;
         }
     }

@@ -65,9 +65,7 @@ namespace BoardGamesShopMVC.Web.Controllers
                 result.AddToModelState(this.ModelState);
                 return View(new NewBoardGameVm());
             }
-
-           
-
+            _boardGameService.SaveImageToFileInApplicationFolder(model);
             var id = _boardGameService.AddBoardGame(model);
             return RedirectToAction("Index");
 

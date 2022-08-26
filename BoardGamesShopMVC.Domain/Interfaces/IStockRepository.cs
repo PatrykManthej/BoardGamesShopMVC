@@ -9,5 +9,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         IQueryable<Stock> GetAllStocks();
         Stock GetStockById(int stockId);
         Stock GetStockByBoardGameId(int boardGameId);
+        void UpdateStock(Stock stock);
     }
 }

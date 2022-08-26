@@ -44,5 +44,11 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var stock = _context.Stocks.Include(s => s.BoardGame).FirstOrDefault(s => s.BoardGame.Id == boardGameId);
             return stock;
         }
+        public void UpdateStock(Stock stock)
+        {
+            _context.Attach(stock);
+            _context.Entry(stock).Property("Quantity").IsModified = true;
+            _context.SaveChanges();
+        }
     }
 }
