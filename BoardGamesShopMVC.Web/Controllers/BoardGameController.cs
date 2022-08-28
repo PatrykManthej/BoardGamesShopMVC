@@ -27,6 +27,13 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _boardGameService.GetAllGamesForList(5, 1, "");
             return View(model);
         }
+        [HttpGet]
+        public IActionResult Index2()
+        {
+            _logger.LogInformation("Jestem w BoardGame/Index");
+            var model = _boardGameService.GetAllGamesForList(5, 1, "");
+            return View(model);
+        }
         [HttpPost]
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
         {
