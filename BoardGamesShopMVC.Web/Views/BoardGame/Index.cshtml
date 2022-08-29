@@ -42,11 +42,10 @@
             }
         </div>
     <div class="row">
-        <table>
-            <tr>
+        <ul class="pagination">
                 @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
                 {
-                    <td>
+                    <li>
                         @if (i != Model.CurrentPage)
                         {
                             <a href="javascript:PagerClick(@i)">@i</a>
@@ -55,12 +54,11 @@
                         {
                             <span>@i</span>
                         }
-                    </td>
+                    </li>
                 }
-            </tr>
-        </table>
+        </ul>
         <input type="hidden" name="pageNo" id="pageNo" />
-        <input type="hidden" name="pageSize" id="pageSize" value="5" />
+        <input type="hidden" name="pageSize" id="pageSize" value="8" />
     </div>
 </form>
 @section Scripts{
