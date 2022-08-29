@@ -14,7 +14,6 @@
         <input type="text" asp-for="SearchString" name="searchString" id="searchString" />
         <input type="submit" value="Search" />
     </div>
-    <div class="row">
         <div class="row">
             @foreach (var item in Model.BoardGames)
             {
@@ -34,7 +33,7 @@
                                     <p>Price: <b>@item.Price</b> </p>
                                 </div>
                                 <div>
-                                        <a asp-action="Details" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
+                                        <a asp-action="ViewBoardGame" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +41,6 @@
                 </div>
             }
         </div>
-    </div>
     <div class="row">
         <table>
             <tr>

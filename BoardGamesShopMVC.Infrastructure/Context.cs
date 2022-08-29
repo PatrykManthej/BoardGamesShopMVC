@@ -58,7 +58,8 @@ namespace BoardGamesShopMVC.Infrastructure
             builder.Entity<Publisher>().HasData
                 (
                     new Publisher() { Id = 1, Name = "Bard" },
-                    new Publisher() { Id = 2, Name = "Rebel" }
+                    new Publisher() { Id = 2, Name = "Rebel" },
+                    new Publisher() { Id = 3, Name = "Albi" }
                 );
             builder.Entity<Language>().HasData
                 (
@@ -71,7 +72,15 @@ namespace BoardGamesShopMVC.Infrastructure
 
                     new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2, @ImageUrl = @"\images\boardgames\73c2c91e-e0ba-4405-98f2-4dc99f90229b_Splendor.jpg", StockId = 2 },
 
-                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\06718f78-7290-48fe-b889-34f48cd3cdfc_Nemesis.png", StockId = 3 }
+                    new BoardGame() { Id = 3, Name = "Nemesis", Description = "Nagle wybudzasz się z hibernacji. Gdy powoli odzyskujesz świadomość i kontrolę nad własnym ciałem, przypominasz sobie, że jesteś na statku kosmicznym \"Nemesis\".", AverageTimeOfPlay = "90 - 180 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2018, Price = 500, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\06718f78-7290-48fe-b889-34f48cd3cdfc_Nemesis.png", StockId = 3 },
+
+                    new BoardGame() { Id = 4, Name = "Terraformacja Marsa", Description = "Zwiększenie odsetka imigracji z Ziemi wymaga terraformacji Marsa, czyli dostosowania jego środowiska, aby ludzie mogli w nim przeżyć bez sprzętu ochronnego i aby zminimalizować śmiertelność w wyniku drobnych wypadków. W związku z tym Rząd Ziemi zdecydował się wesprzeć każdą organizację, która przyczyni się do tego wiekopomnego dzieła.", AverageTimeOfPlay = "120 min", RecommendedMinimumAge = 12, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 5, PublishedYear = 2016, Price = 130, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\b4aca5a4-39f5-4557-9f22-d892ae5833ae_TerraformacjaMarsa.jpg", StockId = 4 },
+
+                    new BoardGame() { Id = 5, Name = "Gloomhaven", Description = "Oto kooperacyjna gra taktyczna, stworzona przez miłośnika ekonomicznych gier Euro, w której wspólnymi siłami przedzieramy się przez nieustannie ewoluujący świat fantasy, rozgrywając kampanię fabularną na przestrzeni wielu sesji.Każdy gracz wciela się w postać twardego najemnika posiadającego unikalne zdolności i własną motywację. ", AverageTimeOfPlay = "60 - 120 min", RecommendedMinimumAge = 14, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 4, PublishedYear = 2017, Price = 500, LanguageId = 1, PublisherId = 3, ImageUrl = @"\images\boardgames\3654de27-3880-416e-918d-669d34843189_Gloomhaven.jpg", StockId = 5 },
+
+                    new BoardGame() { Id = 6, Name = "Everdell ", Description = "W uroczej dolinie Everdell, pod gałęziami wysokich drzew, wśród omszałych głazów, rozwija się cywilizacja leśnych zwierząt. Wiele lat minęło od jej początków i wreszcie nadszedł czas, by odkryć nowe tereny i zakładać zupełnie nowe miasta. ", AverageTimeOfPlay = "40 - 80 min", RecommendedMinimumAge = 13, MinNumberOfPlayers = 1, MaxNumberOfPlayers = 4, PublishedYear = 2018, Price = 200, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\a51727e6-52ff-4aaa-ae76-3655d0deed84_Everdell.png", StockId = 6 },
+
+                    new BoardGame() { Id = 7, Name = "7 Cudów Świata: Pojedynek", Description = "7 Cudów Świata: Pojedynek to gra dla 2 graczy, która wykorzystuje niektóre z głównych założeń bestselleru 7 Cudów Świata, ale oferuje również nowe wyzwania, specjalnie dopasowane do gry dwuosobowej.", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 2, PublishedYear = 2015, Price = 120, LanguageId = 1, PublisherId = 2, ImageUrl = @"\images\boardgames\62a196ba-cb1e-46dd-953a-ecadd3fd7f48_7CudowPojedynek.jpg", StockId = 7}
                 );
 
             builder.Entity<Category>().HasData
@@ -97,7 +106,11 @@ namespace BoardGamesShopMVC.Infrastructure
                 (
                    new Stock() { Id = 1, Quantity = 5},
                    new Stock() { Id = 2, Quantity = 7},
-                   new Stock() { Id = 3, Quantity = 2}
+                   new Stock() { Id = 3, Quantity = 2},
+                   new Stock() { Id = 4, Quantity = 4},
+                   new Stock() { Id = 5, Quantity = 3},
+                   new Stock() { Id = 6, Quantity = 6},
+                   new Stock() { Id = 7, Quantity = 2}
                 );
 
             base.OnModelCreating(builder);

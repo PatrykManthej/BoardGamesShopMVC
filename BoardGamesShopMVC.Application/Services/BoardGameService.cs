@@ -44,7 +44,7 @@ namespace BoardGamesShopMVC.Application.Services
                 PageSize = pageSize,
                 CurrentPage = pageNo,
                 SearchString = searchString,
-                BoardGames = boardGames,
+                BoardGames = boardGamesToShow,
                 Count = boardGames.Count
             };
             return boardGamesList;
