@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGamesShopMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220829103915_NewBoardGamesDataSeed")]
+    [Migration("20220829124819_NewBoardGamesDataSeed")]
     partial class NewBoardGamesDataSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,17 +176,17 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            AverageTimeOfPlay = "120 min",
-                            Description = "Zwiększenie odsetka imigracji z Ziemi wymaga terraformacji Marsa, czyli dostosowania jego środowiska, aby ludzie mogli w nim przeżyć bez sprzętu ochronnego i aby zminimalizować śmiertelność w wyniku drobnych wypadków. W związku z tym Rząd Ziemi zdecydował się wesprzeć każdą organizację, która przyczyni się do tego wiekopomnego dzieła.",
-                            ImageUrl = "\\images\\boardgames\\b4aca5a4-39f5-4557-9f22-d892ae5833ae_TerraformacjaMarsa.jpg",
+                            AverageTimeOfPlay = "30 min",
+                            Description = "W stolicy Radżastanu trwają poszukiwania nowego ministra handlu. Jako jeden z najlepszych w swoim fachu, postanawiasz podjąć wyzwanie i zgromadzić więcej bogactw od przeciwnika.",
+                            ImageUrl = "\\images\\boardgames\\28dcf532-2dd8-4337-b031-7f89f90a1533_Jaipur.png",
                             LanguageId = 1,
-                            MaxNumberOfPlayers = 5,
-                            MinNumberOfPlayers = 1,
-                            Name = "Terraformacja Marsa",
-                            Price = 130m,
-                            PublishedYear = 2016,
+                            MaxNumberOfPlayers = 2,
+                            MinNumberOfPlayers = 2,
+                            Name = "Jaipur",
+                            Price = 85m,
+                            PublishedYear = 2009,
                             PublisherId = 2,
-                            RecommendedMinimumAge = 12,
+                            RecommendedMinimumAge = 10,
                             StockId = 4
                         },
                         new
@@ -224,18 +224,98 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
+                            AverageTimeOfPlay = "30 - 45 min",
+                            Description = "Przenieś się do malowniczej krainy w Północnej Ameryce i stwórz pełne życia środowisko Kaskadii. W swojej turze wybierz parę płytki oraz żetonu i dołóż je do swojego rozrastającego się ekosystemu. Ułóż jak największe obszary gór, rzek czy prerii oraz rozmieść zwierzęta w punktowanych układach.",
+                            ImageUrl = "\\images\\boardgames\\ebb22f92-1c40-4dd1-8266-7d3b55a588be_Kaskadia.png",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 4,
+                            MinNumberOfPlayers = 1,
+                            Name = "Kaskadia ",
+                            Price = 150m,
+                            PublishedYear = 2021,
+                            PublisherId = 4,
+                            RecommendedMinimumAge = 10,
+                            StockId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
                             AverageTimeOfPlay = "30 min",
-                            Description = "7 Cudów Świata: Pojedynek to gra dla 2 graczy, która wykorzystuje niektóre z głównych założeń bestselleru 7 Cudów Świata, ale oferuje również nowe wyzwania, specjalnie dopasowane do gry dwuosobowej.",
-                            ImageUrl = "\\images\\boardgames\\62a196ba-cb1e-46dd-953a-ecadd3fd7f48_7CudowPojedynek.jpg",
+                            Description = "Patchwork to metoda szycia, w której łączy się małe kawałki materiału w większą całość, tworząc nowy wzór. W przeszłości wykorzystywano ją, żeby zagospodarować niechciane ścinki i skrawki.",
+                            ImageUrl = "\\images\\boardgames\\190d7868-947b-4256-9d51-e5f48dfde516_Patchwork.jpg",
                             LanguageId = 1,
                             MaxNumberOfPlayers = 2,
                             MinNumberOfPlayers = 2,
-                            Name = "7 Cudów Świata: Pojedynek",
-                            Price = 120m,
+                            Name = "Patchwork",
+                            Price = 90m,
+                            PublishedYear = 2014,
+                            PublisherId = 5,
+                            RecommendedMinimumAge = 8,
+                            StockId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AverageTimeOfPlay = "10 min",
+                            Description = "Dwie drużyny, którym przewodzi dwóch Szefów Wywiadu, próbują jak najszybciej nawiązać kontakt ze wszystkimi swoimi agentami.",
+                            ImageUrl = "\\images\\boardgames\\4aa3ec2a-03a3-41ff-b471-e0386f40a5e3_Tajniacy.jpg",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 8,
+                            MinNumberOfPlayers = 2,
+                            Name = "Tajniacy",
+                            Price = 60m,
                             PublishedYear = 2015,
                             PublisherId = 2,
+                            RecommendedMinimumAge = 14,
+                            StockId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AverageTimeOfPlay = "30 - 45 min",
+                            Description = "Azulejos - oryginalnie były to biało-niebieskie płytki ceramiczne, sprowadzone do Europy przez Maurów. Sławę i popularność w Portugalii zdobyły po wizycie króla Manuela I w południowej Hiszpanii.",
+                            ImageUrl = "\\images\\boardgames\\87c21d47-dc5a-41c8-aa5f-d0ff1a932691_Azul.jpg",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 4,
+                            MinNumberOfPlayers = 2,
+                            Name = "Azul",
+                            Price = 230m,
+                            PublishedYear = 2017,
+                            PublisherId = 5,
+                            RecommendedMinimumAge = 8,
+                            StockId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AverageTimeOfPlay = "90 min",
+                            Description = "Przenieśmy się w czasie do roku 1670. Zaraza szalejąca w Europie Środkowej od 1348 roku w końcu została przezwyciężona. Na nowo odżywa cywilizacja. Ludzie coraz częściej odnawiają i rozbudowują swoje domostwa.",
+                            ImageUrl = "\\images\\boardgames\\a4bb9edb-b355-4b5b-ab51-3aaa4af38e82_Agricola.jpg",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 4,
+                            MinNumberOfPlayers = 1,
+                            Name = "Agricola ",
+                            Price = 270m,
+                            PublishedYear = 2007,
+                            PublisherId = 5,
+                            RecommendedMinimumAge = 12,
+                            StockId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AverageTimeOfPlay = "60 min",
+                            Description = "Cztery choroby wydostały się na świat i przed drużyną specjalistów z różnych dziedzin stanęło zadanie odnalezienia szczepionek na te epidemie, zanim ludzkość zostanie unicestwiona.",
+                            ImageUrl = "\\images\\boardgames\\7803a237-b779-4669-a386-94ef32e1ac7a_Pandemic.jpg",
+                            LanguageId = 1,
+                            MaxNumberOfPlayers = 4,
+                            MinNumberOfPlayers = 2,
+                            Name = "Pandemic ",
+                            Price = 170m,
+                            PublishedYear = 2008,
+                            PublisherId = 2,
                             RecommendedMinimumAge = 10,
-                            StockId = 7
+                            StockId = 12
                         });
                 });
 
@@ -548,6 +628,16 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         {
                             Id = 3,
                             Name = "Albi"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Lucky Duck Games"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Lacerta"
                         });
                 });
 
@@ -601,6 +691,31 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         {
                             Id = 7,
                             Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Quantity = 6
                         });
                 });
 
