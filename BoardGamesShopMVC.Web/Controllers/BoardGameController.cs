@@ -51,9 +51,9 @@ namespace BoardGamesShopMVC.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewBoardGame(int boardGameId)
+        public IActionResult ViewBoardGame(int id)
         {
-            var model = _boardGameService.GetBoardGameDetails(boardGameId);
+            var model = _boardGameService.GetBoardGameDetails(id);
             return View(model);
         }
 

@@ -47,7 +47,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=BoardGame}/{action=Index2}/{id?}");
+    pattern: "{controller=BoardGame}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

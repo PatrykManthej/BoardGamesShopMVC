@@ -11,52 +11,42 @@
 </p>
 <form asp-action="Index" asp-controller="BoardGame" method="post">
     <div class="row">
-        <input type="text" asp-for="SearchString" name="searchString" id="searchString"/>
-        <input type="submit" value="Wyszukaj"/>
+        <input type="text" asp-for="SearchString" name="searchString" id="searchString" />
+        <input type="submit" value="Search" />
     </div>
     <div class="row">
-        <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">
-            </th>
-            <th scope="col">
-                Name
-            </th>
-            <th scope="col">
-                Price
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.BoardGames) {
-        <tr>
-             <td class="text-center" scope="col">
-                <img height="120" src="@item.ImageUrl" />
-            </td>
-            <td scope="col">
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td scope="col">
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td scope="col">
-                @Html.ActionLink("AddToCart", "AddToCart","Cart", new { id = item.Id}) |
-                @Html.ActionLink("Edit", "EditBoardGame", new { id=item.Id }) |
-                @Html.ActionLink("Details", "ViewBoardGame", new { boardGameId=item.Id}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-        
-}
-    </tbody>
-</table>
+        <div class="row">
+            @foreach (var item in Model.BoardGames)
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="row p-2">
+                        <div class="col-12 p-1" style="border:1px solid; border-radius: 5px;">
+                            <div class="card">
+                                <div>
+                                    <a asp-controller="BoardGame" asp-action="ViewBoardGame" asp-route-id="@item.Id">
+                                        <img src="@item.ImageUrl" class="card-img-top" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-title h5">@item.Name</p>
+                                </div>
+                                <div>
+                                    <p>Price: <b>@item.Price</b> </p>
+                                </div>
+                                <div>
+                                        <a asp-action="Details" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
     <div class="row">
         <table>
             <tr>
-                @for(int i=1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+                @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
                 {
                     <td>
                         @if (i != Model.CurrentPage)
@@ -71,16 +61,15 @@
                 }
             </tr>
         </table>
-        <input type="hidden" name="pageNo" id="pageNo"/>
-        <input type="hidden" name="pageSize" id="pageSize" value="5"/>
+        <input type="hidden" name="pageNo" id="pageNo" />
+        <input type="hidden" name="pageSize" id="pageSize" value="5" />
     </div>
 </form>
 @section Scripts{
     <script type="text/javascript">
-function PagerClick(index) 
-{
-    document.getElementById("pageNo").value = index;
-    document.forms[0].submit();
-}
-</script>
+        function PagerClick(index) {
+            document.getElementById("pageNo").value = index;
+            document.forms[0].submit();
+        }
+    </script>
 }
