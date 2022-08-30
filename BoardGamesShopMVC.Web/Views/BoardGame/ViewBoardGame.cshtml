@@ -4,84 +4,66 @@
     ViewData["Title"] = "ViewBoardGame";
 }
 
-<h1>ViewBoardGame</h1>
-
-<div>
-    <h4>BoardGameDetailsVm</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AverageTimeOfPlay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AverageTimeOfPlay)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RecommendedMinimumAge)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RecommendedMinimumAge)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MinNumberOfPlayers)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MinNumberOfPlayers)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxNumberOfPlayers)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxNumberOfPlayers)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublishedYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublishedYear)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LanguageVersion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LanguageVersion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            <img height="300px" src="@Model.ImageUrl" />
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "EditBoardGame", new { id = Model.Id}) |
-    <a asp-action="Index">Back to List</a>
-</div>
-<div>
-    @Html.ActionLink("AddToCart", "AddToCart","Cart", new { id = Model.Id}) |
+<div class="card container">
+    <div class="row card-header bg-warning">
+        <div class="col-12">
+            <h1>@Model.Name</h1>
+        </div>
+    </div>
+    <div class="row card-body">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3 offset-md-1 mt-4">
+                <img src="@Model.ImageUrl" width="100%" class="rounded" />
+            </div>
+            <div class="col-12 col-md-6 offset-md-1 mt-4">
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Average time of play:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6">@Model.AverageTimeOfPlay</div>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Recommended minimum age:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6 mt-auto">@Model.RecommendedMinimumAge</div>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Players:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6">@Model.MinNumberOfPlayers - @Model.MaxNumberOfPlayers</div>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Year of publish:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6">@Model.PublishedYear</div>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Language:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6">@Model.LanguageVersion</div>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-5 col-md-8 col-lg-7 col-xl-6"><b>Publisher:</b></div>
+                    <div class="col-7 col-md-4 col-lg-5 col-xl-6">@Model.Publisher</div>
+                    <hr />
+                </div>
+                <div class="row mt-3 text-danger">
+                    <div class="col-3 col-sm-2 offset-sm-1 col-md-4 offset-md-2 col-lg-3 offset-lg-3"><h3>Price:</h3></div>
+                    <div class="col-9 col-sm-9 col-md-6 col-lg-6"><h3>@Model.Price</h3></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="offset-sm-1 offset-md-2 offset-lg-3">
+                    <a asp-controller="Cart" asp-action="AddToCart" class="btn btn-warning btn-lg" asp-route-id="@Model.Id">Add to cart</a>
+                    </div>
+                    </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h5>Description:</h5>
+                </div>
+                <div class="col-12">
+                    @Model.Description
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
