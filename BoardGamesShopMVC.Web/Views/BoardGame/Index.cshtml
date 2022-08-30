@@ -11,8 +11,8 @@
 </p>
 <form asp-action="Index" asp-controller="BoardGame" method="post">
     <div class="row">
-        <input type="text" asp-for="SearchString" name="searchString" id="searchString" />
-        <input type="submit" value="Search" />
+        <input type="text" asp-for="SearchString" name="searchString" id="searchString" class="form-control"/>
+        <input type="submit" value="Search" class="form-control bg-warning"/>
     </div>
         <div class="row">
             @foreach (var item in Model.BoardGames)
