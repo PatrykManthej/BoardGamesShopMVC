@@ -4,9 +4,9 @@
     ViewData["Title"] = "AddBoardGame";
 }
 
-<h1>AddBoardGame</h1>
+<h1>Add board game</h1>
 
-<h4>NewBoardGameVm</h4>
+<h4>Complete form to add a new board game</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,27 +27,27 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AverageTimeOfPlay" class="control-label"></label>
+                <label asp-for="AverageTimeOfPlay" class="control-label">Average time of play</label>
                 <input asp-for="AverageTimeOfPlay" class="form-control" />
                 <span asp-validation-for="AverageTimeOfPlay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RecommendedMinimumAge" class="control-label"></label>
+                <label asp-for="RecommendedMinimumAge" class="control-label">Recommended minimum age</label>
                 <input asp-for="RecommendedMinimumAge" class="form-control" />
                 <span asp-validation-for="RecommendedMinimumAge" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MinNumberOfPlayers" class="control-label"></label>
+                <label asp-for="MinNumberOfPlayers" class="control-label">Min number of players</label>
                 <input asp-for="MinNumberOfPlayers" class="form-control" />
                 <span asp-validation-for="MinNumberOfPlayers" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaxNumberOfPlayers" class="control-label"></label>
+                <label asp-for="MaxNumberOfPlayers" class="control-label">Max number of players</label>
                 <input asp-for="MaxNumberOfPlayers" class="form-control" />
                 <span asp-validation-for="MaxNumberOfPlayers" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublishedYear" class="control-label"></label>
+                <label asp-for="PublishedYear" class="control-label">Year of publish</label>
                 <input asp-for="PublishedYear" class="form-control" />
                 <span asp-validation-for="PublishedYear" class="text-danger"></span>
             </div>
@@ -57,7 +57,7 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StockQuantity" class="control-label"></label>
+                <label asp-for="StockQuantity" class="control-label">Quantity</label>
                 <input asp-for="StockQuantity" class="form-control" />
                 <span asp-validation-for="StockQuantity" class="text-danger"></span>
             </div>
@@ -66,22 +66,24 @@
                 <input asp-for="ImageFile" class="form-control" type="file" />
             </div>
             <div class="form-group">
-                <label asp-for="LanguageId" class="control-label"></label>
+                <label asp-for="LanguageId" class="control-label">Language</label>
                 <select asp-for="LanguageId" class="form-control" asp-items="@(new SelectList(Model.Languages,"Id","Name"))">
                     <option selected disabled>Select language</option>
                 </select>
                 <span asp-validation-for="LanguageId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublisherId" class="control-label"></label>
+                <label asp-for="PublisherId" class="control-label">Publisher</label>
                 <select asp-for="PublisherId" class="form-control" asp-items="@(new SelectList(Model.Publishers,"Id","Name"))">
                     <option selected disabled>Select publisher</option>
                 </select>
                 <span asp-validation-for="PublisherId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoriesId" class="control-label"></label>
-                <select multiple asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
+                <label asp-for="CategoriesId" class="control-label">Categories</label>
+                <select multiple asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                    <option selected disabled>Select categories</option>
+                </select>
                 <span asp-validation-for="CategoriesId" class="text-danger"></span>
             </div>
             <div class="form-group">
