@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BoardGamesShopMVC.Web.Controllers
 {
@@ -45,6 +46,31 @@ namespace BoardGamesShopMVC.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult BoardGames()
+        {
+            var model = _boardGameService.GetAllGamesForList(10, 1, "");
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult BoardGames(int? pageSize, int? pageNo, string searchString)
+        {
+            if (!pageNo.HasValue)
+            {
+                pageNo = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = string.Empty;
+            }
+            if(pageSize == null || pageSize == 0)
+            {
+                pageSize = 10;
+            }
+            var model = _boardGameService.GetAllGamesForList(pageSize.Value, pageNo.Value, searchString);
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult ViewBoardGame(int id)
         {
             var model = _boardGameService.GetBoardGameDetails(id);
@@ -72,7 +98,7 @@ namespace BoardGamesShopMVC.Web.Controllers
 
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteBoardGame(int id)
         {
             _boardGameService.DeleteBoardGame(id);
             return RedirectToAction("Index");

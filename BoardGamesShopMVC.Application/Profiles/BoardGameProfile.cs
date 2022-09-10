@@ -8,7 +8,11 @@ namespace BoardGamesShopMVC.Application.Profiles
     {
         public BoardGameProfile()
         {
-            CreateMap<BoardGame, BoardGameForListVm>();
+            CreateMap<BoardGame, BoardGameForListVm>()
+                .ForMember(
+                dst => dst.LanguageVersion,
+                opt => opt.MapFrom(src=>src.LanguageVersion.Name)
+                );
 
             CreateMap<BoardGame, BoardGameDetailsVm>()
                 .ForMember(
