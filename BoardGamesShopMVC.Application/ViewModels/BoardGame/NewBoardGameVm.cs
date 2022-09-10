@@ -31,7 +31,6 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
     {
         public NewBoardGameValidation()
         {
-            RuleFor(b => b.Id).NotNull();
             RuleFor(b => b.Name).MinimumLength(1).MaximumLength(100);
             RuleFor(b => b.Description).MaximumLength(5000);
             RuleFor(b => b.AverageTimeOfPlay).MaximumLength(10);
