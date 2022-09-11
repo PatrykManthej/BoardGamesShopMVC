@@ -31,11 +31,11 @@ namespace BoardGamesShopMVC.Application.Profiles
             //    .ReverseMap();
 
             CreateMap<BoardGame, NewBoardGameVm>()
-            //.ForMember(
-            //dst => dst.StockQuantity,
-            //opt => opt
-            //    .MapFrom(src => src.Stock.Quantity)
-            //)
+            .ForMember(
+            dst => dst.StockQuantity,
+            opt => opt
+                .MapFrom(src => src.Stock.Quantity)
+            )
             .ReverseMap();
                     
 

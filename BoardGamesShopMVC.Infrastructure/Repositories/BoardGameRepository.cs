@@ -41,6 +41,9 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.Entry(boardGame).Property("PublishedYear").IsModified = true;
             _context.Entry(boardGame).Property("Price").IsModified = true;
             _context.Entry(boardGame).Property("PublisherId").IsModified = true;
+            _context.Entry(boardGame).Property("LanguageId").IsModified = true;
+            _context.Entry(boardGame).Property("ImageUrl").IsModified = true;
+            _context.Entry(boardGame).Collection("Categories").IsModified = true;
             _context.SaveChanges();
         }
 
@@ -49,6 +52,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var boardGame = _context.BoardGames
                 .Include(b=>b.LanguageVersion)
                 .Include(b=>b.Publisher)
+                .Include(b=>b.Stock)
                 .FirstOrDefault(b => b.Id == boardGameId);
             return boardGame;
         }

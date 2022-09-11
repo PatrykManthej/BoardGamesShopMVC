@@ -108,17 +108,15 @@ namespace BoardGamesShopMVC.Web.Controllers
         public IActionResult EditBoardGame(int id)
         {
             var boardGame = _boardGameService.GetBoardGameForEdit(id);
+            _boardGameService.SetParametersToVm(boardGame);
             return View(boardGame);
         }
         [HttpPost]
         public IActionResult EditBoardGame(NewBoardGameVm model)
         {
-
-
+            _boardGameService.SaveImageToFileInApplicationFolder(model);
             _boardGameService.UpdateBoardGame(model);
             return RedirectToAction("Index");
-
-            return View(model);
         }
     }
 }

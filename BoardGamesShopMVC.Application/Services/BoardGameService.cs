@@ -59,15 +59,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public int AddBoardGame(NewBoardGameVm newBoardGame)
         {
-            var allCategories = GetCategoriesToSelect().ToList();
-            var categoriesForBoardGame = new List<CategoryForListVm>();
-
-            foreach (var categoryId in newBoardGame.CategoriesId)
-            {
-                var category = allCategories.FirstOrDefault(c => c.Id == categoryId);
-                categoriesForBoardGame.Add(category);
-            }
-            newBoardGame.Categories = categoriesForBoardGame;
+            SetCategoriesToBoardGame(newBoardGame);
 
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
 
@@ -92,6 +84,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void UpdateBoardGame(NewBoardGameVm model)
         {
+            SetCategoriesToBoardGame(model);
             var boardGame = _mapper.Map<BoardGame>(model);
             _boardGameRepository.UpdateBoardGame(boardGame);
         }
@@ -123,10 +116,19 @@ namespace BoardGamesShopMVC.Application.Services
         public NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model)
         {
             string wwwRootPath = _hostEnvironment.WebRootPath;
+
             if (model.ImageFile != null)
             {
                 string fileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
                 var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
+                if (model.ImageUrl != null)
+                {
+                    var oldImagePath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+                    if (File.Exists(oldImagePath))
+                    {
+                        File.Delete(oldImagePath);
+                    }
+                }
                 using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileName), FileMode.Create))
                 {
                     model.ImageFile.CopyTo(fileStream);
@@ -134,6 +136,19 @@ namespace BoardGamesShopMVC.Application.Services
                 model.ImageUrl = @"\images\boardgames\" + fileName;
             }
             return model;
+        }
+        public NewBoardGameVm SetCategoriesToBoardGame(NewBoardGameVm boardGame)
+        {
+            var allCategories = GetCategoriesToSelect().ToList();
+            var categoriesForBoardGame = new List<CategoryForListVm>();
+
+            foreach (var categoryId in boardGame.CategoriesId)
+            {
+                var category = allCategories.FirstOrDefault(c => c.Id == categoryId);
+                categoriesForBoardGame.Add(category);
+            }
+            boardGame.Categories = categoriesForBoardGame;
+            return boardGame;
         }
     }
 }
