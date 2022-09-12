@@ -79,6 +79,11 @@ namespace BoardGamesShopMVC.Application.Services
         {
             var boardGame = _boardGameRepository.GetBoardGameById(id);
             var boardGameVm = _mapper.Map<NewBoardGameVm>(boardGame);
+            boardGameVm.CategoriesId = new List<int>();
+            foreach (var category in boardGame.Categories)
+            {
+                boardGameVm.CategoriesId.Add(category.Id);
+            }
             return boardGameVm;
         }
 

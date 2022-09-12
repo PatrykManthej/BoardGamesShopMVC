@@ -82,8 +82,8 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="CategoriesId" class="control-label">Categories</label>
-                        <select multiple asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
-                            <option selected disabled>Select categories</option>
+                        <select asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                            <option disabled>Select categories</option>
                         </select>
                         <span asp-validation-for="CategoriesId" class="text-danger"></span>
                     </div>
