@@ -43,8 +43,11 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.Entry(boardGame).Property("PublisherId").IsModified = true;
             _context.Entry(boardGame).Property("LanguageId").IsModified = true;
             _context.Entry(boardGame).Property("ImageUrl").IsModified = true;
+            _context.Entry(boardGame).Reference("Stock").IsModified = true;
             _context.Entry(boardGame).Collection("Categories").IsModified = true;
             _context.SaveChanges();
+            //_context.BoardGames.Update(boardGame);
+            //_context.SaveChanges();
         }
 
         public BoardGame GetBoardGameById(int boardGameId)

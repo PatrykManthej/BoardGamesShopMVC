@@ -63,9 +63,6 @@ namespace BoardGamesShopMVC.Application.Services
 
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
 
-            var stockId = _stockRepository.AddStock(new Stock() { Quantity = newBoardGame.StockQuantity });
-            boardGame.StockId = stockId;
-
             var id = _boardGameRepository.AddBoardGame(boardGame);
             return id;
         }
