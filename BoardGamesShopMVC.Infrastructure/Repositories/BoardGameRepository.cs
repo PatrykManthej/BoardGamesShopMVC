@@ -31,23 +31,31 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         }
         public void UpdateBoardGame(BoardGame boardGame)
         {
-            _context.Attach(boardGame);
-            _context.Entry(boardGame).Property("Name").IsModified = true;
-            _context.Entry(boardGame).Property("Description").IsModified = true;
-            _context.Entry(boardGame).Property("AverageTimeOfPlay").IsModified = true;
-            _context.Entry(boardGame).Property("RecommendedMinimumAge").IsModified = true;
-            _context.Entry(boardGame).Property("MinNumberOfPlayers").IsModified = true;
-            _context.Entry(boardGame).Property("MaxNumberOfPlayers").IsModified = true;
-            _context.Entry(boardGame).Property("PublishedYear").IsModified = true;
-            _context.Entry(boardGame).Property("Price").IsModified = true;
-            _context.Entry(boardGame).Property("PublisherId").IsModified = true;
-            _context.Entry(boardGame).Property("LanguageId").IsModified = true;
-            _context.Entry(boardGame).Property("ImageUrl").IsModified = true;
-            _context.Entry(boardGame).Reference("Stock").IsModified = true;
-            _context.Entry(boardGame).Collection("Categories").IsModified = true;
+            var existingBoardGame = _context.BoardGames
+                .Include(b => b.Categories)
+                .Include(b=>b.Stock)
+                .FirstOrDefault(b => b.Id == boardGame.Id);
+            
+            _context.Entry(existingBoardGame).CurrentValues.SetValues(boardGame);
+            _context.Entry(existingBoardGame.Stock).CurrentValues.SetValues(boardGame.Stock);
+
+            foreach (var category in boardGame.Categories)
+            {
+                var existingCategory = existingBoardGame.Categories.FirstOrDefault(c => c.Id == category.Id);
+                if (existingCategory == null)
+                {
+                    existingBoardGame.Categories.Add(category);
+                }
+            }
+            foreach (var oldCategory in existingBoardGame.Categories)
+            {
+                var category = boardGame.Categories.FirstOrDefault(c => c.Id == oldCategory.Id);
+                if (category == null)
+                {
+                    existingBoardGame.Categories.Remove(oldCategory);
+                }
+            }
             _context.SaveChanges();
-            //_context.BoardGames.Update(boardGame);
-            //_context.SaveChanges();
         }
 
         public BoardGame GetBoardGameById(int boardGameId)
