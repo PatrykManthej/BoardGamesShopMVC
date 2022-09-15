@@ -17,12 +17,20 @@ namespace BoardGamesShopMVC.Application.Services
             _categoryRepository=categoryRepository;
             _mapper = mapper;
         }
-        public ListCategoryForListVm GetAllCategories()
+        public ListCategoryForListVm GetAllCategories(int pageSize, int pageNo, string searchString)
         {
-            var categories = _categoryRepository.GetAllCategories().ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider).ToList();
+            var categories = _categoryRepository.GetAllCategories()
+                .Where(c=>c.Name.StartsWith(searchString))
+                .ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var categoriesToShow = categories.Skip(pageSize * (pageNo - 1))
+                .Take(pageSize).ToList();
             var listCategories = new ListCategoryForListVm()
             {
-                Categories = categories,
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
+                Categories = categoriesToShow,
                 Count = categories.Count
             };
             return listCategories;

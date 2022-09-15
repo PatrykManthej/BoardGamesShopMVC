@@ -5,7 +5,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
 {
     public interface ICategoryService
     {
-        ListCategoryForListVm GetAllCategories();
+        ListCategoryForListVm GetAllCategories(int pageSize, int pageNo, string searchString);
         ListBoardGameForListVm GetBoardGamesByCategoryId(int id);
         int AddCategory(NewCategoryVm newCategory);
         void DeleteCategory(int id);

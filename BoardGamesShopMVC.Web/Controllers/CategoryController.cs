@@ -14,7 +14,25 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _categoryService.GetAllCategories();
+            var model = _categoryService.GetAllCategories(10, 1, "");
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNo, string searchString)
+        {
+            if (!pageNo.HasValue)
+            {
+                pageNo = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = string.Empty;
+            }
+            if (pageSize == null || pageSize == 0)
+            {
+                pageSize = 10;
+            }
+            var model = _categoryService.GetAllCategories(pageSize, pageNo.Value, searchString);
             return View(model);
         }
         [HttpGet]

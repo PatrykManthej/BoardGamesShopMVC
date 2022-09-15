@@ -10,5 +10,6 @@ namespace BoardGamesShopMVC.Application.ViewModels.Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int BoardGamesCount { get; set; }
     }
 }
