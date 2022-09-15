@@ -17,6 +17,8 @@
         <div class="col-auto">
             <button class="btn btn-warning" type="submit">Search</button>
         </div>
+            <input type="hidden" name="pageNo" id="pageNo" />
+    <input type="hidden" name="pageSize" id="pageSize" value="10" />
     </div>
 </form>
 <div class="row">
@@ -86,8 +88,6 @@
             </li>
         }
     </ul>
-    <input type="hidden" name="pageNo" id="pageNo" />
-    <input type="hidden" name="pageSize" id="pageSize" value="10" />
 </div>
 </>
 @section Scripts{
