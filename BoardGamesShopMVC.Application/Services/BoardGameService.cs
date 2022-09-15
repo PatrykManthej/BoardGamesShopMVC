@@ -34,7 +34,8 @@ namespace BoardGamesShopMVC.Application.Services
         public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString)
         {
             var boardGames = _boardGameRepository.GetAllBoardGames()
-                .Where(b => b.Name.StartsWith(searchString)).ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+                .Where(b => b.Name.StartsWith(searchString))
+                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
 
             var boardGamesToShow = boardGames.Skip(pageSize * (pageNo - 1))
                 .Take(pageSize).ToList();
