@@ -4,63 +4,62 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="AddBoardGame">Create New</a>
-</p>
 <form asp-action="Index" asp-controller="BoardGame" method="post">
     <div class="row">
-        <input type="text" asp-for="SearchString" name="searchString" id="searchString" class="form-control"/>
-        <input type="submit" value="Search" class="form-control bg-warning"/>
+        <div class="col-3">
+            <input asp-for="SearchString" class="form-control" type="search" placeholder="Search" name="searchString" id="searchString" />
+        </div>
+        <div class="col-3 p-0">
+            <button class="btn btn-warning" type="submit">Search</button>
+        </div>
+        <input type="hidden" name="pageNo" id="pageNo" />
+        <input type="hidden" name="pageSize" id="pageSize" value="10" />
     </div>
-        <div class="row">
-            @foreach (var item in Model.BoardGames)
-            {
-                <div class="col-lg-3 col-md-6">
-                    <div class="row p-2">
-                        <div class="col-12 p-1" style="border:1px solid; border-radius: 5px;">
-                            <div class="card">
-                                <div>
-                                    <a asp-controller="BoardGame" asp-action="ViewBoardGame" asp-route-id="@item.Id">
-                                        <img src="@item.ImageUrl" class="card-img-top" />
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-title h5">@item.Name</p>
-                                </div>
-                                <div>
-                                    <p>Price: <b>@item.Price</b> </p>
-                                </div>
-                                <div>
-                                        <a asp-action="ViewBoardGame" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
-                                </div>
-                            </div>
+</form>
+<div class="row">
+    @foreach (var item in Model.BoardGames)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-1" style="border:1px solid; border-radius: 5px;">
+                    <div class="card">
+                        <div>
+                            <a asp-controller="BoardGame" asp-action="ViewBoardGame" asp-route-id="@item.Id">
+                                <img src="@item.ImageUrl" class="card-img-top" />
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title h5">@item.Name</p>
+                        </div>
+                        <div>
+                            <p>Price: <b>@item.Price</b> </p>
+                        </div>
+                        <div>
+                            <a asp-action="ViewBoardGame" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
-    <div class="row">
-        <ul class="pagination">
-                @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+    }
+</div>
+<div class="row">
+    <ul class="pagination">
+        @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+        {
+            <li>
+                @if (i != Model.CurrentPage)
                 {
-                    <li>
-                        @if (i != Model.CurrentPage)
-                        {
-                            <a href="javascript:PagerClick(@i)">@i</a>
-                        }
-                        else
-                        {
-                            <span>@i</span>
-                        }
-                    </li>
+                    <a href="javascript:PagerClick(@i)">@i</a>
                 }
-        </ul>
-        <input type="hidden" name="pageNo" id="pageNo" />
-        <input type="hidden" name="pageSize" id="pageSize" value="8" />
-    </div>
-</form>
+                else
+                {
+                    <span>@i</span>
+                }
+            </li>
+        }
+    </ul>
+</div>
 @section Scripts{
     <script type="text/javascript">
         function PagerClick(index) {
