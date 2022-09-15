@@ -12,6 +12,10 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(
                 dst => dst.LanguageVersion,
                 opt => opt.MapFrom(src=>src.LanguageVersion.Name)
+                )
+                .ForMember(
+                dst => dst.InStock,
+                opt => opt.MapFrom(src=>src.Stock.Quantity)
                 );
 
             CreateMap<BoardGame, BoardGameDetailsVm>()

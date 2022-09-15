@@ -32,7 +32,6 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpPost]
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
         {
-            _logger.LogInformation("Jestem w BoardGame/Index ale post");
             if (!pageNo.HasValue)
             {
                 pageNo = 1;
@@ -40,6 +39,10 @@ namespace BoardGamesShopMVC.Web.Controllers
             if (searchString is null)
             {
                 searchString = string.Empty;
+            }
+            if (pageSize == null || pageSize == 0)
+            {
+                pageSize = 8;
             }
             var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString);
             return View(model);

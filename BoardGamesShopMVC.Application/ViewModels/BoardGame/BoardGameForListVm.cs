@@ -13,5 +13,6 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
         public string LanguageVersion { get; set; }
+        public int InStock { get; set; }
     }
 }
