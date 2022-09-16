@@ -18,12 +18,21 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public ListPublisherForListVm GetAllPublishers()
+        public ListPublisherForListVm GetAllPublishers(int pageSize, int pageNo, string searchString)
         {
-            var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider).ToList();
+            var publishers = _publisherRepository.GetAllPublishers()
+                .Where(p=>p.Name.StartsWith(searchString))
+                .ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var publishersToShow = publishers.Skip(pageSize * (pageNo - 1))
+                .Take(pageSize).ToList();
+
             var listPublishers = new ListPublisherForListVm()
             {
-                Publishers = publishers,
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
+                Publishers = publishersToShow,
                 Count = publishers.Count
             };
             return listPublishers;
@@ -33,6 +42,7 @@ namespace BoardGamesShopMVC.Application.Services
         {
             var boardGames = _publisherRepository.GetAllBoardGamesByPublisherId(id)
                 .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+
             var boardGamesList = new ListBoardGameForListVm()
             {
                 BoardGames = boardGames,
