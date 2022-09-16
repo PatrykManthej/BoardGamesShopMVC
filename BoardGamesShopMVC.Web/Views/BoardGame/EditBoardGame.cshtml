@@ -4,105 +4,102 @@
     ViewData["Title"] = "EditBoardGame";
 }
 
-<h1>EditBoardGame</h1>
-
-<h4>NewBoardGameVm</h4>
-<hr />
-        <form asp-action="EditBoardGame" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="Id" type="hidden" />
-                <input asp-for="ImageUrl" type="hidden"/>
-                <input asp-for="StockId" type="hidden"/>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="AverageTimeOfPlay" class="control-label">Average time of play</label>
-                        <input asp-for="AverageTimeOfPlay" class="form-control" />
-                        <span asp-validation-for="AverageTimeOfPlay" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="RecommendedMinimumAge" class="control-label">Recommended minimum age</label>
-                        <input asp-for="RecommendedMinimumAge" class="form-control" />
-                        <span asp-validation-for="RecommendedMinimumAge" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MinNumberOfPlayers" class="control-label">Min number of players</label>
-                        <input asp-for="MinNumberOfPlayers" class="form-control" />
-                        <span asp-validation-for="MinNumberOfPlayers" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MaxNumberOfPlayers" class="control-label">Max number of players</label>
-                        <input asp-for="MaxNumberOfPlayers" class="form-control" />
-                        <span asp-validation-for="MaxNumberOfPlayers" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PublishedYear" class="control-label">Year of publish</label>
-                        <input asp-for="PublishedYear" class="form-control" />
-                        <span asp-validation-for="PublishedYear" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" class="form-control" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="StockQuantity" class="control-label">Quantity</label>
-                        <input asp-for="StockQuantity" class="form-control" />
-                        <span asp-validation-for="StockQuantity" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Choose file:</label>
-                        <input asp-for="ImageFile" class="form-control" type="file" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LanguageId" class="control-label">Language</label>
-                        <select asp-for="LanguageId" class="form-control" asp-items="@(new SelectList(Model.Languages,"Id","Name"))">
-                            <option selected disabled>Select language</option>
-                        </select>
-                        <span asp-validation-for="LanguageId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PublisherId" class="control-label">Publisher</label>
-                        <select asp-for="PublisherId" class="form-control" asp-items="@(new SelectList(Model.Publishers,"Id","Name"))">
-                            <option selected disabled>Select publisher</option>
-                        </select>
-                        <span asp-validation-for="PublisherId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CategoriesId" class="control-label">Categories</label>
-                        <select asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
-                            <option disabled>Select categories</option>
-                        </select>
-                        <span asp-validation-for="CategoriesId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>
+<form asp-action="EditBoardGame" method="post" enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="ImageUrl" type="hidden" />
+    <input asp-for="StockId" type="hidden" />
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-3 row">
+                <div class="col-12 pb-2">
+                    <h2>Edit board game</h2>
+                    <hr />
                 </div>
-                <div class="col-2">
-                    <img src="@Model.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9"/>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" rows="7" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="AverageTimeOfPlay" class="control-label">Average time of play</label>
+                    <input asp-for="AverageTimeOfPlay" class="form-control" />
+                    <span asp-validation-for="AverageTimeOfPlay" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="RecommendedMinimumAge" class="control-label">Recommended minimum age</label>
+                    <input asp-for="RecommendedMinimumAge" class="form-control" />
+                    <span asp-validation-for="RecommendedMinimumAge" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="MinNumberOfPlayers" class="control-label">Min number of players</label>
+                    <input asp-for="MinNumberOfPlayers" class="form-control" />
+                    <span asp-validation-for="MinNumberOfPlayers" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="MaxNumberOfPlayers" class="control-label">Max number of players</label>
+                    <input asp-for="MaxNumberOfPlayers" class="form-control" />
+                    <span asp-validation-for="MaxNumberOfPlayers" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="PublishedYear" class="control-label">Year of publish</label>
+                    <input asp-for="PublishedYear" class="form-control" />
+                    <span asp-validation-for="PublishedYear" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="StockQuantity" class="control-label">Quantity</label>
+                    <input asp-for="StockQuantity" class="form-control" />
+                    <span asp-validation-for="StockQuantity" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="LanguageId" class="control-label">Language</label>
+                    <select asp-for="LanguageId" class="form-control" asp-items="@(new SelectList(Model.Languages,"Id","Name"))">
+                        <option selected disabled>Select language</option>
+                    </select>
+                    <span asp-validation-for="LanguageId" class="text-danger"></span>
+                </div>
+                <div class="col-4 mb-3">
+                    <label asp-for="PublisherId" class="control-label">Publisher</label>
+                    <select asp-for="PublisherId" class="form-control" asp-items="@(new SelectList(Model.Publishers,"Id","Name"))">
+                        <option selected disabled>Select publisher</option>
+                    </select>
+                    <span asp-validation-for="PublisherId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CategoriesId" class="control-label">Categories</label>
+                    <select asp-for="CategoriesId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                        <option disabled>Select categories</option>
+                    </select>
+                    <span asp-validation-for="CategoriesId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Choose file:</label>
+                    <input asp-for="ImageFile" class="form-control" type="file" />
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-warning" style="width:150px">Save</button>
+                    <a asp-controller="BoardGame" asp-action="BoardGames" class="btn btn-secondary" style="width:150px">Back to list</a>
                 </div>
             </div>
-            
-        </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        </div>
+        <div class="col-2 pt-3">
+            <img src="@Model.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+    </div>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
