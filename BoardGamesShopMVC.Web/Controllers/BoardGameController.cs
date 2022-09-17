@@ -25,7 +25,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         public IActionResult Index()
         {
             _logger.LogInformation("Jestem w BoardGame/Index");
-            var model = _boardGameService.GetAllGamesForList(8, 1, "");
+            var model = _boardGameService.GetAllGamesForList(8, 1, "", "", 0);
             return View(model);
         }
 
@@ -44,18 +44,12 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 pageSize = 8;
             }
-            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString);
+            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString, "", 0);
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult BoardGames()
-        {
-            var model = _boardGameService.GetAllGamesForList(10, 1, "");
-            return View(model);
-        }
-        [HttpPost]
-        public IActionResult BoardGames(int? pageSize, int? pageNo, string searchString)
+
+        public IActionResult BoardGames(int? pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
         {
             if (!pageNo.HasValue)
             {
@@ -69,7 +63,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 pageSize = 10;
             }
-            var model = _boardGameService.GetAllGamesForList(pageSize.Value, pageNo.Value, searchString);
+            var model = _boardGameService.GetAllGamesForList(pageSize.Value, pageNo.Value, searchString, filter, filterObjectId);
             return View(model);
         }
 

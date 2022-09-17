@@ -31,13 +31,29 @@ namespace BoardGamesShopMVC.Application.Services
             _hostEnvironment = hostEnvironment;
         }
 
-        public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString)
+        public ListBoardGameForListVm GetAllGamesForList(int pageSize, int pageNo, string searchString, string filter, int filterObjectId)
         {
-            var boardGames = _boardGameRepository.GetAllBoardGames()
-                .Where(b => b.Name.StartsWith(searchString))
-                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+            var boardGames = Enumerable.Empty<BoardGame>().AsQueryable();
 
-            var boardGamesToShow = boardGames.Skip(pageSize * (pageNo - 1))
+            switch (filter)
+            {
+                case "Category":
+                    boardGames = _categoryRepository.GetAllBoardGamesByCategoryId(filterObjectId)
+                        .Where(b => b.Name.StartsWith(searchString));
+                    break;
+                case "Publisher":
+                    boardGames = _publisherRepository.GetAllBoardGamesByPublisherId(filterObjectId)
+                        .Where(b => b.Name.StartsWith(searchString));
+                    break;
+                default:
+                    boardGames = _boardGameRepository.GetAllBoardGames()
+                        .Where(b => b.Name.StartsWith(searchString));
+                    break;
+            }
+
+            var mappedBoardGames = boardGames.ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var boardGamesToShow = mappedBoardGames.Skip(pageSize * (pageNo - 1))
                 .Take(pageSize).ToList();
 
             var boardGamesList = new ListBoardGameForListVm()
@@ -46,7 +62,9 @@ namespace BoardGamesShopMVC.Application.Services
                 CurrentPage = pageNo,
                 SearchString = searchString,
                 BoardGames = boardGamesToShow,
-                Count = boardGames.Count
+                Count = mappedBoardGames.Count,
+                Filter = filter,
+                FilterObjectId = filterObjectId
             };
             return boardGamesList;
         }

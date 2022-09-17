@@ -38,18 +38,6 @@ namespace BoardGamesShopMVC.Application.Services
             return listPublishers;
         }
 
-        public ListBoardGameForListVm GetBoardGamesByPublisherId(int id)
-        {
-            var boardGames = _publisherRepository.GetAllBoardGamesByPublisherId(id)
-                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
-
-            var boardGamesList = new ListBoardGameForListVm()
-            {
-                BoardGames = boardGames,
-                Count = boardGames.Count
-            };
-            return boardGamesList;
-        }
         public int AddPublisher(NewPublisherVm newPublisher)
         {
             var publisher = _mapper.Map<Publisher>(newPublisher);

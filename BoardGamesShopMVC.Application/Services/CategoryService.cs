@@ -35,17 +35,6 @@ namespace BoardGamesShopMVC.Application.Services
             };
             return listCategories;
         }
-        public ListBoardGameForListVm GetBoardGamesByCategoryId(int id)
-        {
-            var boardGames = _categoryRepository.GetAllBoardGamesByCategoryId(id)
-                .ProjectTo<BoardGameForListVm>(_mapper.ConfigurationProvider).ToList();
-            var boardGamesList = new ListBoardGameForListVm()
-            {
-                BoardGames = boardGames,
-                Count = boardGames.Count
-            };
-            return boardGamesList;
-        }
 
         public int AddCategory(NewCategoryVm newCategory)
         {

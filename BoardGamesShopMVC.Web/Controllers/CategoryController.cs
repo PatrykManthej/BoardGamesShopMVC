@@ -11,13 +11,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             _categoryService = categoryService;
         }
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var model = _categoryService.GetAllCategories(10, 1, "");
-            return View(model);
-        }
-        [HttpPost]
+
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
         {
             if (!pageNo.HasValue)
@@ -35,12 +29,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _categoryService.GetAllCategories(pageSize, pageNo.Value, searchString);
             return View(model);
         }
-        [HttpGet]
-        public IActionResult ViewBoardGamesByCategory(int id)
-        {
-            var model = _categoryService.GetBoardGamesByCategoryId(id);
-            return View(model);
-        }
+
         [HttpGet]
         public IActionResult AddCategory()
         {

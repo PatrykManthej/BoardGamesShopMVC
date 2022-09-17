@@ -6,7 +6,6 @@ namespace BoardGamesShopMVC.Application.Interfaces
     public interface IPublisherService
     {
         ListPublisherForListVm GetAllPublishers(int pageSize, int pageNo, string searchString);
-        ListBoardGameForListVm GetBoardGamesByPublisherId(int id);
         int AddPublisher(NewPublisherVm newPublisher);
         void DeletePublisher(int id);
         NewPublisherVm GetPublisherForEdit(int id);

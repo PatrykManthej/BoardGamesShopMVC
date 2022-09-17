@@ -15,13 +15,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             _validator = validator;
             _publisherService = publisherService;
         }
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var model = _publisherService.GetAllPublishers(10, 1, "");
-            return View(model);
-        }
-        [HttpPost]
+
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
         {
             if (!pageNo.HasValue)
@@ -39,12 +33,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _publisherService.GetAllPublishers(pageSize, pageNo.Value, searchString);
             return View(model);
         }
-        [HttpGet]
-        public IActionResult ViewBoardGamesByPublisher(int id)
-        {
-            var model = _publisherService.GetBoardGamesByPublisherId(id);
-            return View(model);
-        }
+
         [HttpGet]
         public IActionResult AddPublisher()
         {

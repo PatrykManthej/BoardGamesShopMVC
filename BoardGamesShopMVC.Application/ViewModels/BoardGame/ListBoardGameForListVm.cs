@@ -13,5 +13,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public int PageSize { get; set; }
         public string SearchString { get; set; }
         public int Count { get; set; }
+        public string Filter { get; set; }
+        public int FilterObjectId { get; set; }
     }
 }
