@@ -26,16 +26,23 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Publisher" asp-action="Index">Publishers</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="ViewCart">Cart</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BoardGame" asp-action="BoardGames">Board games</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Managment
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="BoardGame" asp-action="BoardGames">Board games</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Publisher" asp-action="Index">Publishers</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
