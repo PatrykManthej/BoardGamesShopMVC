@@ -18,6 +18,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
         IQueryable<LanguageForListVm> GetLanguagesToSelect();
         NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
         NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model);
+        void DeleteImageFile(string imageUrl);
 
     }
 }

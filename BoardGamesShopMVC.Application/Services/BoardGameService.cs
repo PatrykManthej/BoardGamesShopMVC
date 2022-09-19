@@ -88,6 +88,8 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void DeleteBoardGame(int id)
         {
+            var boardGame = _boardGameRepository.GetBoardGameById(id);
+            DeleteImageFile(boardGame.ImageUrl);
             _boardGameRepository.DeleteBoardGame(id);
         }
 
@@ -157,6 +159,15 @@ namespace BoardGamesShopMVC.Application.Services
                 model.ImageUrl = @"\images\boardgames\" + fileName;
             }
             return model;
+        }
+        public void DeleteImageFile(string imageUrl)
+        {
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            var plik = Path.Combine(wwwRootPath, imageUrl.TrimStart('\\'));
+            if (File.Exists(plik))
+            {
+                File.Delete(plik);
+            }
         }
         public NewBoardGameVm SetCategoriesToBoardGame(NewBoardGameVm boardGame)
         {
