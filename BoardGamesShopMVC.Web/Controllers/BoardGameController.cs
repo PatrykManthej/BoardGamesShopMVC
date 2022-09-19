@@ -84,14 +84,14 @@ namespace BoardGamesShopMVC.Web.Controllers
             }
             _boardGameService.SaveImageToFileInApplicationFolder(model);
             var id = _boardGameService.AddBoardGame(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("BoardGames");
 
         }
 
         public IActionResult DeleteBoardGame(int id)
         {
             _boardGameService.DeleteBoardGame(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("BoardGames");
         }
 
         [HttpGet]
@@ -113,7 +113,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             }
             _boardGameService.SaveImageToFileInApplicationFolder(model);
             _boardGameService.UpdateBoardGame(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("BoardGames");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
