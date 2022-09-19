@@ -1,0 +1,15 @@
+﻿@model BoardGamesShopMVC.Application.ViewModels.Category.ListCategoryForListVm
+
+<li class="nav-item dropdown">
+    <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        Categories
+    </a>
+    <ul class="dropdown-menu">
+        @foreach (var category in Model.Categories)
+        {
+            <li>
+                <a class="dropdown-item" asp-controller="BoardGame" asp-action="Index" asp-route-filter ="Category" asp-route-filterObjectId="@category.Id">@category.Name</a>
+            </li>
+        }
+    </ul>
+</li>

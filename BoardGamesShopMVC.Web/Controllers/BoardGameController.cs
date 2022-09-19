@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 
 namespace BoardGamesShopMVC.Web.Controllers
 {
@@ -13,24 +14,15 @@ namespace BoardGamesShopMVC.Web.Controllers
     {
         private readonly IBoardGameService _boardGameService;
         private readonly IValidator<NewBoardGameVm> _validator;
-        private readonly ILogger<HomeController> _logger;
-        public BoardGameController(IBoardGameService boardGameService, IValidator<NewBoardGameVm> validator, ILogger<HomeController> logger)
+        private readonly ILogger<BoardGameController> _logger;
+        public BoardGameController(IBoardGameService boardGameService, IValidator<NewBoardGameVm> validator, ILogger<BoardGameController> logger)
         {
             _boardGameService = boardGameService;
             _validator = validator;
             _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            _logger.LogInformation("Jestem w BoardGame/Index");
-            var model = _boardGameService.GetAllGamesForList(8, 1, "", "", 0);
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Index(int pageSize, int? pageNo, string searchString)
+        public IActionResult Index(int pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
         {
             if (!pageNo.HasValue)
             {
@@ -44,7 +36,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 pageSize = 8;
             }
-            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString, "", 0);
+            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString, filter, filterObjectId);
             return View(model);
         }
 
@@ -114,6 +106,12 @@ namespace BoardGamesShopMVC.Web.Controllers
             _boardGameService.SaveImageToFileInApplicationFolder(model);
             _boardGameService.UpdateBoardGame(model);
             return RedirectToAction("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -22,12 +22,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BoardGame" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                        <li>
+                            @await Component.InvokeAsync("CategoryNavbar")
+                        </li>
+                        <li>
+                            @await Component.InvokeAsync("PublisherNavbar")
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="ViewCart">Cart</a>
                         </li>
+                        <!--Managment section-->
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 Managment
@@ -44,6 +49,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <!--End of managment section-->
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

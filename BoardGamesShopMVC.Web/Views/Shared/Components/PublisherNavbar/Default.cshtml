@@ -1,0 +1,15 @@
+﻿@model BoardGamesShopMVC.Application.ViewModels.Publisher.ListPublisherForListVm
+
+<li class="nav-item dropdown">
+    <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        Publishers
+    </a>
+    <ul class="dropdown-menu">
+        @foreach (var publisher in Model.Publishers)
+        {
+            <li>
+                <a class="dropdown-item" asp-controller="BoardGame" asp-action="Index" asp-route-filter ="Publisher" asp-route-filterObjectId="@publisher.Id">@publisher.Name</a>
+            </li>
+        }
+    </ul>
+</li>
