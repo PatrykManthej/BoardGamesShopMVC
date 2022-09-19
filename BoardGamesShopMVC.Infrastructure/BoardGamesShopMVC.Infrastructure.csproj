@@ -20,8 +20,4 @@
     <ProjectReference Include="..\BoardGamesShopMVC.Domain\BoardGamesShopMVC.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BoardGamesImages\" />
-  </ItemGroup>
-
 </Project>
