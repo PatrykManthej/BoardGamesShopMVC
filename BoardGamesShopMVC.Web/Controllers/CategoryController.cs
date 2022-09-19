@@ -41,9 +41,12 @@ namespace BoardGamesShopMVC.Web.Controllers
             var id = _categoryService.AddCategory(model);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, int boardGamesCount)
         {
+            if(boardGamesCount == 0)
+            {
             _categoryService.DeleteCategory(id);
+            }
             return RedirectToAction("Index");
         }
         [HttpGet]
