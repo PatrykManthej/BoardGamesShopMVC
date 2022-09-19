@@ -1,5 +1,7 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.Category;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
@@ -7,9 +9,11 @@ namespace BoardGamesShopMVC.Web.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly IValidator<NewCategoryVm> _validator;
+        public CategoryController(ICategoryService categoryService, IValidator<NewCategoryVm> validator)
         {
             _categoryService = categoryService;
+            _validator = validator;
         }
 
         public IActionResult Index(int pageSize, int? pageNo, string searchString)
@@ -38,6 +42,12 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpPost]
         public IActionResult AddCategory(NewCategoryVm model)
         {
+            ValidationResult result = _validator.Validate(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return View(new NewCategoryVm());
+            }
             var id = _categoryService.AddCategory(model);
             return RedirectToAction("Index");
         }

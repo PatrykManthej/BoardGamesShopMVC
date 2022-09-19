@@ -51,7 +51,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 searchString = string.Empty;
             }
-            if(pageSize == null || pageSize == 0)
+            if (pageSize == null || pageSize == 0)
             {
                 pageSize = 10;
             }
@@ -79,7 +79,8 @@ namespace BoardGamesShopMVC.Web.Controllers
             if (!result.IsValid)
             {
                 result.AddToModelState(this.ModelState);
-                return View(new NewBoardGameVm());
+                var newModel = _boardGameService.SetParametersToVm(new NewBoardGameVm());
+                return View(newModel);
             }
             _boardGameService.SaveImageToFileInApplicationFolder(model);
             var id = _boardGameService.AddBoardGame(model);
@@ -103,6 +104,13 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpPost]
         public IActionResult EditBoardGame(NewBoardGameVm model)
         {
+            ValidationResult result = _validator.Validate(model);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                _boardGameService.SetParametersToVm(model);
+                return View(model);
+            }
             _boardGameService.SaveImageToFileInApplicationFolder(model);
             _boardGameService.UpdateBoardGame(model);
             return RedirectToAction("Index");

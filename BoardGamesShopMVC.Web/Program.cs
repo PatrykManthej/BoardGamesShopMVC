@@ -1,5 +1,6 @@
 using BoardGamesShopMVC.Application;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Infrastructure;
 using FluentValidation;
@@ -25,6 +26,7 @@ builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
 builder.Services.AddTransient<IValidator<NewPublisherVm>, NewPublisherValidation>();
+builder.Services.AddTransient<IValidator<NewCategoryVm>, NewCategoryValidation>();
 
 builder.Logging.AddFile("Logs/myLog-{Date}.txt");
 

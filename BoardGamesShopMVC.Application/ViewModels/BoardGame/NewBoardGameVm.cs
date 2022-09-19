@@ -40,6 +40,11 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
             RuleFor(b => b.MaxNumberOfPlayers).GreaterThanOrEqualTo(1);
             RuleFor(b => b.PublishedYear).GreaterThanOrEqualTo(0);
             RuleFor(b => b.Price).InclusiveBetween(0, 100000000);
+            RuleFor(b => b.StockQuantity).InclusiveBetween(0, 100000000);
+            RuleFor(b => b.ImageFile).NotNull();
+            RuleFor(b => b.LanguageId).NotNull();
+            RuleFor(b => b.PublisherId).NotNull();
+            RuleFor(b => b.CategoriesId).NotNull();
         }
     }
 }
