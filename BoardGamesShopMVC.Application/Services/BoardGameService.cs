@@ -138,25 +138,40 @@ namespace BoardGamesShopMVC.Application.Services
         }
         public NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model)
         {
-            string wwwRootPath = _hostEnvironment.WebRootPath;
-
-            if (model.ImageFile != null)
+            var contentType = model.ImageFile.ContentType;
+            if (contentType.Equals("image/jpeg") || contentType.Equals("image/jpg") || contentType.Equals("image/png"))
             {
-                string fileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
-                var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
-                if (model.ImageUrl != null)
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+                if (model.ImageFile != null)
                 {
-                    var oldImagePath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
-                    if (File.Exists(oldImagePath))
+                    string fileName = model.ImageFile.FileName;
+                    string fileNameWithGuid = Guid.NewGuid().ToString() + "_" + fileName;
+                    var uploadsFolder = Path.Combine(wwwRootPath, @"images\boardgames\");
+                    var fullFilePath = Path.Combine(uploadsFolder, fileNameWithGuid);
+                    var maxNumberOfChars = 259;
+                    if (fullFilePath.Length > maxNumberOfChars)
                     {
-                        File.Delete(oldImagePath);
+                        var numberOfCharsToDelete = fullFilePath.Length - maxNumberOfChars;
+                        var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                        var fileExtension = Path.GetExtension(fileName);
+                        var removeStartIndex = fileNameWithoutExtension.Length - numberOfCharsToDelete;
+                        var cutedFileName = fileNameWithoutExtension.Remove(removeStartIndex, numberOfCharsToDelete);
+                        fileNameWithGuid = Guid.NewGuid().ToString() + "_" + cutedFileName + fileExtension;
                     }
+                    if (model.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+                        if (File.Exists(oldImagePath))
+                        {
+                            File.Delete(oldImagePath);
+                        }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileNameWithGuid), FileMode.Create))
+                    {
+                        model.ImageFile.CopyTo(fileStream);
+                    }
+                    model.ImageUrl = @"\images\boardgames\" + fileNameWithGuid;
                 }
-                using (var fileStream = new FileStream(Path.Combine(uploadsFolder, fileName), FileMode.Create))
-                {
-                    model.ImageFile.CopyTo(fileStream);
-                }
-                model.ImageUrl = @"\images\boardgames\" + fileName;
             }
             return model;
         }
