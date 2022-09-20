@@ -82,10 +82,8 @@ namespace BoardGamesShopMVC.Web.Controllers
                 var newModel = _boardGameService.SetParametersToVm(new NewBoardGameVm());
                 return View(newModel);
             }
-            _boardGameService.SaveImageToFileInApplicationFolder(model);
             var id = _boardGameService.AddBoardGame(model);
             return RedirectToAction("BoardGames");
-
         }
 
         public IActionResult DeleteBoardGame(int id)
@@ -111,7 +109,6 @@ namespace BoardGamesShopMVC.Web.Controllers
                 _boardGameService.SetParametersToVm(model);
                 return View(model);
             }
-            _boardGameService.SaveImageToFileInApplicationFolder(model);
             _boardGameService.UpdateBoardGame(model);
             return RedirectToAction("BoardGames");
         }

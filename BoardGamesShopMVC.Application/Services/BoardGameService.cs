@@ -78,6 +78,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public int AddBoardGame(NewBoardGameVm newBoardGame)
         {
+            SaveImageToFileInApplicationFolder(newBoardGame);
             SetCategoriesToBoardGame(newBoardGame);
 
             var boardGame = _mapper.Map<BoardGame>(newBoardGame);
@@ -107,6 +108,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void UpdateBoardGame(NewBoardGameVm model)
         {
+            SaveImageToFileInApplicationFolder(model);
             SetCategoriesToBoardGame(model);
             var boardGame = _mapper.Map<BoardGame>(model);
             _boardGameRepository.UpdateBoardGame(boardGame);
