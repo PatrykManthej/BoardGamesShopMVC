@@ -22,9 +22,13 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public void DeleteBoardGame(int boardGameId)
         {
-            var boardGame = _context.BoardGames.Find(boardGameId);
+            var boardGame = _context.BoardGames
+                .Include(b=>b.Stock)
+                .FirstOrDefault(b => b.Id == boardGameId);
+
             if (boardGame != null)
             {
+                _context.Stocks.Remove(boardGame.Stock);
                 _context.BoardGames.Remove(boardGame);
                 _context.SaveChanges();
             }
@@ -57,8 +61,13 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             }
             _context.SaveChanges();
         }
-
         public BoardGame GetBoardGameById(int boardGameId)
+        {
+            var boardGame = _context.BoardGames
+                .FirstOrDefault(b => b.Id == boardGameId);
+            return boardGame;
+        }
+        public BoardGame GetBoardGameWithDependenciesById(int boardGameId)
         {
             var boardGame = _context.BoardGames
                 .Include(b=>b.LanguageVersion)

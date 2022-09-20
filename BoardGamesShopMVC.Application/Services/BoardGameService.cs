@@ -70,7 +70,7 @@ namespace BoardGamesShopMVC.Application.Services
         }
         public BoardGameDetailsVm GetBoardGameDetails(int id)
         {
-            var boardGame = _boardGameRepository.GetBoardGameById(id);
+            var boardGame = _boardGameRepository.GetBoardGameWithDependenciesById(id);
             var boardGameVm = _mapper.Map<BoardGameDetailsVm>(boardGame);
 
             return boardGameVm;
@@ -96,7 +96,7 @@ namespace BoardGamesShopMVC.Application.Services
 
         public NewBoardGameVm GetBoardGameForEdit(int id)
         {
-            var boardGame = _boardGameRepository.GetBoardGameById(id);
+            var boardGame = _boardGameRepository.GetBoardGameWithDependenciesById(id);
             var boardGameVm = _mapper.Map<NewBoardGameVm>(boardGame);
             boardGameVm.CategoriesId = new List<int>();
             foreach (var category in boardGame.Categories)
