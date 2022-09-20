@@ -19,7 +19,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public int StockId { get; set; }
-        public IFormFile? ImageFile{ get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string ImageUrl { get; set; }
         public int LanguageId { get; set; }
         public int PublisherId { get; set; }
@@ -34,7 +34,7 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
         {
             RuleFor(b => b.Name).MinimumLength(1).MaximumLength(100);
             RuleFor(b => b.Description).MaximumLength(5000);
-            RuleFor(b => b.AverageTimeOfPlay).MaximumLength(10);
+            RuleFor(b => b.AverageTimeOfPlay).MaximumLength(10).WithMessage("Za duzo");
             RuleFor(b => b.RecommendedMinimumAge).InclusiveBetween(0, 125);
             RuleFor(b => b.MinNumberOfPlayers).InclusiveBetween(1, 100);
             RuleFor(b => b.MaxNumberOfPlayers).GreaterThanOrEqualTo(1);
@@ -44,6 +44,11 @@ namespace BoardGamesShopMVC.Application.ViewModels.BoardGame
             RuleFor(b => b.LanguageId).NotNull();
             RuleFor(b => b.PublisherId).NotNull();
             RuleFor(b => b.CategoriesId).NotNull();
+            RuleFor(b => b.ImageFile).NotNull().When(b => b.ImageUrl == null);
+            RuleFor(b => b.ImageFile.ContentType)
+                .Must(c => c.Equals("image/jpeg") || c.Equals("image/jpg") || c.Equals("image/png"))
+              .WithMessage("Allowed file types: jpeg, jpg, png")
+                .When(b => b.ImageFile != null);
         }
     }
 }

@@ -80,6 +80,8 @@
                 <div class="mb-3">
                     <label>Choose file:</label>
                     <input asp-for="ImageFile" class="form-control" type="file" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    <span asp-validation-for="ImageFile.ContentType" class="text-danger"></span>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-warning" style="width:150px">Save</button>
