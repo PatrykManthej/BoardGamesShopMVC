@@ -41,7 +41,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         }
 
 
-        public IActionResult BoardGames(int? pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
+        public IActionResult BoardGamesManagement(int? pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
         {
             if (!pageNo.HasValue)
             {
