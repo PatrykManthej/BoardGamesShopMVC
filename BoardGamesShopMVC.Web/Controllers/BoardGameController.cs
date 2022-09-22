@@ -83,13 +83,13 @@ namespace BoardGamesShopMVC.Web.Controllers
                 return View(newModel);
             }
             var id = _boardGameService.AddBoardGame(model);
-            return RedirectToAction("BoardGames");
+            return RedirectToAction("BoardGamesManagement");
         }
 
         public IActionResult DeleteBoardGame(int id)
         {
             _boardGameService.DeleteBoardGame(id);
-            return RedirectToAction("BoardGames");
+            return RedirectToAction("BoardGamesManagement");
         }
 
         [HttpGet]
@@ -110,7 +110,7 @@ namespace BoardGamesShopMVC.Web.Controllers
                 return View(model);
             }
             _boardGameService.UpdateBoardGame(model);
-            return RedirectToAction("BoardGames");
+            return RedirectToAction("BoardGamesManagement");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
