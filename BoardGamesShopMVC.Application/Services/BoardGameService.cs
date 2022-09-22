@@ -140,11 +140,11 @@ namespace BoardGamesShopMVC.Application.Services
         }
         public NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model)
         {
-            var contentType = model.ImageFile.ContentType;
-            if (contentType.Equals("image/jpeg") || contentType.Equals("image/jpg") || contentType.Equals("image/png"))
-            {
             string wwwRootPath = _hostEnvironment.WebRootPath;
-                if (model.ImageFile != null)
+            if (model.ImageFile != null)
+            {
+                var contentType = model.ImageFile.ContentType;
+                if (contentType.Equals("image/jpeg") || contentType.Equals("image/jpg") || contentType.Equals("image/png"))
                 {
                     string fileName = model.ImageFile.FileName;
                     string fileNameWithGuid = Guid.NewGuid().ToString() + "_" + fileName;
