@@ -30,13 +30,16 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public Category GetCategoryById(int categoryId)
         {
-            var category = _context.Categories.FirstOrDefault(b => b.Id == categoryId);
+            var category = _context.Categories
+                .Where(b => b.StatusId == 1)
+                .FirstOrDefault(b => b.Id == categoryId);
             return category;
         }
 
         public IQueryable<Category> GetAllCategories()
         {
-            var categories = _context.Categories;
+            var categories = _context.Categories
+                .Where(b => b.StatusId == 1);
             return categories;
         }
 

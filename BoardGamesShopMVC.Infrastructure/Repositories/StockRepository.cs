@@ -30,18 +30,24 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public Stock GetStockById(int stockId)
         {
-            var stock = _context.Stocks.FirstOrDefault(b => b.Id == stockId);
+            var stock = _context.Stocks
+                .Where(b => b.StatusId == 1)
+                .FirstOrDefault(b => b.Id == stockId);
             return stock;
         }
 
         public IQueryable<Stock> GetAllStocks()
         {
-            var stocks = _context.Stocks;
+            var stocks = _context.Stocks
+                .Where(b => b.StatusId == 1);
             return stocks;
         }
         public Stock GetStockByBoardGameId(int boardGameId)
         {
-            var stock = _context.Stocks.Include(s => s.BoardGame).FirstOrDefault(s => s.BoardGame.Id == boardGameId);
+            var stock = _context.Stocks
+                .Where(b => b.StatusId == 1)
+                .Include(s => s.BoardGame)
+                .FirstOrDefault(s => s.BoardGame.Id == boardGameId);
             return stock;
         }
         public void UpdateStock(Stock stock)

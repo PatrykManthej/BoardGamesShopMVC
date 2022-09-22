@@ -29,13 +29,16 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public Language GetLanguageById(int languageId)
         {
-            var language = _context.Languages.FirstOrDefault(b => b.Id == languageId);
+            var language = _context.Languages
+                .Where(b => b.StatusId == 1)
+                .FirstOrDefault(b => b.Id == languageId);
             return language;
         }
 
         public IQueryable<Language> GetAllLanguages()
         {
-            var languages = _context.Languages;
+            var languages = _context.Languages
+                .Where(b => b.StatusId == 1);
             return languages;
         }
     }

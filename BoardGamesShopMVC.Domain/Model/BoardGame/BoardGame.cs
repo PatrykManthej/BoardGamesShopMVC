@@ -1,6 +1,8 @@
-﻿namespace BoardGamesShopMVC.Domain.Model
+﻿using BoardGamesShopMVC.Domain.Model.Common;
+
+namespace BoardGamesShopMVC.Domain.Model
 {
-    public class BoardGame
+    public class BoardGame : AuditableEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
