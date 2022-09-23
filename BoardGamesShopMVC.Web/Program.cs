@@ -24,6 +24,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredUniqueChars = 1;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.User.RequireUniqueEmail = true;
+});
+
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
 builder.Services.AddTransient<IValidator<NewPublisherVm>, NewPublisherValidation>();
 builder.Services.AddTransient<IValidator<NewCategoryVm>, NewCategoryValidation>();
