@@ -33,22 +33,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="ViewCart">Cart</a>
                         </li>
                         <!--Management section-->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                Management
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" asp-controller="BoardGame" asp-action="BoardGamesManagement">Board games</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-controller="Publisher" asp-action="Index">Publishers</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (User.IsInRole("Admin, Employee"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    Management
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="BoardGame" asp-action="BoardGamesManagement">Board games</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Publisher" asp-action="Index">Publishers</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                         <!--End of management section-->
                     </ul>
                     <partial name="_LoginPartial" />

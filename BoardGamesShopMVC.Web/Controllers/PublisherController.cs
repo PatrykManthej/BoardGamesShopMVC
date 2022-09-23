@@ -2,10 +2,12 @@
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class PublisherController : Controller
     {
         private readonly IPublisherService _publisherService;

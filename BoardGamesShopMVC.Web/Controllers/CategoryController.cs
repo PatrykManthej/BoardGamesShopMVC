@@ -2,10 +2,12 @@
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGamesShopMVC.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
