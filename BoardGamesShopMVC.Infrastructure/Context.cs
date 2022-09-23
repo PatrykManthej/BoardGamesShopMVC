@@ -1,5 +1,6 @@
 ﻿using BoardGamesShopMVC.Domain.Model;
 using BoardGamesShopMVC.Domain.Model.Common;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -140,6 +141,11 @@ namespace BoardGamesShopMVC.Infrastructure
                    new Stock() { Id = 10, Quantity = 2, StatusId = 1},
                    new Stock() { Id = 11, Quantity = 5, StatusId = 1},
                    new Stock() { Id = 12, Quantity = 6, StatusId = 1 }
+                );
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "Admin", Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "Employee", Name = "Employee", NormalizedName= "EMPLOYEE"},
+                new IdentityRole { Id = "User", Name = "User", NormalizedName = "USER"}
                 );
 
             base.OnModelCreating(builder);
