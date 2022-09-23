@@ -43,18 +43,10 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .Include(b=>b.Stock)
                 .FirstOrDefault(b => b.Id == boardGame.Id);
 
-            var existingAuditableEntity = new AuditableEntity()
-            {
-                Created = _context.Entry(existingBoardGame).Property(b => b.Created).CurrentValue,
-                Modified = _context.Entry(existingBoardGame).Property(b => b.Modified).CurrentValue,
-                StatusId = _context.Entry(existingBoardGame).Property(b => b.StatusId).CurrentValue,
-                Inactivated = _context.Entry(existingBoardGame).Property(b => b.Inactivated).CurrentValue,
-            };
-
-            boardGame.Created = existingAuditableEntity.Created;
-            boardGame.Modified = existingAuditableEntity.Modified;
-            boardGame.StatusId = existingAuditableEntity.StatusId;
-            boardGame.Inactivated = existingAuditableEntity.Inactivated;
+            boardGame.Created = _context.Entry(existingBoardGame).Property(b => b.Created).CurrentValue;
+            boardGame.Modified = _context.Entry(existingBoardGame).Property(b => b.Modified).CurrentValue;
+            boardGame.StatusId = _context.Entry(existingBoardGame).Property(b => b.StatusId).CurrentValue;
+            boardGame.Inactivated = _context.Entry(existingBoardGame).Property(b => b.Inactivated).CurrentValue;
 
             _context.Entry(existingBoardGame).CurrentValues.SetValues(boardGame);
             _context.Entry(existingBoardGame.Stock).CurrentValues.SetValues(boardGame.Stock);
