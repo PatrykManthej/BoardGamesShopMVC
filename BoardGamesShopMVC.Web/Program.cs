@@ -35,6 +35,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.AddAuthentication().AddGoogle(options =>
+{
+    IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
+    options.ClientId = googleAuthNSection["ClientId"];
+    options.ClientSecret = googleAuthNSection["ClientSecret"];
+});
+
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
 builder.Services.AddTransient<IValidator<NewPublisherVm>, NewPublisherValidation>();
 builder.Services.AddTransient<IValidator<NewCategoryVm>, NewCategoryValidation>();
