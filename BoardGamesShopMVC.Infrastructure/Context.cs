@@ -57,6 +57,12 @@ namespace BoardGamesShopMVC.Infrastructure
 
             builder.Entity<Publisher>().Property(p => p.Name).HasMaxLength(50).IsRequired();
 
+            DataSeed(builder);
+
+            base.OnModelCreating(builder);
+        }
+        private void DataSeed(ModelBuilder builder)
+        {
             builder.Entity<Publisher>().HasData
                 (
                     new Publisher() { Id = 1, Name = "Bard", StatusId = 1 },
@@ -72,7 +78,7 @@ namespace BoardGamesShopMVC.Infrastructure
                 );
             builder.Entity<BoardGame>().HasData
                 (
-                    new BoardGame() { Id = 1, Name = "Carcassonne", Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1, ImageUrl= @"\images\boardgames\24cf50d0-b7ed-44f5-8269-20889c9ca1ba_Carcassonne.png", StockId = 1, StatusId = 1 },
+                    new BoardGame() { Id = 1, Name = "Carcassonne", Description = "Usiądź z przyjaciółmi przy stole i wspólnie zacznijcie budować z niewielkich żetonów łąki, twierdze, całe miasta i drogi, rywalizując między sobą o przejęcie kontroli nad co bardziej atrakcyjnymi lokacjami.", AverageTimeOfPlay = "30 - 45 min", RecommendedMinimumAge = 7, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 5, PublishedYear = 2000, Price = 120, LanguageId = 1, PublisherId = 1, ImageUrl = @"\images\boardgames\24cf50d0-b7ed-44f5-8269-20889c9ca1ba_Carcassonne.png", StockId = 1, StatusId = 1 },
 
                     new BoardGame() { Id = 2, Name = "Splendor", Description = "Splendor jest dynamiczną i niemal uzależniającą grą w zbieranie żetonów i kart, które tworzą zasoby gracza, umożliwiające mu dalszy rozwój. ", AverageTimeOfPlay = "30 min", RecommendedMinimumAge = 10, MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4, PublishedYear = 2014, Price = 130, LanguageId = 1, PublisherId = 2, @ImageUrl = @"\images\boardgames\73c2c91e-e0ba-4405-98f2-4dc99f90229b_Splendor.jpg", StockId = 2, StatusId = 1 },
 
@@ -119,36 +125,63 @@ namespace BoardGamesShopMVC.Infrastructure
                     new BoardGameCategory() { BoardGamesId = 11, CategoriesId = 1 },
                     new BoardGameCategory() { BoardGamesId = 12, CategoriesId = 1 }
                 );
-            builder.Entity<Cart>().HasData
-                (
-                    new Cart() { Id = 1, CustomerId = 1 }
-                );
-            builder.Entity<Customer>().HasData
-               (
-                   new Customer() { Id = 1, FirstName = "Test", LastName = "Test" }
-               );
             builder.Entity<Stock>().HasData
                 (
                    new Stock() { Id = 1, Quantity = 5, StatusId = 1 },
                    new Stock() { Id = 2, Quantity = 7, StatusId = 1 },
                    new Stock() { Id = 3, Quantity = 2, StatusId = 1 },
-                   new Stock() { Id = 4, Quantity = 4, StatusId = 1},
-                   new Stock() { Id = 5, Quantity = 3, StatusId = 1},
-                   new Stock() { Id = 6, Quantity = 6, StatusId = 1},
-                   new Stock() { Id = 7, Quantity = 2, StatusId = 1},
-                   new Stock() { Id = 8, Quantity = 3, StatusId = 1},
+                   new Stock() { Id = 4, Quantity = 4, StatusId = 1 },
+                   new Stock() { Id = 5, Quantity = 3, StatusId = 1 },
+                   new Stock() { Id = 6, Quantity = 6, StatusId = 1 },
+                   new Stock() { Id = 7, Quantity = 2, StatusId = 1 },
+                   new Stock() { Id = 8, Quantity = 3, StatusId = 1 },
                    new Stock() { Id = 9, Quantity = 2, StatusId = 1 },
-                   new Stock() { Id = 10, Quantity = 2, StatusId = 1},
-                   new Stock() { Id = 11, Quantity = 5, StatusId = 1},
+                   new Stock() { Id = 10, Quantity = 2, StatusId = 1 },
+                   new Stock() { Id = 11, Quantity = 5, StatusId = 1 },
                    new Stock() { Id = 12, Quantity = 6, StatusId = 1 }
                 );
-            builder.Entity<IdentityRole>().HasData(
+            builder.Entity<IdentityRole>().HasData
+                (
                 new IdentityRole { Id = "Admin", Name = "Admin", NormalizedName = "ADMIN" },
-                new IdentityRole { Id = "Employee", Name = "Employee", NormalizedName= "EMPLOYEE"},
-                new IdentityRole { Id = "User", Name = "User", NormalizedName = "USER"}
+                new IdentityRole { Id = "Employee", Name = "Employee", NormalizedName = "EMPLOYEE" },
+                new IdentityRole { Id = "User", Name = "User", NormalizedName = "USER" }
                 );
 
-            base.OnModelCreating(builder);
+            var admin = new IdentityUser()
+            {
+                UserName = "admin@test.com",
+                NormalizedUserName = "ADMIN@TEST.COM",
+                Email = "admin@test.com",
+                NormalizedEmail = "ADMIN@TEST.COM",
+                EmailConfirmed = true,
+            };
+            var customer = new IdentityUser()
+            {
+                UserName = "customer1@test.com",
+                NormalizedUserName = "CUSTOMER1@TEST.COM",
+                Email = "customer1@test.com",
+                NormalizedEmail = "CUSTOMER1@TEST.COM",
+                EmailConfirmed = true
+            };
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+            admin.PasswordHash = passwordHasher.HashPassword(admin, "123qweASD@");
+            customer.PasswordHash = passwordHasher.HashPassword(customer, "123qweASD@");
+
+            builder.Entity<IdentityUser>().HasData(admin, customer);
+
+            builder.Entity<IdentityUserRole<string>>().HasData
+                (
+                new IdentityUserRole<string>() { RoleId = "Admin", UserId = admin.Id},
+                new IdentityUserRole<string>() { RoleId = "User", UserId = customer.Id}
+                );
+            builder.Entity<Customer>().HasData
+                (
+                    new Customer() { Id = 1, UserId = customer.Id}
+                );
+            builder.Entity<Cart>().HasData
+                (
+                    new Cart() { Id = 1, CustomerId = 1 }
+                );
         }
         public override int SaveChanges()
         {
