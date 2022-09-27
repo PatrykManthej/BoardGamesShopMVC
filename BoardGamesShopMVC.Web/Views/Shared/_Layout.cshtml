@@ -33,7 +33,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="ViewCart">Cart</a>
                         </li>
                         <!--Management section-->
-                        @if (User.IsInRole("Admin, Employee"))
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
