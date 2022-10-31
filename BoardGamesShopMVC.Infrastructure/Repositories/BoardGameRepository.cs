@@ -76,6 +76,16 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .FirstOrDefault(b => b.Id == boardGameId);
             return boardGame;
         }
+
+        public string GetBoardGameImageUrl(int boardGameId)
+        {
+            var boardGameImageUrl = _context.BoardGames
+                .Where(b => b.StatusId == 1)
+                .Select(b => new { Id = b.Id, ImageUrl = b.ImageUrl })
+                .FirstOrDefault(b => b.Id == boardGameId);
+
+            return boardGameImageUrl.ImageUrl;
+        }
         public BoardGame GetBoardGameWithDependenciesById(int boardGameId)
         {
             var boardGame = _context.BoardGames

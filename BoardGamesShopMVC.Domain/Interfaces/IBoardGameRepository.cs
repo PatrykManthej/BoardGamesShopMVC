@@ -9,6 +9,7 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void UpdateBoardGame(BoardGame boardGame);
         IQueryable<BoardGame> GetAllBoardGames();
         BoardGame GetBoardGameById(int boardGameId);
+        string GetBoardGameImageUrl(int boardGameId);
         BoardGame GetBoardGameWithDependenciesById(int boardGameId);
         IQueryable<BoardGame> GetBoardGamesByCategoryId(int categoryId);
         IQueryable<BoardGame> GetBoardGamesByLanguageId(int languageId);

@@ -89,8 +89,8 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void DeleteBoardGame(int id)
         {
-            var boardGame = _boardGameRepository.GetBoardGameById(id);
-            DeleteImageFile(boardGame.ImageUrl);
+            var boardGameImageUrl = _boardGameRepository.GetBoardGameImageUrl(id);
+            DeleteImageFile(boardGameImageUrl);
             _boardGameRepository.DeleteBoardGame(id);
         }
 
