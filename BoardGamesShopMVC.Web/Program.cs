@@ -75,4 +75,13 @@ app.MapControllerRoute(
     pattern: "{controller=BoardGame}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetService<Context>();
+
+var pendingMigrations = dbContext.Database.GetPendingMigrations();
+if (pendingMigrations.Any())
+{
+    dbContext.Database.Migrate();
+}
+
 app.Run();
