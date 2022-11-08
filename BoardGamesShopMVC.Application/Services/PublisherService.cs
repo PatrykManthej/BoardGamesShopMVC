@@ -47,7 +47,10 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void DeletePublisher(int id)
         {
-            _publisherRepository.DeletePublisher(id);
+            if (_publisherRepository.GetAllBoardGamesByPublisherId(id).Any() is false)
+            {
+                _publisherRepository.DeletePublisher(id);
+            }
         }
 
         public NewPublisherVm GetPublisherForEdit(int id)

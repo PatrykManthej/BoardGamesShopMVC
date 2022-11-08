@@ -45,7 +45,10 @@ namespace BoardGamesShopMVC.Application.Services
 
         public void DeleteCategory(int id)
         {
-            _categoryRepository.DeleteCategory(id);
+            if (_categoryRepository.GetAllBoardGamesByCategoryId(id).Any() is false)
+            {
+                _categoryRepository.DeleteCategory(id);
+            }
         }
 
         public NewCategoryVm GetCategoryForEdit(int id)
