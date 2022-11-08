@@ -18,21 +18,10 @@ namespace BoardGamesShopMVC.Web.Controllers
             _publisherService = publisherService;
         }
 
-        public IActionResult Index(int pageSize, int? pageNo, string searchString)
+        public IActionResult Index(string? searchString, int pageSize = 10, int pageNo = 1)
         {
-            if (!pageNo.HasValue)
-            {
-                pageNo = 1;
-            }
-            if (searchString is null)
-            {
-                searchString = string.Empty;
-            }
-            if (pageSize == null || pageSize == 0)
-            {
-                pageSize = 10;
-            }
-            var model = _publisherService.GetAllPublishers(pageSize, pageNo.Value, searchString);
+            searchString ??= string.Empty;
+            var model = _publisherService.GetAllPublishers(pageSize, pageNo, searchString);
             return View(model);
         }
 

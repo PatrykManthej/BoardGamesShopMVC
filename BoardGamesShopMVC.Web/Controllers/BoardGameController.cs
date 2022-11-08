@@ -23,40 +23,18 @@ namespace BoardGamesShopMVC.Web.Controllers
             _logger = logger;
         }
         [AllowAnonymous]
-        public IActionResult Index(int pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
+        public IActionResult Index(string? searchString, string filter, int filterObjectId, int pageSize = 8, int pageNo = 1)
         {
-            if (!pageNo.HasValue)
-            {
-                pageNo = 1;
-            }
-            if (searchString is null)
-            {
-                searchString = string.Empty;
-            }
-            if (pageSize == null || pageSize == 0)
-            {
-                pageSize = 8;
-            }
-            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo.Value, searchString, filter, filterObjectId);
+            searchString ??= string.Empty;
+            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo, searchString, filter, filterObjectId);
             return View(model);
         }
 
         [Authorize(Roles ="Admin, Employee")]
-        public IActionResult BoardGamesManagement(int? pageSize, int? pageNo, string searchString, string filter, int filterObjectId)
+        public IActionResult BoardGamesManagement(string? searchString, string filter, int filterObjectId, int pageSize = 10, int pageNo = 1)
         {
-            if (!pageNo.HasValue)
-            {
-                pageNo = 1;
-            }
-            if (searchString is null)
-            {
-                searchString = string.Empty;
-            }
-            if (pageSize == null || pageSize == 0)
-            {
-                pageSize = 10;
-            }
-            var model = _boardGameService.GetAllGamesForList(pageSize.Value, pageNo.Value, searchString, filter, filterObjectId);
+            searchString ??= string.Empty;
+            var model = _boardGameService.GetAllGamesForList(pageSize, pageNo, searchString, filter, filterObjectId);
             return View(model);
         }
 
