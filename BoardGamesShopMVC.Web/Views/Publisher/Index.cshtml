@@ -54,8 +54,8 @@
                     </td>
                     <td>
                         <a asp-action="EditPublisher" class="btn btn-warning" asp-route-id="@item.Id">Edit</a>
-                        <a asp-controller="BoardGame" asp-action="BoardGames" class="btn btn-primary" asp-route-filter="Publisher" asp-route-filterObjectId="@item.Id">Board games</a>
-                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id" asp-route-boardGamesCount="@item.BoardGamesCount">Delete</a>
+                        <a asp-controller="BoardGame" asp-action="Index" class="btn btn-primary" asp-route-filter="Publisher" asp-route-filterObjectId="@item.Id">Board games</a>
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }

@@ -22,6 +22,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             _validator = validator;
             _logger = logger;
         }
+
         [AllowAnonymous]
         public IActionResult Index(string? searchString, string filter, int filterObjectId, int pageSize = 8, int pageNo = 1)
         {
@@ -44,6 +45,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _boardGameService.GetBoardGameDetails(id);
             return View(model);
         }
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public IActionResult AddBoardGame()
@@ -51,6 +53,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             var model = _boardGameService.SetParametersToVm(new NewBoardGameVm());
             return View(model);
         }
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public IActionResult AddBoardGame(NewBoardGameVm model)
@@ -65,12 +68,14 @@ namespace BoardGamesShopMVC.Web.Controllers
             var id = _boardGameService.AddBoardGame(model);
             return RedirectToAction("BoardGamesManagement");
         }
+
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteBoardGame(int id)
         {
             _boardGameService.DeleteBoardGame(id);
             return RedirectToAction("BoardGamesManagement");
         }
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public IActionResult EditBoardGame(int id)
@@ -79,6 +84,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             _boardGameService.SetParametersToVm(boardGame);
             return View(boardGame);
         }
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public IActionResult EditBoardGame(NewBoardGameVm model)

@@ -11,6 +11,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddCart(Cart cart)
         {
             _context.Carts.Add(cart);
@@ -49,12 +50,14 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.Entry(cart).Property("TotalAmount").IsModified = true;
             _context.SaveChanges();
         }
+
         public void UpdateCartItem(CartItem cartItem)
         {
             _context.Attach(cartItem);
             _context.Entry(cartItem).Property("Quantity").IsModified = true;
             _context.SaveChanges();
         }
+
         public void DeleteCartItem(int cartItemId)
         {
             var cartItem = _context.CartItems.Find(cartItemId);
@@ -64,6 +67,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
+
         public void AddCartItem(CartItem cartItem)
         {
             _context.CartItems.Add(cartItem);

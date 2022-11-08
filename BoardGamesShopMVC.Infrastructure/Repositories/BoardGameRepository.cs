@@ -34,6 +34,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
+
         public void UpdateBoardGame(BoardGame boardGame)
         {
 
@@ -69,6 +70,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             }
             _context.SaveChanges();
         }
+
         public BoardGame GetBoardGameById(int boardGameId)
         {
             var boardGame = _context.BoardGames
@@ -86,6 +88,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
             return boardGameImageUrl.ImageUrl;
         }
+
         public BoardGame GetBoardGameWithDependenciesById(int boardGameId)
         {
             var boardGame = _context.BoardGames

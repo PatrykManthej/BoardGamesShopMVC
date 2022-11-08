@@ -11,6 +11,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddCategory(Category category)
         {
             _context.Categories.Add(category);

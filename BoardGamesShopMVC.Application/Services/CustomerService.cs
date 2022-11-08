@@ -12,10 +12,12 @@ namespace BoardGamesShopMVC.Application.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+
         public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }
+
         public int AddCustomerAfterConfirmEmail(string userId, string userMail)
         {
             Customer customer = new Customer() { UserId = userId };

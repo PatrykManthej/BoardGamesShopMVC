@@ -30,6 +30,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             return View(new NewCategoryVm());
         }
+
         [HttpPost]
         public IActionResult AddCategory(NewCategoryVm model)
         {
@@ -42,20 +43,20 @@ namespace BoardGamesShopMVC.Web.Controllers
             var id = _categoryService.AddCategory(model);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id, int boardGamesCount)
+
+        public IActionResult Delete(int id)
         {
-            if(boardGamesCount == 0)
-            {
             _categoryService.DeleteCategory(id);
-            }
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult EditCategory(int id)
         {
             var category = _categoryService.GetCategoryForEdit(id);
             return View(category);
         }
+
         [HttpPost]
         public IActionResult EditCategory(NewCategoryVm model)
         {

@@ -10,6 +10,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddLanguage(Language language)
         {
             _context.Languages.Add(language);

@@ -10,6 +10,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddPublisher(Publisher publisher)
         {
             var existingPublisher = _context.Publishers.FirstOrDefault(p => p.Name.ToLower() == publisher.Name.ToLower());
@@ -24,6 +25,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 return publisher.Id;
             }
         }
+
         public void UpdatePublisher(Publisher publisher)
         {
             _context.Attach(publisher);

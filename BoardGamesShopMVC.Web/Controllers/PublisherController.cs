@@ -30,6 +30,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             return View(new NewPublisherVm());
         }
+
         [HttpPost]
         public IActionResult AddPublisher(NewPublisherVm model)
         {
@@ -42,20 +43,20 @@ namespace BoardGamesShopMVC.Web.Controllers
             var id = _publisherService.AddPublisher(model);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id, int boardGamesCount)
+
+        public IActionResult Delete(int id)
         {
-            if(boardGamesCount == 0)
-            {
             _publisherService.DeletePublisher(id);
-            }
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult EditPublisher(int id)
         {
             var publisher = _publisherService.GetPublisherForEdit(id);
             return View(publisher);
         }
+
         [HttpPost]
         public IActionResult EditPublisher(NewPublisherVm model)
         {

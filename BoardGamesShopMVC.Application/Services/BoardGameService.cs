@@ -68,6 +68,7 @@ namespace BoardGamesShopMVC.Application.Services
             };
             return boardGamesList;
         }
+
         public BoardGameDetailsVm GetBoardGameDetails(int id)
         {
             var boardGame = _boardGameRepository.GetBoardGameWithDependenciesById(id);
@@ -113,24 +114,28 @@ namespace BoardGamesShopMVC.Application.Services
             var boardGame = _mapper.Map<BoardGame>(model);
             _boardGameRepository.UpdateBoardGame(boardGame);
         }
+
         public IQueryable<PublisherForListVm> GetPublishersToSelect()
         {
             var publishersToSelect = _publisherRepository.GetAllPublishers()
                 .ProjectTo<PublisherForListVm>(_mapper.ConfigurationProvider);
             return publishersToSelect;
         }
+
         public IQueryable<CategoryForListVm> GetCategoriesToSelect()
         {
             var categoriesToSelect = _categoryRepository.GetAllCategories()
                 .ProjectTo<CategoryForListVm>(_mapper.ConfigurationProvider);
             return categoriesToSelect;
         }
+
         public IQueryable<LanguageForListVm> GetLanguagesToSelect()
         {
             var languagesToSelect = _languageRepository.GetAllLanguages()
                 .ProjectTo<LanguageForListVm>(_mapper.ConfigurationProvider);
             return languagesToSelect;
         }
+
         public NewBoardGameVm SetParametersToVm(NewBoardGameVm model)
         {
             model.Publishers = GetPublishersToSelect().ToList();
@@ -138,6 +143,7 @@ namespace BoardGamesShopMVC.Application.Services
             model.Languages = GetLanguagesToSelect().ToList();
             return model;
         }
+
         public NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model)
         {
             string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -177,6 +183,7 @@ namespace BoardGamesShopMVC.Application.Services
             }
             return model;
         }
+
         public void DeleteImageFile(string imageUrl)
         {
             string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -186,6 +193,7 @@ namespace BoardGamesShopMVC.Application.Services
                 File.Delete(plik);
             }
         }
+
         public NewBoardGameVm SetCategoriesToBoardGame(NewBoardGameVm boardGame)
         {
             var allCategories = GetCategoriesToSelect().ToList();

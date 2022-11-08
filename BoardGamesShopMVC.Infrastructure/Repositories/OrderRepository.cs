@@ -10,6 +10,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddOrder(Order order)
         {
             _context.Orders.Add(order);
@@ -38,6 +39,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var orders = _context.Orders;
             return orders;
         }
+
         public IQueryable<Order> GetAllCustomerOrders(int customerId)
         {
             var orders = _context.Orders.Where(o => o.CustomerId == customerId);

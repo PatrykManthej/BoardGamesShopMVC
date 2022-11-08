@@ -11,6 +11,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public int AddStock(Stock stock)
         {
             _context.Stocks.Add(stock);
@@ -42,6 +43,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .Where(b => b.StatusId == 1);
             return stocks;
         }
+
         public Stock GetStockByBoardGameId(int boardGameId)
         {
             var stock = _context.Stocks
@@ -50,6 +52,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
                 .FirstOrDefault(s => s.BoardGame.Id == boardGameId);
             return stock;
         }
+
         public void UpdateStock(Stock stock)
         {
             _context.Attach(stock);

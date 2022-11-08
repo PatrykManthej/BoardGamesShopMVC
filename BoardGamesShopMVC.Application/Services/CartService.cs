@@ -17,6 +17,7 @@ namespace BoardGamesShopMVC.Application.Services
             _stockRepository = stockRepository;
             _mapper = mapper;
         }
+
         public CartDetailsVm ViewCart() 
         {
             var cart = _cartRepository.GetCartById(1);
@@ -71,10 +72,12 @@ namespace BoardGamesShopMVC.Application.Services
                 }
             }
         }
+
         public void DeleteCartItemFromCart(int cartItemId)
         {
             _cartRepository.DeleteCartItem(cartItemId);
         }
+
         public void IncrementCartItemQuantity(int cartId, int cartItemId)
         {
             var cart = _cartRepository.GetCartById(cartId);
@@ -92,6 +95,7 @@ namespace BoardGamesShopMVC.Application.Services
                 }
             }
         }
+
         public void DecrementCartItemQuantity(int cartId, int cartItemId)
         {
             var cart = _cartRepository.GetCartById(cartId);

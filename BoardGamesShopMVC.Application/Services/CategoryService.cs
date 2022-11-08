@@ -48,7 +48,6 @@ namespace BoardGamesShopMVC.Application.Services
             _categoryRepository.DeleteCategory(id);
         }
 
-
         public NewCategoryVm GetCategoryForEdit(int id)
         {
             var category = _categoryRepository.GetCategoryById(id);
