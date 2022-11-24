@@ -18,9 +18,9 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public CartDetailsVm ViewCart() 
+        public CartDetailsVm ViewCart(int shopUserId) 
         {
-            var cart = _cartRepository.GetCartById(1);
+            var cart = _cartRepository.GetCartByUserId(shopUserId);
 
             decimal total = 0;
             foreach (var item in cart.CartItems)
@@ -36,6 +36,16 @@ namespace BoardGamesShopMVC.Application.Services
                 item.Total = item.Price * item.Quantity;
             }
             return cartVm;
+        }
+
+        public void CreateCart(int shopUserId)
+        {
+            var newCart = new Cart
+            {
+                ShopUserId = shopUserId
+            };
+
+            var newCartId = _cartRepository.AddCart(newCart);
         }
 
         public void AddItemToCart(int boardGameId, int cartId)

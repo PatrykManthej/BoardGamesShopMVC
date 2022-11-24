@@ -1,11 +1,6 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Infrastructure
 {
@@ -19,7 +14,7 @@ namespace BoardGamesShopMVC.Infrastructure
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddTransient<ILanguageRepository, LanguageRepository>();
             services.AddTransient<IStockRepository, StockRepository>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IShopUserRepository, ShopUserRepository>();
             return services;
         }
     }

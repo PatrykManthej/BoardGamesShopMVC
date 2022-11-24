@@ -8,14 +8,14 @@ namespace BoardGamesShopMVC.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Cart> builder)
         {
-            builder.HasOne(ca => ca.Customer).WithOne(cu => cu.Cart).HasForeignKey<Cart>(ca => ca.CustomerId);
+            builder.HasOne(ca => ca.ShopUser).WithOne(cu => cu.Cart).HasForeignKey<Cart>(ca => ca.ShopUserId);
             builder.HasMany(ca => ca.CartItems).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
 
             #region DataSeed
 
             builder.HasData
             (
-                new Cart() { Id = 1, CustomerId = 1 }
+                new Cart() { Id = 1, ShopUserId = 1 }
             );
 
             #endregion

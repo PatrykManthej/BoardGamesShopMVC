@@ -8,7 +8,7 @@ namespace BoardGamesShopMVC.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.HasOne(o => o.Customer).WithMany(c => c.Orders).HasForeignKey(o => o.CustomerId);
+            builder.HasOne(o => o.ShopUser).WithMany(c => c.Orders).HasForeignKey(o => o.ShopUserId);
             builder.HasMany(o => o.Items).WithOne(i => i.Order).HasForeignKey(i => i.OrderId);
 
         }

@@ -18,7 +18,7 @@ namespace BoardGamesShopMVC.Application
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<ICartService, CartService>();
-            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IShopUserService, ShopUserService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

@@ -38,6 +38,15 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             return cart;
         }
 
+        public Cart GetCartByUserId(int shopUserId)
+        {
+            var cart = _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(i => i.BoardGame)
+                .FirstOrDefault(c => c.ShopUserId == shopUserId);
+            return cart;
+        }
+
         public IQueryable<Cart> GetAllCarts()
         {
             var carts = _context.Carts;

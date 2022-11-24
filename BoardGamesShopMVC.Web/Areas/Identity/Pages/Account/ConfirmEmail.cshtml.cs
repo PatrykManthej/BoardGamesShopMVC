@@ -2,28 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoardGamesShopMVC.Application.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ICustomerService _customerService;
+        private readonly IShopUserService _shopUserService;
+        private readonly ICartService _cartService;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager, ICustomerService customerService)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager, IShopUserService shopUserService, ICartService cartService)
         {
             _userManager = userManager;
-            _customerService = customerService;
+            _shopUserService = shopUserService;
+            _cartService = cartService;;
         }
 
         /// <summary>
@@ -49,7 +47,8 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
-                var customerId = _customerService.AddCustomerAfterConfirmEmail(user.Id, user.Email);
+                var shopUserId = _shopUserService.AddShopUserAfterConfirmEmail(user.Id, user.Email);
+                _cartService.CreateCart(shopUserId);
                 await _userManager.AddToRoleAsync(user, "User");
                 StatusMessage = "Thank you for confirming your email.";
             }
