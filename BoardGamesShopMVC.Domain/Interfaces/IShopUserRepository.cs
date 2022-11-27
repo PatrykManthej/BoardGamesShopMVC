@@ -9,5 +9,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         IQueryable<ShopUser> GetAllShopUsers();
         ShopUser GetShopUserById(int shopUserId);
         ShopUser GetShopUserByIdentityUserId(string identityUserId);
+        ShopUser GetShopUserWithAddressByIdentityUserId(string identityUserId);
     }
 }

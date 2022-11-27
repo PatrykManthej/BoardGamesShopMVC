@@ -37,5 +37,12 @@ namespace BoardGamesShopMVC.Application.Services
             var shopUserVm = _mapper.Map<ShopUserVm>(shopUser);
             return shopUserVm;
         }
+
+        public ShopUserWithAddressVm GetShopUserWithAddressByIdentityUserId(string identityUserId)
+        {
+            var shopUser = _shopUserRepository.GetShopUserWithAddressByIdentityUserId(identityUserId);
+            var shopUserWithAddressVm = _mapper.Map<ShopUserWithAddressVm>(shopUser);
+            return shopUserWithAddressVm;
+        }
     }
 }

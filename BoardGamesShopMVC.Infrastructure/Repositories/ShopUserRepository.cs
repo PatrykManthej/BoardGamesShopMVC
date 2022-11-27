@@ -1,5 +1,7 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
@@ -39,8 +41,12 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var shopUser = _context.ShopUsers.FirstOrDefault(s => s.IdentityUserId == identityUserId);
             return shopUser;
         }
-
-
+        public ShopUser GetShopUserWithAddressByIdentityUserId(string identityUserId)
+        {
+            var shopUser = _context.ShopUsers.Include(u=>u.Addresses)
+                .FirstOrDefault(s => s.IdentityUserId == identityUserId);
+            return shopUser;
+        }
         public IQueryable<ShopUser> GetAllShopUsers()
         {
             var shopUsers = _context.ShopUsers;
