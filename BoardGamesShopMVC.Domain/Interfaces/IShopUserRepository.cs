@@ -10,6 +10,5 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         ShopUser GetShopUserById(int shopUserId);
         ShopUser GetShopUserByIdentityUserId(string identityUserId);
         ShopUser GetShopUserWithAddressByIdentityUserId(string identityUserId);
-        void UpdateShopUser(ShopUser shopUser);
     }
 }

@@ -44,14 +44,5 @@ namespace BoardGamesShopMVC.Application.Services
             var shopUserWithAddressVm = _mapper.Map<ShopUserWithAddressVm>(shopUser);
             return shopUserWithAddressVm;
         }
-
-        public void UpdateShopUser(ShopUserWithAddressVm shopUserVM)
-        {
-            var shopUser = _mapper.Map<ShopUser>(shopUserVM);
-            shopUser.Addresses = new List<Address>();
-            var address = _mapper.Map<Address>(shopUserVM.Address);
-            shopUser.Addresses.Add(address);
-            _shopUserRepository.UpdateShopUser(shopUser);
-        }
     }
 }

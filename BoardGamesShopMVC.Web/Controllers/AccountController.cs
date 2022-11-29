@@ -29,7 +29,7 @@ namespace BoardGamesShopMVC.Web.Controllers
             var shopUser = _shopUserService.GetShopUserWithAddressByIdentityUserId(userId);
             return View(shopUser);
         }
-        [HttpPost]
+        [HttpPut]
         public IActionResult Index(ShopUserWithAddressVm model)
         {
             var userId = _userManager.GetUserId(User);
@@ -37,7 +37,8 @@ namespace BoardGamesShopMVC.Web.Controllers
             {
                 return NotFound("Unable to load user ID.");
             }
-            _shopUserService.UpdateShopUser(model);
+
+            //TODO Update ShopUser
             return View();
         }
     }

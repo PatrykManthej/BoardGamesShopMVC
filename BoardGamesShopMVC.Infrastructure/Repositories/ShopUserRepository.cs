@@ -52,24 +52,5 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var shopUsers = _context.ShopUsers;
             return shopUsers;
         }
-
-        public void UpdateShopUser(ShopUser shopUser)
-        {
-            _context.Attach(shopUser);
-            _context.Entry(shopUser).Property("FirstName").IsModified=true;
-            _context.Entry(shopUser).Property("LastName").IsModified = true;
-            _context.Entry(shopUser).Property("Email").IsModified=true;
-            _context.Entry(shopUser).Property("PhoneNumber").IsModified=true;
-            _context.Entry(shopUser).Collection("Addresses").IsModified = true;
-            foreach (var address in shopUser.Addresses)
-            {
-                _context.Entry(address).Property("Street").IsModified = true;
-                _context.Entry(address).Property("BuildingNumber").IsModified = true;
-                _context.Entry(address).Property("FlatNumber").IsModified = true;
-                _context.Entry(address).Property("ZipCode").IsModified = true;
-                _context.Entry(address).Property("City").IsModified = true;
-            }
-            _context.SaveChanges();
-        }
     }
 }
