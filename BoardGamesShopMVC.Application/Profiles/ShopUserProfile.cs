@@ -10,10 +10,6 @@ namespace BoardGamesShopMVC.Application.Profiles
         {
             CreateMap<NewShopUserVm, ShopUser>();
             CreateMap<ShopUser, ShopUserVm>();
-            CreateMap<Address, AddressVm>();
-            CreateMap<ShopUser, ShopUserWithAddressVm>()
-                .ForMember(dst=>dst.Address,
-                    opt=>opt.MapFrom(src=>src.Addresses.FirstOrDefault()));
         }
     }
 }

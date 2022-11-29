@@ -6,6 +6,5 @@ namespace BoardGamesShopMVC.Application.Interfaces
     {
         int AddShopUserAfterConfirmEmail(string userId, string userMail);
         ShopUserVm GetShopUserByIdentityUserId(string identityUserId);
-        ShopUserWithAddressVm GetShopUserWithAddressByIdentityUserId(string identityUserId);
     }
 }
