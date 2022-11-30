@@ -18,9 +18,9 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public CartDetailsVm ViewCart(int shopUserId) 
+        public CartDetailsVm ViewCart(string ApplicationUserId) 
         {
-            var cart = _cartRepository.GetCartByUserId(shopUserId);
+            var cart = _cartRepository.GetCartByUserId(ApplicationUserId);
 
             decimal total = 0;
             foreach (var item in cart.CartItems)
@@ -38,11 +38,11 @@ namespace BoardGamesShopMVC.Application.Services
             return cartVm;
         }
 
-        public void CreateCart(int shopUserId)
+        public void CreateCart(string ApplicationUserId)
         {
             var newCart = new Cart
             {
-                ShopUserId = shopUserId
+                ApplicationUserId = ApplicationUserId
             };
 
             var newCartId = _cartRepository.AddCart(newCart);

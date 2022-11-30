@@ -2,6 +2,7 @@ using BoardGamesShopMVC.Application;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
+using BoardGamesShopMVC.Domain.Model;
 using BoardGamesShopMVC.Infrastructure;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,7 @@ builder.Services.AddDbContext<Context>(options =>
     );
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<Context>();
 builder.Services.AddApplication();

@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public decimal TotalAmount { get; set; }
 
-        public ShopUser ShopUser { get; set; }
-        public int ShopUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
     }
 }

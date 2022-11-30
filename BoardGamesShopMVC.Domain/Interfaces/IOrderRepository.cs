@@ -6,7 +6,7 @@ namespace BoardGamesShopMVC.Domain.Interfaces
     {
         int AddOrder(Order order);
         void DeleteOrder(int orderId);
-        IQueryable<Order> GetAllShopUserOrders(int shopUserId);
+        IQueryable<Order> GetAllApplicationUserOrders(string ApplicationUserId);
         IQueryable<Order> GetAllOrders();
         Order GetOrderById(int orderId);
     }

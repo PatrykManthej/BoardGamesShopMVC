@@ -12,12 +12,12 @@ namespace BoardGamesShopMVC.Web.Controllers
     {
         private readonly ICartService _cartService;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IShopUserService _shopUserService;
-        public CartController(ICartService cartService, UserManager<IdentityUser> userManager, IShopUserService shopUserService)
+        private readonly IApplicationUserService _applicationUserService;
+        public CartController(ICartService cartService, UserManager<IdentityUser> userManager, IApplicationUserService applicationUserService)
         {
             _cartService = cartService;
             _userManager = userManager;
-            _shopUserService = shopUserService;
+            _applicationUserService = applicationUserService;
         }
 
         public IActionResult Index()
@@ -29,7 +29,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         public IActionResult ViewCart()
         {
             var currentIdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentShopUser = _shopUserService.GetShopUserByIdentityUserId(currentIdentityUserId);
+            var currentShopUser = _applicationUserService.GetApplicationUserById(currentIdentityUserId);
             var model = _cartService.ViewCart(currentShopUser.Id);
             return View(model);
         }

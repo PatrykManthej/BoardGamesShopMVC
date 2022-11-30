@@ -6,8 +6,8 @@
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
 
-        public ShopUser ShopUser { get; set; }
-        public int ShopUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
         public ICollection<OrderItem> Items { get; set; }
     }
 }

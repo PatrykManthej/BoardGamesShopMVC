@@ -13,7 +13,7 @@ namespace BoardGamesShopMVC.Infrastructure
         }
 
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<ShopUser> ShopUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }

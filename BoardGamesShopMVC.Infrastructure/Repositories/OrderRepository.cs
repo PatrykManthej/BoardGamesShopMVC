@@ -40,9 +40,9 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             return orders;
         }
 
-        public IQueryable<Order> GetAllShopUserOrders(int shopUserId)
+        public IQueryable<Order> GetAllApplicationUserOrders(string ApplicationUserId)
         {
-            var orders = _context.Orders.Where(o => o.ShopUserId == shopUserId);
+            var orders = _context.Orders.Where(o => o.ApplicationUserId == ApplicationUserId);
             return orders;
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BoardGamesShopMVC.Infrastructure.Configurations.Identity
 {
-    public class IdentityRoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
     {
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {

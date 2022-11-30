@@ -9,7 +9,7 @@
         public string ZipCode { get; set; }
         public string City { get; set; }
 
-        public ShopUser ShopUser { get; set; }
-        public int ShopUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
     }
 }

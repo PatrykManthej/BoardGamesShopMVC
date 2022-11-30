@@ -14,13 +14,13 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IShopUserService _shopUserService;
+        private readonly IApplicationUserService _applicationUserService;
         private readonly ICartService _cartService;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager, IShopUserService shopUserService, ICartService cartService)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager, IApplicationUserService applicationUserService, ICartService cartService)
         {
             _userManager = userManager;
-            _shopUserService = shopUserService;
+            _applicationUserService = applicationUserService;
             _cartService = cartService;;
         }
 
@@ -47,8 +47,8 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
-                var shopUserId = _shopUserService.AddShopUserAfterConfirmEmail(user.Id, user.Email);
-                _cartService.CreateCart(shopUserId);
+                var applicationUserId = _applicationUserService.AddApplicationUserAfterConfirmEmail(user.Id, user.Email);
+                _cartService.CreateCart(userId);
                 await _userManager.AddToRoleAsync(user, "User");
                 StatusMessage = "Thank you for confirming your email.";
             }

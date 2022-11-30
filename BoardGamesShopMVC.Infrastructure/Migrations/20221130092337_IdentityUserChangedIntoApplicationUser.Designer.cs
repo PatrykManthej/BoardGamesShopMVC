@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGamesShopMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221029141618_IdentityUserDataSeedIdFixed")]
-    partial class IdentityUserDataSeedIdFixed
+    [Migration("20221130092337_IdentityUserChangedIntoApplicationUser")]
+    partial class IdentityUserChangedIntoApplicationUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,10 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("BuildingNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,18 +44,10 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlatNumber")
+                    b.Property<int?>("FlatNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
@@ -60,7 +56,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Addresses");
                 });
@@ -440,15 +436,16 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
+                    b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
                     b.ToTable("Carts");
@@ -457,7 +454,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CustomerId = 1,
+                            ApplicationUserId = "655a6e17-70d7-40ba-9a1b-861eafbb842b",
                             TotalAmount = 0m
                         });
                 });
@@ -548,80 +545,6 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.ContactDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ContactDetailInformation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ContactDetailTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactDetailTypeId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("ContactDetails");
-                });
-
-            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.ContactDetailType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactDetailTypes");
-                });
-
-            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = "655a6e17-70d7-40ba-9a1b-861eafbb842b"
-                        });
-                });
-
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -678,15 +601,16 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Orders");
                 });
@@ -789,6 +713,37 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                             Name = "Lacerta",
                             StatusId = 1
                         });
+                });
+
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Recipient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Recipient");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Stock", b =>
@@ -935,21 +890,21 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "79cadc2f-d0df-4fc0-843d-1f6c27bd1844",
+                            ConcurrencyStamp = "1474bd4f-07f8-4e07-a9b0-e8de2b85f230",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Employee",
-                            ConcurrencyStamp = "cbf545c7-c2b9-4d14-af88-e7f66bd02664",
+                            ConcurrencyStamp = "8ec7ae22-cc86-45ea-b924-9dd47d7a2198",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = "User",
-                            ConcurrencyStamp = "6e7f153e-c67d-4b75-bd9f-1dc105ccd22c",
+                            ConcurrencyStamp = "0956a9c1-364c-46ac-91f5-acf231d94c2f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -990,6 +945,10 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -1044,39 +1003,7 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "3937b908 - 3ed5 - 4b6d - abf8 - 0ec70e3a18ca",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f54f1802-55d7-43c3-a827-71988039b1e2",
-                            Email = "admin@test.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@TEST.COM",
-                            NormalizedUserName = "ADMIN@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAR8OQcEu4YHJ9e2K09R0fwsHGYvaLXS0QJE9XJwq+ErPOT+lqZxt3/utqSmIV5Dtg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "2eee9eb9-02b7-4742-a974-bf718ac747fd",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@test.com"
-                        },
-                        new
-                        {
-                            Id = "655a6e17-70d7-40ba-9a1b-861eafbb842b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d830c05e-53f1-430f-81e2-a3cf5a9c65dd",
-                            Email = "customer1@test.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CUSTOMER1@TEST.COM",
-                            NormalizedUserName = "CUSTOMER1@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGVofJYfQ7Bp5pP6BU3RWD7DnBZaa4ciuYVfsRBeMoZK7IMlaBl9ouCF/NGa1gK09g==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "915ed6d6-19b4-42ef-a567-c21edd33c498",
-                            TwoFactorEnabled = false,
-                            UserName = "customer1@test.com"
-                        });
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -1176,15 +1103,77 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("BuildingNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FlatNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3937b908 - 3ed5 - 4b6d - abf8 - 0ec70e3a18ca",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9f75a021-875b-4928-8857-bc1b2f34eeb0",
+                            Email = "admin1@test.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN1@TEST.COM",
+                            NormalizedUserName = "ADMIN1@TEST.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOVJt+C36R0oytDzFiPMU4RogczGDM/gAbpnn1FW50jnO/ZFX3Ox2JSpxgxjFvmu3A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fc859f70-cbd0-4516-9668-77d9aa55dc56",
+                            TwoFactorEnabled = false,
+                            UserName = "admin1@test.com"
+                        },
+                        new
+                        {
+                            Id = "655a6e17-70d7-40ba-9a1b-861eafbb842b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ab6cc13c-6cd1-4b56-b137-7fc45257ce8e",
+                            Email = "user1@test.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER1@TEST.COM",
+                            NormalizedUserName = "USER1@TEST.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOsd/qsuzsKrbeL3J4iuUISuC6za7AVhscbthSs+55ZhNKNbT2LNY9tUk3r93qKgFQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2c28060c-14c9-4a89-b6b1-f089f582a413",
+                            TwoFactorEnabled = false,
+                            UserName = "user1@test.com"
+                        });
+                });
+
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Address", b =>
                 {
-                    b.HasOne("BoardGamesShopMVC.Domain.Model.Customer", "Customer")
+                    b.HasOne("BoardGamesShopMVC.Domain.Model.ApplicationUser", "ApplicationUser")
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGame", b =>
@@ -1235,13 +1224,13 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Cart", b =>
                 {
-                    b.HasOne("BoardGamesShopMVC.Domain.Model.Customer", "Customer")
+                    b.HasOne("BoardGamesShopMVC.Domain.Model.ApplicationUser", "ApplicationUser")
                         .WithOne("Cart")
-                        .HasForeignKey("BoardGamesShopMVC.Domain.Model.Cart", "CustomerId")
+                        .HasForeignKey("BoardGamesShopMVC.Domain.Model.Cart", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.CartItem", b =>
@@ -1263,34 +1252,15 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Navigation("Cart");
                 });
 
-            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.ContactDetail", b =>
-                {
-                    b.HasOne("BoardGamesShopMVC.Domain.Model.ContactDetailType", "ContactDetailType")
-                        .WithMany()
-                        .HasForeignKey("ContactDetailTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BoardGamesShopMVC.Domain.Model.Customer", "Customer")
-                        .WithMany("ContactDetails")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ContactDetailType");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Order", b =>
                 {
-                    b.HasOne("BoardGamesShopMVC.Domain.Model.Customer", "Customer")
+                    b.HasOne("BoardGamesShopMVC.Domain.Model.ApplicationUser", "ApplicationUser")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.OrderItem", b =>
@@ -1310,6 +1280,17 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Navigation("BoardGame");
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Recipient", b =>
+                {
+                    b.HasOne("BoardGamesShopMVC.Domain.Model.ApplicationUser", "ApplicationUser")
+                        .WithMany("Recipients")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1377,18 +1358,6 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                     b.Navigation("CartItems");
                 });
 
-            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Customer", b =>
-                {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("Cart")
-                        .IsRequired();
-
-                    b.Navigation("ContactDetails");
-
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Language", b =>
                 {
                     b.Navigation("BoardGames");
@@ -1408,6 +1377,18 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                 {
                     b.Navigation("BoardGame")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.ApplicationUser", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Cart")
+                        .IsRequired();
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Recipients");
                 });
 #pragma warning restore 612, 618
         }
