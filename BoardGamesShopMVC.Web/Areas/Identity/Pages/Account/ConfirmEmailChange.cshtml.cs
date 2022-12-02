@@ -2,27 +2,27 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using BoardGamesShopMVC.Application.Interfaces;
+using System;
+using System.Text;
+using System.Threading.Tasks;
+using BoardGamesShopMVC.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
-using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
 {
-    public class ConfirmEmailModel : PageModel
+    public class ConfirmEmailChangeModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationUserService _applicationUserService;
-        private readonly ICartService _cartService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager, IApplicationUserService applicationUserService, ICartService cartService)
+        public ConfirmEmailChangeModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
-            _applicationUserService = applicationUserService;
-            _cartService = cartService;;
+            _signInManager = signInManager;
         }
 
         /// <summary>
@@ -31,9 +31,10 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
         /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
-        public async Task<IActionResult> OnGetAsync(string userId, string code)
+
+        public async Task<IActionResult> OnGetAsync(string userId, string email, string code)
         {
-            if (userId == null || code == null)
+            if (userId == null || email == null || code == null)
             {
                 return RedirectToPage("/Index");
             }
@@ -45,17 +46,24 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
             }
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            if (result.Succeeded)
+            var result = await _userManager.ChangeEmailAsync(user, email, code);
+            if (!result.Succeeded)
             {
-                _cartService.CreateCart(userId);
-                await _userManager.AddToRoleAsync(user, "User");
-                StatusMessage = "Thank you for confirming your email.";
+                StatusMessage = "Error changing email.";
+                return Page();
             }
-            else
+
+            // In our UI email and user name are one and the same, so when we update the email
+            // we need to update the user name.
+            var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
+            if (!setUserNameResult.Succeeded)
             {
-                StatusMessage = "Error confirming your email.";
+                StatusMessage = "Error changing user name.";
+                return Page();
             }
+
+            await _signInManager.RefreshSignInAsync(user);
+            StatusMessage = "Thank you for confirming your email change.";
             return Page();
         }
     }

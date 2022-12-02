@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.Cart;
+using BoardGamesShopMVC.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace BoardGamesShopMVC.Web.Controllers
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IApplicationUserService _applicationUserService;
-        public CartController(ICartService cartService, UserManager<IdentityUser> userManager, IApplicationUserService applicationUserService)
+        public CartController(ICartService cartService, UserManager<ApplicationUser> userManager, IApplicationUserService applicationUserService)
         {
             _cartService = cartService;
             _userManager = userManager;
@@ -28,9 +29,9 @@ namespace BoardGamesShopMVC.Web.Controllers
         [HttpGet]
         public IActionResult ViewCart()
         {
-            var currentIdentityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentShopUser = _applicationUserService.GetApplicationUserById(currentIdentityUserId);
-            var model = _cartService.ViewCart(currentShopUser.Id);
+            var currentApplicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentapplicationUser = _applicationUserService.GetApplicationUserById(currentApplicationUserId);
+            var model = _cartService.ViewCart(currentapplicationUser.Id);
             return View(model);
         }
 

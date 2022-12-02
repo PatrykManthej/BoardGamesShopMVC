@@ -104,13 +104,6 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
                 name: "FirstName",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
@@ -190,29 +183,29 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: "Admin",
                 column: "ConcurrencyStamp",
-                value: "1474bd4f-07f8-4e07-a9b0-e8de2b85f230");
+                value: "a7a233ad-42ed-4af6-bcc7-78d5767ff064");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "Employee",
                 column: "ConcurrencyStamp",
-                value: "8ec7ae22-cc86-45ea-b924-9dd47d7a2198");
+                value: "ce02d274-3576-4db8-9c19-5896eaa2b1a3");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "User",
                 column: "ConcurrencyStamp",
-                value: "0956a9c1-364c-46ac-91f5-acf231d94c2f");
+                value: "eb44d9ba-d4b8-4720-aa80-250217796d57");
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BuildingNumber", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "FlatNumber", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Street", "TwoFactorEnabled", "UserName", "ZipCode" },
+                columns: new[] { "Id", "AccessFailedCount", "BuildingNumber", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "FlatNumber", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Street", "TwoFactorEnabled", "UserName", "ZipCode" },
                 values: new object[,]
                 {
-                    { "3937b908 - 3ed5 - 4b6d - abf8 - 0ec70e3a18ca", 0, null, null, "9f75a021-875b-4928-8857-bc1b2f34eeb0", "ApplicationUser", "admin1@test.com", true, null, null, null, false, null, "ADMIN1@TEST.COM", "ADMIN1@TEST.COM", "AQAAAAEAACcQAAAAEOVJt+C36R0oytDzFiPMU4RogczGDM/gAbpnn1FW50jnO/ZFX3Ox2JSpxgxjFvmu3A==", null, false, "fc859f70-cbd0-4516-9668-77d9aa55dc56", null, false, "admin1@test.com", null },
-                    { "655a6e17-70d7-40ba-9a1b-861eafbb842b", 0, null, null, "ab6cc13c-6cd1-4b56-b137-7fc45257ce8e", "ApplicationUser", "user1@test.com", true, null, null, null, false, null, "USER1@TEST.COM", "USER1@TEST.COM", "AQAAAAEAACcQAAAAEOsd/qsuzsKrbeL3J4iuUISuC6za7AVhscbthSs+55ZhNKNbT2LNY9tUk3r93qKgFQ==", null, false, "2c28060c-14c9-4a89-b6b1-f089f582a413", null, false, "user1@test.com", null }
+                    { "3937b908 - 3ed5 - 4b6d - abf8 - 0ec70e3a18ca", 0, null, null, "86f53fa3-30df-4f41-9f0e-b79f612191fc", "admin1@test.com", true, null, null, null, false, null, "ADMIN1@TEST.COM", "ADMIN1@TEST.COM", "AQAAAAEAACcQAAAAEAlYtVlIe1TgUGeT+e3udMascC9R5KuZetWF2XizX5y0wc+yq6ehto1StoMnEB705Q==", null, false, "9f9105be-1315-4696-a72d-028de77690fb", null, false, "admin1@test.com", null },
+                    { "655a6e17-70d7-40ba-9a1b-861eafbb842b", 0, null, null, "596e65b0-8567-4138-9e27-d36e2efd06cd", "user1@test.com", true, null, null, null, false, null, "USER1@TEST.COM", "USER1@TEST.COM", "AQAAAAEAACcQAAAAEAeoU3akVNDh2Xfb6PmalLQXC6rFrlD7iT9JIU+MMHJ7YIS75FObwxeBHl7uJTL3Tw==", null, false, "c1ec0904-b861-4611-b3c8-77ec169acb17", null, false, "user1@test.com", null }
                 });
 
             migrationBuilder.InsertData(
@@ -341,10 +334,6 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             migrationBuilder.DropColumn(
                 name: "City",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "Discriminator",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
