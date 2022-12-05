@@ -8,7 +8,6 @@ namespace BoardGamesShopMVC.Application.Profiles
     {
         public ApplicationUserProfile()
         {
-            CreateMap<NewApplicationUserVm, ApplicationUser>();
             CreateMap<ApplicationUser, ApplicationUserVm>();
         }
     }

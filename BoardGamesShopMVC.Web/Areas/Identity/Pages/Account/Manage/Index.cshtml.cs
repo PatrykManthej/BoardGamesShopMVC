@@ -90,7 +90,13 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                FirstName = user.FirstName
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Street = user.Street,
+                BuildingNumber = user.BuildingNumber,
+                FlatNumber = user.FlatNumber,
+                ZipCode = user.ZipCode,
+                City = user.City
             };
         }
 

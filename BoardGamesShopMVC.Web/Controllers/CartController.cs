@@ -13,12 +13,10 @@ namespace BoardGamesShopMVC.Web.Controllers
     {
         private readonly ICartService _cartService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationUserService _applicationUserService;
-        public CartController(ICartService cartService, UserManager<ApplicationUser> userManager, IApplicationUserService applicationUserService)
+        public CartController(ICartService cartService, UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;
             _userManager = userManager;
-            _applicationUserService = applicationUserService;
         }
 
         public IActionResult Index()
@@ -30,8 +28,7 @@ namespace BoardGamesShopMVC.Web.Controllers
         public IActionResult ViewCart()
         {
             var currentApplicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentapplicationUser = _applicationUserService.GetApplicationUserById(currentApplicationUserId);
-            var model = _cartService.ViewCart(currentapplicationUser.Id);
+            var model = _cartService.GetCart(currentApplicationUserId);
             return View(model);
         }
 
@@ -63,6 +60,14 @@ namespace BoardGamesShopMVC.Web.Controllers
         {
             _cartService.DecrementCartItemQuantity(cartId, cartItemId);
             return RedirectToAction("ViewCart");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CartSummary()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var model = _cartService.GetCartSummary(user);
+            return View(model);
         }
     }
 }

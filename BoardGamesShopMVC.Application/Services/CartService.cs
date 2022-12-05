@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Security.Principal;
+using AutoMapper;
 using BoardGamesShopMVC.Application.Interfaces;
+using BoardGamesShopMVC.Application.ViewModels.ApplicationUser;
 using BoardGamesShopMVC.Application.ViewModels.Cart;
 using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Model;
@@ -18,7 +20,7 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public CartDetailsVm ViewCart(string applicationUserId) 
+        public CartDetailsVm GetCart(string applicationUserId) 
         {
             var cart = _cartRepository.GetCartByUserId(applicationUserId);
 
@@ -123,6 +125,20 @@ namespace BoardGamesShopMVC.Application.Services
                 _cartRepository.UpdateCartItem(cartItem);
                 }
             }
+        }
+
+        public CartSummaryVm GetCartSummary(ApplicationUser user)
+        {
+            var cart = _cartRepository.GetCartByUserId(user.Id);
+            var cartSummaryVm = _mapper.Map<CartSummaryVm>(cart);
+            var applicationUserVm = _mapper.Map<ApplicationUserVm>(user);
+            cartSummaryVm.ApplicationUser = applicationUserVm;
+
+            foreach (var item in cartSummaryVm.CartItems)
+            {
+                item.Total = item.Price * item.Quantity;
+            }
+            return cartSummaryVm;
         }
     }
 }

@@ -15,13 +15,11 @@ namespace BoardGamesShopMVC.Web.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationUserService _applicationUserService;
         private readonly ICartService _cartService;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager, IApplicationUserService applicationUserService, ICartService cartService)
+        public ConfirmEmailModel(UserManager<ApplicationUser> userManager, ICartService cartService)
         {
             _userManager = userManager;
-            _applicationUserService = applicationUserService;
             _cartService = cartService;;
         }
 

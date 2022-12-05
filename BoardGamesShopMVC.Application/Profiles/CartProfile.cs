@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoardGamesShopMVC.Application.ViewModels.ApplicationUser;
 
 namespace BoardGamesShopMVC.Application.Profiles
 {
@@ -27,7 +28,9 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(
                 dst => dst.ImageUrl,
                 opt => opt.MapFrom(src => src.BoardGame.ImageUrl)
-                );
+                )
+                .ForMember(dst=>dst.Total, opt => opt.MapFrom(src=>src.Quantity));
+            CreateMap<Cart, CartSummaryVm>();
         }
     }
 }
