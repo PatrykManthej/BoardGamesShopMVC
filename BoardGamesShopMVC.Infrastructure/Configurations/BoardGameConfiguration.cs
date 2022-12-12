@@ -14,9 +14,9 @@ namespace BoardGamesShopMVC.Infrastructure.Configurations
 
             builder.HasOne(b => b.Stock).WithOne(s => s.BoardGame).HasForeignKey<BoardGame>(s => s.StockId);
 
-            builder.HasOne(b => b.CartItem).WithOne(c => c.BoardGame).HasForeignKey<CartItem>(c => c.BoardGameId);
+            builder.HasMany(b => b.CartItems).WithOne(c => c.BoardGame).HasForeignKey(x=>x.BoardGameId);
 
-            builder.HasOne(b => b.OrderItem).WithOne(o => o.BoardGame).HasForeignKey<OrderItem>(o => o.BoardGameId);
+            builder.HasMany(b => b.OrderItems).WithOne(o => o.BoardGame).HasForeignKey(o => o.BoardGameId);
 
             builder.HasMany(b => b.Categories)
                 .WithMany(c => c.BoardGames)

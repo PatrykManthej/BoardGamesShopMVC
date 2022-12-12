@@ -21,8 +21,8 @@ namespace BoardGamesShopMVC.Domain.Model
         public int PublisherId { get; set; }
         public Stock Stock { get; set; }
         public int StockId { get; set; }
-        public CartItem CartItem { get; set; }
-        public OrderItem OrderItem { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
         public ICollection<Category> Categories { get; set; }
     }
 }

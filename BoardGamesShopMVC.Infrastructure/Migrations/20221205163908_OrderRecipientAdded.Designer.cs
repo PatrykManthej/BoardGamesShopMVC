@@ -4,6 +4,7 @@ using BoardGamesShopMVC.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGamesShopMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221205163908_OrderRecipientAdded")]
+    partial class OrderRecipientAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,15 +151,15 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         {
                             Id = "3937b908 - 3ed5 - 4b6d - abf8 - 0ec70e3a18ca",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27961cec-75e1-4527-8b2f-270f43e97146",
+                            ConcurrencyStamp = "e50d59a3-cd38-465a-9506-66483f37601a",
                             Email = "admin1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN1@TEST.COM",
                             NormalizedUserName = "ADMIN1@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEONUkrFxwlC1VVpkONf8rQylbuvNCGmCDRquNW7qbTceXIgI83PCyQx9Obrb2pvi+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOLGBJYCSqJgsPFzKbIG6JR+YUyrehmXoVsrklfAvOR9BFriy57qqOULdIi9TQEbNg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c7b554f-5dab-4019-95b9-a4913c75fd58",
+                            SecurityStamp = "3aa15e5a-566c-4cc2-bd9b-0e6137407c20",
                             TwoFactorEnabled = false,
                             UserName = "admin1@test.com"
                         },
@@ -165,15 +167,15 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         {
                             Id = "655a6e17-70d7-40ba-9a1b-861eafbb842b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "599e9f44-74d1-4e58-b368-614c2bff7b62",
+                            ConcurrencyStamp = "4b329271-c404-463f-a738-7997ea2dfb2b",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJFG+EjWjEWouCOdtKmfXhhNmX8bREl6bhgqDjuEFxA6TE7Hoz6rv2yo5v24GIb6MQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHU+aXhPfs49GwJNMTyFO1xxHCJ+s2zKLEihA9bOkZ8LkCpX0qwTIVfqII/P+SfWRQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6d152ea4-760a-4761-9fe5-191834af9506",
+                            SecurityStamp = "62a4992e-73a0-467c-a7a1-8764b9bcc9b8",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         });
@@ -596,7 +598,8 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardGameId");
+                    b.HasIndex("BoardGameId")
+                        .IsUnique();
 
                     b.HasIndex("CartId");
 
@@ -764,7 +767,8 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardGameId");
+                    b.HasIndex("BoardGameId")
+                        .IsUnique();
 
                     b.HasIndex("OrderId");
 
@@ -1063,21 +1067,21 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
                         new
                         {
                             Id = "Admin",
-                            ConcurrencyStamp = "28a05819-dc5b-476c-87a3-e1196619f4ef",
+                            ConcurrencyStamp = "01426701-9d9a-43c3-b68a-97cb80b589bf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "Employee",
-                            ConcurrencyStamp = "ef08e60f-1230-4b23-9ad2-ca1d3ebff33a",
+                            ConcurrencyStamp = "07cf141b-1d1a-4783-8909-56c735a429be",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = "User",
-                            ConcurrencyStamp = "cb61558e-e82c-4666-8e02-08a3c77bbb3e",
+                            ConcurrencyStamp = "332fb3a5-0f56-402d-b3f0-6bad60238be5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -1276,8 +1280,8 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.CartItem", b =>
                 {
                     b.HasOne("BoardGamesShopMVC.Domain.Model.BoardGame", "BoardGame")
-                        .WithMany("CartItems")
-                        .HasForeignKey("BoardGameId")
+                        .WithOne("CartItem")
+                        .HasForeignKey("BoardGamesShopMVC.Domain.Model.CartItem", "BoardGameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1306,8 +1310,8 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.OrderItem", b =>
                 {
                     b.HasOne("BoardGamesShopMVC.Domain.Model.BoardGame", "BoardGame")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("BoardGameId")
+                        .WithOne("OrderItem")
+                        .HasForeignKey("BoardGamesShopMVC.Domain.Model.OrderItem", "BoardGameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1409,9 +1413,11 @@ namespace BoardGamesShopMVC.Infrastructure.Migrations
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.BoardGame", b =>
                 {
-                    b.Navigation("CartItems");
+                    b.Navigation("CartItem")
+                        .IsRequired();
 
-                    b.Navigation("OrderItems");
+                    b.Navigation("OrderItem")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BoardGamesShopMVC.Domain.Model.Cart", b =>
