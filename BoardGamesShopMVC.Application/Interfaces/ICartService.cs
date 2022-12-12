@@ -12,5 +12,6 @@ namespace BoardGamesShopMVC.Application.Interfaces
         void IncrementCartItemQuantity(int cartId, int cartItemId);
         void DecrementCartItemQuantity(int cartId, int cartItemId);
         CartSummaryVm GetCartSummary(ApplicationUser user);
+        void ClearCart(int cartId);
     }
 }

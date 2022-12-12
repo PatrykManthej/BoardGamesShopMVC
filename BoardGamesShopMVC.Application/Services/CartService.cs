@@ -132,13 +132,18 @@ namespace BoardGamesShopMVC.Application.Services
             var cart = _cartRepository.GetCartByUserId(user.Id);
             var cartSummaryVm = _mapper.Map<CartSummaryVm>(cart);
             var applicationUserVm = _mapper.Map<ApplicationUserVm>(user);
-            cartSummaryVm.ApplicationUser = applicationUserVm;
+            cartSummaryVm.ApplicationUserVm = applicationUserVm;
 
             foreach (var item in cartSummaryVm.CartItems)
             {
                 item.Total = item.Price * item.Quantity;
             }
             return cartSummaryVm;
+        }
+
+        public void ClearCart(int cartId)
+        {
+            _cartRepository.DeleteCartItems(cartId);
         }
     }
 }

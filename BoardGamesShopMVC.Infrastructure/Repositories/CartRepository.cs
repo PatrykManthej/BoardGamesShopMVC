@@ -82,5 +82,13 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.CartItems.Add(cartItem);
             _context.SaveChanges();
         }
+
+        public void DeleteCartItems(int cartId)
+        {
+            var cartItems = _context.CartItems.Where(x => x.CartId == cartId);
+            _context.CartItems.RemoveRange(cartItems);
+            _context.SaveChanges();
+
+        }
     }
 }
