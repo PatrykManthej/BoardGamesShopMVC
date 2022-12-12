@@ -10,5 +10,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         Stock GetStockById(int stockId);
         Stock GetStockByBoardGameId(int boardGameId);
         void UpdateStock(Stock stock);
+        void RemoveBoardGamesFromStock(Dictionary<int,int> boardGamesIdAndQuantity);
     }
 }

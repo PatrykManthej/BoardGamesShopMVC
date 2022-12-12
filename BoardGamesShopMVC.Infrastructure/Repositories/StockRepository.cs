@@ -59,5 +59,16 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             _context.Entry(stock).Property("Quantity").IsModified = true;
             _context.SaveChanges();
         }
+
+        public void RemoveBoardGamesFromStock(Dictionary<int,int> boardGamesIdAndQuantity)
+        {
+            foreach (var pair in boardGamesIdAndQuantity)
+            {
+                var stock = _context.Stocks.FirstOrDefault(x => x.BoardGame.Id == pair.Key);
+                if (stock != null) 
+                    stock.Quantity -= pair.Value;
+                _context.SaveChanges();
+            }
+        }
     }
 }

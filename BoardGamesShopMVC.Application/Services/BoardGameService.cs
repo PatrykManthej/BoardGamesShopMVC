@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Security.Cryptography.X509Certificates;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Cart;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
@@ -207,5 +209,12 @@ namespace BoardGamesShopMVC.Application.Services
             boardGame.Categories = categoriesForBoardGame;
             return boardGame;
         }
+
+        public void RemoveBoardGamesFromStock(CartSummaryVm cartSummaryVm)
+        {
+            var boardGamesIdAndQuantity = cartSummaryVm.CartItems.Select(x => new { x.BoardGameId, x.Quantity }).ToDictionary(x=>x.BoardGameId, y=>y.Quantity);
+            _stockRepository.RemoveBoardGamesFromStock(boardGamesIdAndQuantity);
+        }
+ 
     }
 }

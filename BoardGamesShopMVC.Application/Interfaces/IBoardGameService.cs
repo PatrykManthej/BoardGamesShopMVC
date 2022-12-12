@@ -1,4 +1,5 @@
 ﻿using BoardGamesShopMVC.Application.ViewModels.BoardGame;
+using BoardGamesShopMVC.Application.ViewModels.Cart;
 using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Language;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
@@ -19,6 +20,7 @@ namespace BoardGamesShopMVC.Application.Interfaces
         NewBoardGameVm SetParametersToVm(NewBoardGameVm model);
         NewBoardGameVm SaveImageToFileInApplicationFolder(NewBoardGameVm model);
         void DeleteImageFile(string imageUrl);
+        void RemoveBoardGamesFromStock(CartSummaryVm cartSummaryVm);
 
     }
 }
