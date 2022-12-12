@@ -1,7 +1,21 @@
 ﻿@model BoardGamesShopMVC.Application.ViewModels.Cart.CartSummaryVm;
 
-<form method="post">
-    <br />
+<form asp-controller="Order" asp-action="CreateOrder" method="post">
+    <input asp-for="Id" type="hidden"/>
+    <input asp-for="TotalAmount" type="hidden"/>
+    @{
+        for (int i = 0; i < Model.CartItems.Count; i++)
+        {
+            <input asp-for="@Model.CartItems[i].Id" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].Name" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].ImageUrl" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].Price" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].Quantity" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].Total" type="hidden"/>
+            <input asp-for="@Model.CartItems[i].BoardGameId" type="hidden"/>
+        }
+    }
+    <br/>
     <div class="container">
         <div class="card">
             <div class="card-header bg-warning ml-0">
@@ -28,8 +42,8 @@
                                     <label>Email:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.Email" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.Email" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.Email" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -37,8 +51,8 @@
                                     <label>Phone number:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.PhoneNumber" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.PhoneNumber" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.PhoneNumber" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.PhoneNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -46,8 +60,8 @@
                                     <label>First name:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.FirstName" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.FirstName" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.FirstName" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.FirstName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -55,8 +69,8 @@
                                     <label>Last name:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.LastName" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.LastName" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.LastName" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.LastName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -64,8 +78,8 @@
                                     <label>City:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.City" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.City" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.City" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.City" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -73,8 +87,8 @@
                                     <label>Street:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.Street" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.Street" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.Street" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.Street" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -82,8 +96,8 @@
                                     <label>Building number:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.BuildingNumber" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.BuildingNumber" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.BuildingNumber" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.BuildingNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -91,8 +105,8 @@
                                     <label>Flat number:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.FlatNumber" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.FlatNumber" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.FlatNumber" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.FlatNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -100,8 +114,8 @@
                                     <label>ZIP code:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="@Model.ApplicationUser.ZipCode" class="form-control" />
-                                    <span asp-validation-for="@Model.ApplicationUser.ZipCode" class="text-danger"></span>
+                                    <input asp-for="@Model.ApplicationUserVm.ZipCode" class="form-control"/>
+                                    <span asp-validation-for="@Model.ApplicationUserVm.ZipCode" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -132,17 +146,16 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-8 pt-2">
-                        <p style="color:maroon; font-size:14px;">
+                        <p style="color: maroon; font-size: 14px;">
                             Estimate Arrival Date:
                             @DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
                         </p>
                     </div>
                     <div class="col-12 col-md-4">
-                        <button type="submit" value="Place Order" class="btn btn-primary form-control">Place Order</button>
+                        <button type="submit" class="btn btn-primary form-control">Place Order</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
-

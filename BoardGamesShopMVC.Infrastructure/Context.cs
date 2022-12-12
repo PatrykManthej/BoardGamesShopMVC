@@ -23,6 +23,7 @@ namespace BoardGamesShopMVC.Infrastructure
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<OrderRecipient> OrderRecipients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

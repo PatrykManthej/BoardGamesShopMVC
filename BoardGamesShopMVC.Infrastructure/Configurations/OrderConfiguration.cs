@@ -10,6 +10,7 @@ namespace BoardGamesShopMVC.Infrastructure.Configurations
         {
             builder.HasOne(o => o.ApplicationUser).WithMany(c => c.Orders).HasForeignKey(o => o.ApplicationUserId);
             builder.HasMany(o => o.Items).WithOne(i => i.Order).HasForeignKey(i => i.OrderId);
+            builder.HasOne(o => o.OrderRecipient).WithOne(r => r.Order);
 
         }
     }

@@ -7,7 +7,8 @@
         public string Status { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
-
+        
+        public OrderRecipient OrderRecipient { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
         public ICollection<OrderItem> Items { get; set; }
