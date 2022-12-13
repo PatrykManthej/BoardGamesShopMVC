@@ -4,9 +4,11 @@ using BoardGamesShopMVC.Application.ViewModels.Category;
 using BoardGamesShopMVC.Application.ViewModels.Publisher;
 using BoardGamesShopMVC.Domain.Model;
 using BoardGamesShopMVC.Infrastructure;
+using BoardGamesShopMVC.Infrastructure.Utilities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,13 @@ builder.Services.AddAuthentication().AddGoogle(options =>
     options.ClientSecret = googleAuthNSection["ClientSecret"];
 });
 
+builder.Services.Configure<StripeSettings>(opt =>
+{
+    IConfigurationSection stripeSection = builder.Configuration.GetSection("Stripe");
+    opt.SecretKey = stripeSection["SecretKey"];
+    opt.PublishableKey = stripeSection["PublishableKey"];
+});
+
 builder.Services.AddTransient<IValidator<NewBoardGameVm>, NewBoardGameValidation>();
 builder.Services.AddTransient<IValidator<NewPublisherVm>, NewPublisherValidation>();
 builder.Services.AddTransient<IValidator<NewCategoryVm>, NewCategoryValidation>();
@@ -67,6 +76,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 app.UseAuthentication();
 app.UseAuthorization();

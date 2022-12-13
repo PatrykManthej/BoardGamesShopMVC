@@ -19,11 +19,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
+    <PackageReference Include="Stripe.net" Version="41.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BoardGamesShopMVC.Application\BoardGamesShopMVC.Application.csproj" />
+    <ProjectReference Include="..\BoardGamesShopMVC.Infrastructure.Utilities\BoardGamesShopMVC.Infrastructure.Utilities.csproj" />
     <ProjectReference Include="..\BoardGamesShopMVC.Infrastructure\BoardGamesShopMVC.Infrastructure.csproj" />
   </ItemGroup>
 

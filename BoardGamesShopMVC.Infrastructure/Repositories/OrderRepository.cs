@@ -45,5 +45,13 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
             var orders = _context.Orders.Where(o => o.ApplicationUserId == ApplicationUserId);
             return orders;
         }
+
+        public void UpdateOrder(Order order)
+        {
+            _context.Attach(order);
+            _context.Entry(order).Property("SessionId").IsModified = true;
+            _context.Entry(order).Property("PaymentIntentId").IsModified = true;
+            _context.SaveChanges();
+        }
     }
 }

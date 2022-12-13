@@ -1,6 +1,8 @@
-﻿namespace BoardGamesShopMVC.Domain.Model
+﻿using BoardGamesShopMVC.Domain.Model;
+
+namespace BoardGamesShopMVC.Application.ViewModels.Order
 {
-    public class Order
+    public class OrderVm
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
@@ -11,9 +13,5 @@
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
 
-        public OrderRecipient OrderRecipient { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserId { get; set; }
-        public ICollection<OrderItem> Items { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         IQueryable<Order> GetAllApplicationUserOrders(string ApplicationUserId);
         IQueryable<Order> GetAllOrders();
         Order GetOrderById(int orderId);
+        void UpdateOrder(Order order);
     }
 }

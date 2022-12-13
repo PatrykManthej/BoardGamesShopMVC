@@ -1,12 +1,7 @@
 ﻿using BoardGamesShopMVC.Application.Interfaces;
 using BoardGamesShopMVC.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGamesShopMVC.Application
 {
@@ -19,6 +14,7 @@ namespace BoardGamesShopMVC.Application
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IPaymentService, PaymentService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

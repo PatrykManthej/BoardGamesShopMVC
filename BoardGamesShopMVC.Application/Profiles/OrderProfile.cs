@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BoardGamesShopMVC.Application.ViewModels.Cart;
+using BoardGamesShopMVC.Application.ViewModels.Order;
 using BoardGamesShopMVC.Domain.Model;
 
 namespace BoardGamesShopMVC.Application.Profiles
@@ -20,6 +21,8 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(dst=>dst.UnitPrice, opt => opt.MapFrom(src=>src.Price))
                 .ForMember(dst=>dst.TotalPrice, opt => opt.MapFrom(src=>(src.Price*src.Quantity)))
                 .ForMember(dst=>dst.Id, opt=>opt.Ignore());
+
+            CreateMap<Order, OrderVm>();
         }
     }
 }

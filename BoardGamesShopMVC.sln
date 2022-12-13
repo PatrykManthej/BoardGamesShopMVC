@@ -15,13 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E8E44353-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D3831DA7-F421-495B-A429-6489C52828D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesShopMVC.Application", "BoardGamesShopMVC.Application\BoardGamesShopMVC.Application.csproj", "{47BC35DE-D4D4-474B-BB11-4AD907FEDF73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGamesShopMVC.Application", "BoardGamesShopMVC.Application\BoardGamesShopMVC.Application.csproj", "{47BC35DE-D4D4-474B-BB11-4AD907FEDF73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesShopMVC.Domain", "BoardGamesShopMVC.Domain\BoardGamesShopMVC.Domain.csproj", "{51071AF2-9DC6-4BC9-80F1-BE0BA2EE39FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGamesShopMVC.Domain", "BoardGamesShopMVC.Domain\BoardGamesShopMVC.Domain.csproj", "{51071AF2-9DC6-4BC9-80F1-BE0BA2EE39FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesShopMVC.Infrastructure", "BoardGamesShopMVC.Infrastructure\BoardGamesShopMVC.Infrastructure.csproj", "{83A66F96-B848-4BAA-BA6A-C2459F21544D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGamesShopMVC.Infrastructure", "BoardGamesShopMVC.Infrastructure\BoardGamesShopMVC.Infrastructure.csproj", "{83A66F96-B848-4BAA-BA6A-C2459F21544D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesShopMVC.Tests", "BoardGamesShopMVC.Tests\BoardGamesShopMVC.Tests.csproj", "{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGamesShopMVC.Tests", "BoardGamesShopMVC.Tests\BoardGamesShopMVC.Tests.csproj", "{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesShopMVC.Infrastructure.Utilities", "BoardGamesShopMVC.Infrastructure.Utilities\BoardGamesShopMVC.Infrastructure.Utilities.csproj", "{F55AE4EA-5891-4844-9FB4-6049C1EA7294}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F55AE4EA-5891-4844-9FB4-6049C1EA7294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F55AE4EA-5891-4844-9FB4-6049C1EA7294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F55AE4EA-5891-4844-9FB4-6049C1EA7294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F55AE4EA-5891-4844-9FB4-6049C1EA7294}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{51071AF2-9DC6-4BC9-80F1-BE0BA2EE39FC} = {B2EC58CE-A320-4260-BC18-138C37020581}
 		{83A66F96-B848-4BAA-BA6A-C2459F21544D} = {0E53638E-7C5A-4612-A25A-B896987D56DA}
 		{E4D11C12-BA6D-48D4-AE87-C27CB34D13C5} = {E8E44353-0612-417A-98CE-DC904CA94F67}
+		{F55AE4EA-5891-4844-9FB4-6049C1EA7294} = {0E53638E-7C5A-4612-A25A-B896987D56DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {550FDE3E-C6F6-4F3C-B85C-F5F3FB7614A2}
