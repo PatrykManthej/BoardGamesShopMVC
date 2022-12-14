@@ -15,5 +15,6 @@ namespace BoardGamesShopMVC.Domain.Interfaces
         void DeleteCartItem(int cartItemId);
         void AddCartItem(CartItem cartItem);
         void DeleteCartItems(int cartId);
+        CartItem GetCartItem(int cartItemId);
     }
 }

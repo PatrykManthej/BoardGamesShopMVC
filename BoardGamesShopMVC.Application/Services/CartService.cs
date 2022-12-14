@@ -13,6 +13,7 @@ namespace BoardGamesShopMVC.Application.Services
         private readonly ICartRepository _cartRepository;
         private readonly IStockRepository _stockRepository;
         private readonly IMapper _mapper;
+
         public CartService(ICartRepository cartRepository, IStockRepository stockRepository, IMapper mapper)
         {
             _cartRepository = cartRepository;
@@ -20,7 +21,7 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
-        public CartDetailsVm GetCart(string applicationUserId) 
+        public CartDetailsVm GetCart(string applicationUserId)
         {
             var cart = _cartRepository.GetCartByUserId(applicationUserId);
 
@@ -29,6 +30,7 @@ namespace BoardGamesShopMVC.Application.Services
             {
                 total += item.BoardGame.Price * item.Quantity;
             }
+
             cart.TotalAmount = total;
             _cartRepository.UpdateCart(cart);
 
@@ -37,6 +39,7 @@ namespace BoardGamesShopMVC.Application.Services
             {
                 item.Total = item.Price * item.Quantity;
             }
+
             return cartVm;
         }
 
@@ -54,15 +57,16 @@ namespace BoardGamesShopMVC.Application.Services
         public void AddItemToCart(int boardGameId, int cartId)
         {
             var cart = _cartRepository.GetCartById(cartId);
-            if(cart != null)
+            if (cart != null)
             {
                 if (cart.CartItems == null)
                 {
                     cart.CartItems = new List<CartItem>();
                 }
+
                 var cartItem = cart.CartItems.FirstOrDefault(c => c.BoardGameId == boardGameId);
 
-                if(cartItem == null)
+                if (cartItem == null)
                 {
                     var newCartItem = new CartItem()
                     {
@@ -91,42 +95,32 @@ namespace BoardGamesShopMVC.Application.Services
             _cartRepository.DeleteCartItem(cartItemId);
         }
 
-        public void IncrementCartItemQuantity(int cartId, int cartItemId)
+        public void IncrementCartItemQuantity(int cartItemId)
         {
-            var cart = _cartRepository.GetCartById(cartId);
-            var cartItem = cart.CartItems.FirstOrDefault(i => i.Id == cartItemId);
-            if(cartItem != null)
-            {
-                var boardGameId = cartItem.BoardGameId;
-                var boardGameStock = _stockRepository.GetStockByBoardGameId(boardGameId);
-                var boardGameStockQuantity = boardGameStock.Quantity;
-                var cartitemQuantity = cartItem.Quantity;
-                if (++cartitemQuantity <= boardGameStockQuantity)
-                {
-                    cartItem.Quantity++;
-                    _cartRepository.UpdateCartItem(cartItem);
-                }
-            }
+            var cartItem = _cartRepository.GetCartItem(cartItemId);
+            var boardGameId = cartItem.BoardGameId;
+            var boardGameStock = _stockRepository.GetStockByBoardGameId(boardGameId);
+            var boardGameStockQuantity = boardGameStock.Quantity;
+            var cartItemQuantity = cartItem.Quantity;
+            if (++cartItemQuantity > boardGameStockQuantity) return;
+            cartItem.Quantity++;
+            _cartRepository.UpdateCartItem(cartItem);
         }
 
-        public void DecrementCartItemQuantity(int cartId, int cartItemId)
+        public void DecrementCartItemQuantity(int cartItemId)
         {
-            var cart = _cartRepository.GetCartById(cartId);
-            var cartItem = cart.CartItems.FirstOrDefault(i => i.Id == cartItemId);
-            if (cartItem != null)
+            var cartItem = _cartRepository.GetCartItem(cartItemId);
+            if (cartItem == null) return;
+            cartItem.Quantity--;
+            if (cartItem.Quantity <= 0)
             {
-                cartItem.Quantity--;
-                if(cartItem.Quantity <= 0)
-                {
-                    _cartRepository.DeleteCartItem(cartItemId);
-                }
-                else
-                {
+                _cartRepository.DeleteCartItem(cartItemId);
+            }
+            else
+            {
                 _cartRepository.UpdateCartItem(cartItem);
-                }
             }
         }
-
         public CartSummaryVm GetCartSummary(ApplicationUser user)
         {
             var cart = _cartRepository.GetCartByUserId(user.Id);
@@ -138,6 +132,7 @@ namespace BoardGamesShopMVC.Application.Services
             {
                 item.Total = item.Price * item.Quantity;
             }
+
             return cartSummaryVm;
         }
 

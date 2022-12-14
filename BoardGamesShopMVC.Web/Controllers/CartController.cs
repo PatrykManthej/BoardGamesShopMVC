@@ -44,21 +44,21 @@ namespace BoardGamesShopMVC.Web.Controllers
             return RedirectToAction("Index", "BoardGame");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int cartItemId)
         {
-            _cartService.DeleteCartItemFromCart(id);
+            _cartService.DeleteCartItemFromCart(cartItemId);
             return RedirectToAction("ViewCart");
         }
 
-        public IActionResult Plus(int cartId, int cartItemId)
+        public IActionResult Plus(int cartItemId)
         {
-            _cartService.IncrementCartItemQuantity(cartId, cartItemId);
+            _cartService.IncrementCartItemQuantity(cartItemId);
             return RedirectToAction("ViewCart");
         }
 
-        public IActionResult Minus(int cartId, int cartItemId)
+        public IActionResult Minus(int cartItemId)
         {
-            _cartService.DecrementCartItemQuantity(cartId, cartItemId);
+            _cartService.DecrementCartItemQuantity(cartItemId);
             return RedirectToAction("ViewCart");
         }
 

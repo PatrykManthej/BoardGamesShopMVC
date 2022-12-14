@@ -7,6 +7,7 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
     public class CartRepository : ICartRepository
     {
         private readonly Context _context;
+
         public CartRepository(Context context)
         {
             _context = context;
@@ -70,11 +71,9 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         public void DeleteCartItem(int cartItemId)
         {
             var cartItem = _context.CartItems.Find(cartItemId);
-            if(cartItem != null)
-            {
-                _context.CartItems.Remove(cartItem);
-                _context.SaveChanges();
-            }
+            if (cartItem == null) return;
+            _context.CartItems.Remove(cartItem);
+            _context.SaveChanges();
         }
 
         public void AddCartItem(CartItem cartItem)
@@ -85,10 +84,19 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public void DeleteCartItems(int cartId)
         {
-            var cartItems = _context.CartItems.Where(x => x.CartId == cartId);
-            _context.CartItems.RemoveRange(cartItems);
-            _context.SaveChanges();
+            var cart = _context.Carts.Include(x => x.CartItems).FirstOrDefault(x => x.Id == cartId);
+            if (cart != null)
+            {
+                _context.CartItems.RemoveRange(cart.CartItems);
+                cart.TotalAmount = 0;
+                _context.SaveChanges();
+            }
+        }
 
+        public CartItem GetCartItem(int cartItemId)
+        {
+            var cartItem = _context.CartItems.Find(cartItemId);
+            return cartItem;
         }
     }
 }
