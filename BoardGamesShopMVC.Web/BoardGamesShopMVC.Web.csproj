@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include="Logs\" />
     <Folder Include="wwwroot\images\boardgames\" />
+    <Folder Include="wwwroot\images\website\" />
   </ItemGroup>
 
 </Project>
