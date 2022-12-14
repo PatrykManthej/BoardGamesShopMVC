@@ -5,7 +5,7 @@
 }
 
 <div class="card container">
-    <div class="row card-header bg-warning">
+    <div class="row card-header header-color">
         <div class="col-12">
             <h1>@Model.Name</h1>
         </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="offset-sm-1 offset-md-2 offset-lg-3">
-                    <a asp-controller="Cart" asp-action="AddToCart" class="btn btn-warning btn-lg" asp-route-id="@Model.Id">Add to cart</a>
+                    <a asp-controller="Cart" asp-action="AddToCart" class="btn btn-primary btn-lg" asp-route-id="@Model.Id">Add to cart</a>
                     </div>
                     </div>
             </div>

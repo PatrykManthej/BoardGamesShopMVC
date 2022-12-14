@@ -7,7 +7,7 @@
     <br/>
     <div class="container">
         <div class="card">
-            <div class="card-header bg-warning ml-0">
+            <div class="card-header ml-0 header-color">
                 <div class="row">
                     <div class="col-6  pt-2">
                         Shopping Cart
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
                         <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between bg-warning me-4">
+                            <li class="list-group-item d-flex justify-content-between me-4 header-color">
                                 <span> Total (PLN)</span>
                                 <strong>@Model.TotalAmount.ToString("C")</strong>
                             </li>
@@ -74,7 +74,7 @@
                     <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
                         <div class="w-100 btn-group" role="group">
                             <a asp-action="CartSummary" asp-controller="Cart" class="btn btn-success form-control">Summary</a> &nbsp;
-                            <a asp-action="Index" asp-controller="BoardGame" class="btn btn-warning form-control">Continue Shopping</a>
+                            <a asp-action="Index" asp-controller="BoardGame" class="btn btn-secondary form-control">Continue Shopping</a>
                         </div>
                     </div>
                 </div>

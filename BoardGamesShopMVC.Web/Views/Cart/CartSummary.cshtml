@@ -18,7 +18,7 @@
     <br/>
     <div class="container">
         <div class="card">
-            <div class="card-header bg-warning ml-0">
+            <div class="card-header ml-0 header-color">
                 <div class=" row container">
                     <div class="col-6">
                         Order Summary
@@ -31,7 +31,7 @@
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-warning">Shipping Details:</span>
+                                    <span class="text-primary">Shipping Details:</span>
                                 </h4>
                             </div>
                             <div class="row my-1">
@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-12 col-lg-5 offset-lg-1">
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-warning">Order Summary:</span>
+                                <span class="text-primary">Order Summary:</span>
                             </h4>
                             <ul class="list-group mb-3">
                                 @foreach (var cartItem in Model.CartItems)
@@ -131,7 +131,7 @@
                                         <span class="text-muted">@cartItem.Total.ToString("c")) </span>
                                     </li>
                                 }
-                                <li class="list-group-item d-flex justify-content-between bg-warning">
+                                <li class="list-group-item d-flex justify-content-between header-color">
                                     <small >Total (PLN)</small>
                                     <strong>@Model.TotalAmount.ToString("c")</strong>
                                 </li>
@@ -151,7 +151,7 @@
                     <div class="col-12 col-md-4">
                         <div class="w-100 btn-group" role="group">
                             <button type="submit" class="btn btn-success form-control">Place Order</button> &nbsp;
-                            <a asp-action="ViewCart" asp-controller="Cart" class="btn btn-warning form-control">Back to Cart</a>
+                            <a asp-action="ViewCart" asp-controller="Cart" class="btn btn-secondary form-control">Back to Cart</a>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@
             <input asp-for="SearchString" class="form-control" type="search" placeholder="Search" name="searchString" id="searchString" />
         </div>
         <div class="col-3 p-0">
-            <button class="btn btn-warning" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">Search</button>
         </div>
         <input type="hidden" name="pageNo" id="pageNo" />
         <input type="hidden" name="pageSize" id="pageSize" value="10" />
@@ -35,7 +35,7 @@
                             <p>Price: <b>@item.Price</b> </p>
                         </div>
                         <div>
-                            <a asp-action="ViewBoardGame" class="btn btn-warning form-control" asp-route-id="@item.Id">Details</a>
+                            <a asp-action="ViewBoardGame" class="btn btn-primary form-control" asp-route-id="@item.Id">Details</a>
                         </div>
                     </div>
                 </div>

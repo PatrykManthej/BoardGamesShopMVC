@@ -21,3 +21,6 @@ body {
     height: 15rem;
     object-fit: contain;
 }
+.header-color {
+    background-color: #e3f2fd;
+}
