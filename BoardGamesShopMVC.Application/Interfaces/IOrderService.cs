@@ -6,8 +6,9 @@ namespace BoardGamesShopMVC.Application.Interfaces
 {
     public interface IOrderService
     {
+        ListOrderForListVm GetAllOrders();
         int CreateOrder(CartSummaryVm cartVm, string userId);
-        OrderVm GetOrderById(int orderId);
+        OrderDetailsVm GetOrderById(int orderId);
         void UpdateOrderStripePaymentSessionId(int orderId, string sessionId, string paymentIntentId);
         void ConfirmOrder(int orderId);
     }

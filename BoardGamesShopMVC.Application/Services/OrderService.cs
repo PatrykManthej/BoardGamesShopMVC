@@ -20,6 +20,17 @@ namespace BoardGamesShopMVC.Application.Services
             _mapper = mapper;
         }
 
+        public ListOrderForListVm GetAllOrders()
+        {
+            var orders = _orderRepository.GetAllOrders();
+            var ordersVm = _mapper.ProjectTo<OrderForListVm>(orders).ToList();
+            var listOrders = new ListOrderForListVm
+            {
+                Orders = ordersVm
+            };
+            return listOrders;
+        }
+
         public int CreateOrder(CartSummaryVm cartVm, string userId)
         {
             var order = _mapper.Map<Order>(cartVm);
@@ -31,10 +42,10 @@ namespace BoardGamesShopMVC.Application.Services
             return orderId;
         }
 
-        public OrderVm GetOrderById(int orderId)
+        public OrderDetailsVm GetOrderById(int orderId)
         {
             var order = _orderRepository.GetOrderById(orderId);
-            var orderVm = _mapper.Map<OrderVm>(order);
+            var orderVm = _mapper.Map<OrderDetailsVm>(order);
             return orderVm;
         }
 
@@ -58,6 +69,7 @@ namespace BoardGamesShopMVC.Application.Services
             }
 
         }
+
         private void UpdateOrderStatus(int orderId, OrderStatus orderStatus, PaymentStatus paymentStatus)
         {
             var order = _orderRepository.GetOrderById(orderId);

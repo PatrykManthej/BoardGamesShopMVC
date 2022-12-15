@@ -55,5 +55,17 @@ namespace BoardGamesShopMVC.Web.Controllers
 
             return View(id);
         }
+
+        public IActionResult Index()
+        {
+            var orders = _orderService.GetAllOrders();
+            return View(orders);
+        }
+
+        public IActionResult ViewOrder(int id)
+        {
+            var order = _orderService.GetOrderById(id);
+            return View(order);
+        }
     }
 }

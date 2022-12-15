@@ -1,0 +1,105 @@
+﻿@model BoardGamesShopMVC.Application.ViewModels.Order.ListOrderForListVm
+
+@{
+    ViewData["Title"] = "BoardGames";
+}
+
+<h2>Orders</h2>
+
+
+@*<form asp-action="Index" asp-controller="Order">
+    <div class="row">
+        <div class="col-3">
+            <input asp-for="SearchString" class="form-control" type="search" placeholder="Search" name="searchString" id="searchString" />
+        </div>
+        <div class="col-3 p-0">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+        <input type="hidden" name="pageNo" id="pageNo" />
+        <input type="hidden" name="pageSize" id="pageSize" value="10" />
+    </div>
+</form>*@
+<div class="row">
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="header-color">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Payment status
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        <a asp-action="EditBoardGame" class="btn btn-warning" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="ViewBoardGame" class="btn btn-primary" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="DeleteBoardGame" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*<div class="row">
+    <ul class="pagination">
+        @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+        {
+            <li>
+                @if (i != Model.CurrentPage)
+                {
+                    <a href="javascript:PagerClick(@i)">@i</a>
+                }
+                else
+                {
+                    <span>@i</span>
+                }
+            </li>
+        }
+    </ul>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function PagerClick(index) {
+            document.getElementById("pageNo").value = index;
+            document.forms[0].submit();
+        }
+    </script>
+}*@

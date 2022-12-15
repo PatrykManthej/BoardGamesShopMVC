@@ -2,7 +2,7 @@
 
 namespace BoardGamesShopMVC.Application.ViewModels.Order
 {
-    public class OrderVm
+    public class OrderDetailsVm
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
@@ -12,6 +12,8 @@ namespace BoardGamesShopMVC.Application.ViewModels.Order
         public DateTime ShippingDate { get; set; }
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
+        public string UserEmail { get; set; }
+
 
     }
 }
