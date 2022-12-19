@@ -11,9 +11,8 @@ namespace BoardGamesShopMVC.Application.ViewModels.Order
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public string? SessionId { get; set; }
-        public string? PaymentIntentId { get; set; }
         public string UserEmail { get; set; }
-
-
+        public OrderRecipientVm OrderRecipientVm { get; set; }
+        public List<OrderItemVm> OrderItems { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BoardGamesShopMVC.Domain.Interfaces;
 using BoardGamesShopMVC.Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesShopMVC.Infrastructure.Repositories
 {
@@ -30,7 +31,12 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public Order GetOrderById(int orderId)
         {
-            var order = _context.Orders.FirstOrDefault(b => b.Id == orderId);
+            var order = _context.Orders
+                .Include(x=>x.OrderRecipient)
+                .Include(x=>x.ApplicationUser)
+                .Include(x=>x.Items)
+                .ThenInclude(x=>x.BoardGame)
+                .FirstOrDefault(b => b.Id == orderId);
             return order;
         }
 
@@ -50,7 +56,6 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
         {
             _context.Attach(order);
             _context.Entry(order).Property("SessionId").IsModified = true;
-            _context.Entry(order).Property("PaymentIntentId").IsModified = true;
             _context.SaveChanges();
         }
     }

@@ -9,7 +9,6 @@
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public string? SessionId { get; set; }
-        public string? PaymentIntentId { get; set; }
 
         public OrderRecipient OrderRecipient { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

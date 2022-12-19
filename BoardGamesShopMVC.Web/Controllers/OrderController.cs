@@ -35,12 +35,11 @@ namespace BoardGamesShopMVC.Web.Controllers
             }
 
             var session = _paymentService.CreateStripeSession(cartVm, orderId);
-            _orderService.UpdateOrderStripePaymentSessionId(orderId, session.Id, session.PaymentIntentId);
+            _orderService.UpdateOrderStripePaymentSessionId(orderId, session.Id);
 
             Response.Headers.Add("Location", session.Url);
       
             return new StatusCodeResult(303);
-
         }
 
         public async Task<IActionResult> OrderConfirmation(int id)

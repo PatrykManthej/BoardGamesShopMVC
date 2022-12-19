@@ -22,9 +22,17 @@ namespace BoardGamesShopMVC.Application.Profiles
                 .ForMember(dst=>dst.TotalPrice, opt => opt.MapFrom(src=>(src.Price*src.Quantity)))
                 .ForMember(dst=>dst.Id, opt=>opt.Ignore());
 
-            CreateMap<Order, OrderDetailsVm>();
+            CreateMap<Order, OrderDetailsVm>()
+                .ForMember(dst => dst.UserEmail, opt => opt.MapFrom(src=>src.ApplicationUser.Email))
+                .ForMember(dst=>dst.OrderRecipientVm, opt=>opt.MapFrom(src=>src.OrderRecipient))
+				.ForMember(dst => dst.OrderItems, opt => opt.MapFrom(src => src.Items));
 
-            CreateMap<Order, OrderForListVm>()
+            CreateMap<OrderRecipient, OrderRecipientVm>();
+
+            CreateMap<OrderItem, OrderItemVm>()
+	            .ForMember(dst=>dst.Name, opt => opt.MapFrom(src=>src.BoardGame.Name));
+
+			CreateMap<Order, OrderForListVm>()
                 .ForMember(dst => dst.UserEmail,
                     opt => opt.MapFrom(src => src.ApplicationUser.Email));
         }

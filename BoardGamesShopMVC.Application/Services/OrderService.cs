@@ -49,11 +49,10 @@ namespace BoardGamesShopMVC.Application.Services
             return orderVm;
         }
 
-        public void UpdateOrderStripePaymentSessionId(int orderId, string sessionId, string paymentIntentId)
+        public void UpdateOrderStripePaymentSessionId(int orderId, string sessionId)
         {
             var order = _orderRepository.GetOrderById(orderId);
             order.SessionId = sessionId;
-            order.PaymentIntentId = paymentIntentId;
             _orderRepository.UpdateOrder(order);
         }
 
