@@ -4,6 +4,7 @@ using BoardGamesShopMVC.Domain.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using BoardGamesShopMVC.Domain.Enums;
 
 namespace BoardGamesShopMVC.Web.Controllers
 {
@@ -66,5 +67,12 @@ namespace BoardGamesShopMVC.Web.Controllers
             var order = _orderService.GetOrderById(id);
             return View(order);
         }
-    }
+
+        public IActionResult StartProcessing(int id)
+        {
+            _orderService.UpdateOrderStatus(id, OrderStatus.InProcess);
+            return RedirectToAction("ViewOrder", "Order", new { id });
+        }
+
+	}
 }

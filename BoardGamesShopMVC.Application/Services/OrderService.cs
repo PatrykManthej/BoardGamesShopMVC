@@ -69,11 +69,14 @@ namespace BoardGamesShopMVC.Application.Services
 
         }
 
-        private void UpdateOrderStatus(int orderId, OrderStatus orderStatus, PaymentStatus paymentStatus)
+        public void UpdateOrderStatus(int orderId, OrderStatus orderStatus, PaymentStatus? paymentStatus = null)
         {
             var order = _orderRepository.GetOrderById(orderId);
             order.OrderStatus = orderStatus.ToString();
-            order.PaymentStatus = paymentStatus.ToString();
+            if (paymentStatus != null)
+            {
+	            order.PaymentStatus = paymentStatus.ToString();
+			}
             _orderRepository.UpdateOrder(order);
         }
     }
