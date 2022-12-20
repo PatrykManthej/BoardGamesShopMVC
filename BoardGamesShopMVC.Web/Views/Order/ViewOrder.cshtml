@@ -1,9 +1,10 @@
 ﻿@using BoardGamesShopMVC.Domain.Enums
-@using BoardGamesShopMVC.Domain.Model
 @model BoardGamesShopMVC.Application.ViewModels.Order.OrderDetailsVm
 
 <form method="post">
 	<input asp-for="@Model.Id" hidden />
+	<input asp-for="@Model.OrderRecipientVm.Id" hidden />
+	<input asp-for="@Model.OrderStatus" hidden />
 	<br />
 	<div class="container">
 		<div class="card">
@@ -155,12 +156,44 @@
 									<input asp-for="@Model.UserEmail" readonly type="text" class="form-control" />
 								</div>
 							</div>
-							<div class="row my-1">
-								<div class="col-3">Order Date</div>
-								<div class="col-9">
-									<input value="@Model.OrderDate.ToShortDateString()" readonly type="text" class="form-control" />
-								</div>
-							</div>
+                            <div class="row my-1">
+                                <div class="col-3">Order Date</div>
+                                <div class="col-9">
+                                    <input value="@Model.OrderDate.ToShortDateString()" readonly type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">Carrier</div>
+                                <div class="col-9">
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    {
+                                        <input asp-for="@Model.Carrier" type="text" class="form-control" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="@Model.Carrier" readonly type="text" class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">Tracking</div>
+                                <div class="col-9">
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    {
+                                        <input asp-for="@Model.TrackingNumber" type="text" class="form-control" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="@Model.TrackingNumber" readonly type="text" class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">Shipping Date</div>
+                                <div class="col-9">
+                                    <input value="@Model.ShippingDate?.ToShortDateString()" type="text" readonly class="form-control" />
+                                </div>
+                            </div>
                             @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
 							{
 								<div class="row my-1">
@@ -176,7 +209,7 @@
 									<input asp-for="@Model.PaymentStatus" type="text" readonly class="form-control" />
 								</div>
 							</div>
-							<input type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1" value="Update Order Details" />
+                            <input type="submit" asp-action="EditOrder" asp-controller="Order" class="btn btn-warning form-control my-1" value="Update Order Details" />
 
 
 
@@ -219,11 +252,11 @@
 							{
 								if (Model.OrderStatus == OrderStatus.Approved.ToString())
 								{
-									<input type="submit" asp-action="StartProcessing" class="btn btn-success form-control my-1" value="Start Processing" />
+                                    <input type="submit" asp-action="StartProcessing" asp-controller="Order" class="btn btn-success form-control my-1" value="Start Processing" />
 								}
 								if (Model.OrderStatus == OrderStatus.InProcess.ToString())
 								{
-									<input type="submit" asp-action="Ship" class="btn btn-success form-control my-1" value="Ship Order" />
+									<input type="submit" asp-action="Shipping" asp-controller="Order" class="btn btn-success form-control my-1" value="Ship Order" />
 								}
 
 								@if (Model.OrderStatus != OrderStatus.Cancelled.ToString() &&

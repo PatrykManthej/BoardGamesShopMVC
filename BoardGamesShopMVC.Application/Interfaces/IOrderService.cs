@@ -11,7 +11,8 @@ namespace BoardGamesShopMVC.Application.Interfaces
         OrderDetailsVm GetOrderById(int orderId);
         void UpdateOrderStripePaymentSessionId(int orderId, string sessionId);
         void ConfirmOrder(int orderId);
-        public void UpdateOrderStatus(int orderId, OrderStatus orderStatus, PaymentStatus? paymentStatus = null);
-
+        void UpdateOrderStatus(int orderId, OrderStatus orderStatus, PaymentStatus? paymentStatus = null);
+        void Shipping(OrderDetailsVm orderVm);
+        void UpdateOrderDetails(OrderDetailsVm orderVm);
     }
 }

@@ -25,9 +25,9 @@ namespace BoardGamesShopMVC.Application.Profiles
             CreateMap<Order, OrderDetailsVm>()
                 .ForMember(dst => dst.UserEmail, opt => opt.MapFrom(src=>src.ApplicationUser.Email))
                 .ForMember(dst=>dst.OrderRecipientVm, opt=>opt.MapFrom(src=>src.OrderRecipient))
-				.ForMember(dst => dst.OrderItems, opt => opt.MapFrom(src => src.Items));
+				.ForMember(dst => dst.OrderItems, opt => opt.MapFrom(src => src.Items)).ReverseMap();
 
-            CreateMap<OrderRecipient, OrderRecipientVm>();
+            CreateMap<OrderRecipient, OrderRecipientVm>().ReverseMap();
 
             CreateMap<OrderItem, OrderItemVm>()
 	            .ForMember(dst=>dst.Name, opt => opt.MapFrom(src=>src.BoardGame.Name));

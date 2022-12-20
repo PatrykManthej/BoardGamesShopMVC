@@ -79,5 +79,18 @@ namespace BoardGamesShopMVC.Application.Services
 			}
             _orderRepository.UpdateOrder(order);
         }
+
+        public void Shipping(OrderDetailsVm orderVm)
+        {
+            orderVm.ShippingDate = DateTime.Now;
+            orderVm.OrderStatus = OrderStatus.Shipped.ToString();
+            UpdateOrderDetails(orderVm);
+        }
+        
+        public void UpdateOrderDetails(OrderDetailsVm orderVm)
+        {
+            var order = _mapper.Map<Order>(orderVm);
+            _orderRepository.UpdateOrder(order);
+        }
     }
 }

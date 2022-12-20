@@ -4,6 +4,7 @@ using BoardGamesShopMVC.Domain.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using BoardGamesShopMVC.Application.ViewModels.Order;
 using BoardGamesShopMVC.Domain.Enums;
 
 namespace BoardGamesShopMVC.Web.Controllers
@@ -74,5 +75,16 @@ namespace BoardGamesShopMVC.Web.Controllers
             return RedirectToAction("ViewOrder", "Order", new { id });
         }
 
+        public IActionResult Shipping(OrderDetailsVm order)
+        {
+            _orderService.Shipping(order);
+            return RedirectToAction("ViewOrder", "Order", new { order.Id });
+        }
+
+        public IActionResult EditOrder(OrderDetailsVm order)
+        {
+            _orderService.UpdateOrderDetails(order);
+            return RedirectToAction("ViewOrder", "Order", new { order.Id });
+        }
 	}
 }

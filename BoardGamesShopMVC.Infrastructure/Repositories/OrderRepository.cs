@@ -54,8 +54,26 @@ namespace BoardGamesShopMVC.Infrastructure.Repositories
 
         public void UpdateOrder(Order order)
         {
+            var orderRecipient = order.OrderRecipient;
+
             _context.Attach(order);
-            _context.Entry(order).Property("SessionId").IsModified = true;
+            _context.Entry(order).Property("SessionId").IsModified=true;
+            _context.Entry(order).Property("OrderStatus").IsModified=true;
+            _context.Entry(order).Property("PaymentStatus").IsModified=true;
+            _context.Entry(order).Property("ShippingDate").IsModified=true;
+            _context.Entry(order).Property("TrackingNumber").IsModified=true;
+            _context.Entry(order).Property("Carrier").IsModified=true;
+
+            _context.Entry(orderRecipient).Property("Email").IsModified=true;
+            _context.Entry(orderRecipient).Property("FirstName").IsModified=true;
+            _context.Entry(orderRecipient).Property("LastName").IsModified=true;
+            _context.Entry(orderRecipient).Property("PhoneNumber").IsModified=true;
+            _context.Entry(orderRecipient).Property("Street").IsModified=true;
+            _context.Entry(orderRecipient).Property("BuildingNumber").IsModified=true;
+            _context.Entry(orderRecipient).Property("FlatNumber").IsModified=true;
+            _context.Entry(orderRecipient).Property("ZipCode").IsModified=true;
+            _context.Entry(orderRecipient).Property("City").IsModified=true;
+           
             _context.SaveChanges();
         }
     }
