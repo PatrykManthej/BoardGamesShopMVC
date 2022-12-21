@@ -28,7 +28,7 @@ The Board Games Shop MVC application is used for buying and selling board games.
 
 ## Screenshots
 ### 1.Registration.
-![1 Rejestracja](https://user-images.githubusercontent.com/103### **256222/208920791-6b646d7a-ae87-4873-9d89-f0e218d79a6b.png)
+![1 Rejestracja](https://user-images.githubusercontent.com/103256222/208920791-6b646d7a-ae87-4873-9d89-f0e218d79a6b.png)
 ### 2. Main Page
 ![2 PanelGlowny](https://user-images.githubusercontent.com/103256222/208920906-7b62dd41-ac3f-49ad-8abb-cfea7c6edb6a.png)
 ### 3. Game details
